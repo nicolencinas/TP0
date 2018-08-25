@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -118,6 +120,22 @@ public class Interfaz1 {
 				
 			
 		}));
+        }	
+        	 
+        for (Component jc: comp) 
+        {
+              	((JButton)jc).addKeyListener(new KeyAdapter() {
+      			public void keyReleased(KeyEvent e)
+      			{
+      				if (e.getKeyCode()==38)
+      				matriz(comp);
+      			}
+      				
+      			
+      				
+      				
+      			
+      		});	
         }
         
 		
