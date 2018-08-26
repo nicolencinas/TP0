@@ -1,12 +1,19 @@
 package tp2048;
 
+import java.awt.Component;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+import java.util.Random;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class Interfaz {
 
@@ -38,119 +45,107 @@ public class Interfaz {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() 
+	
+	public static JButton generarBoton(int x,int y) 
 	{
-		int [][] matriz=new int [4][4];
-		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 600,600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JButton b00 = new JButton("");
-		b00.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		b00.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		b00.setBounds(10, 11, 120, 120);
-		frame.getContentPane().add(b00);
-		
-		JButton b01 = new JButton("3");
+		JButton b01 = new JButton("");
 		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
 		b01.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		b01.setBounds(159, 11, 120, 120);
-		frame.getContentPane().add(b01);
+		b01.setBounds(x, y, 120, 120);
+		return b01;
 		
-		JButton b02 = new JButton("");
-		b02.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+	}
+	public static int [][] matriz(Component [] comp)
+	
+	{
+		Random gen =new Random();
+		int [][] ret=new int [4][4];
+		int but=0;
+		for (int i=0;i<ret.length;i++) 
+	{
+		for (int j=0;j<ret.length;j++)
+		{
+			int e=gen.nextInt(100);
+			ret[i][j]=e;
+			
+			 ((JButton) comp[but]).setText(""+e);
+			but++;
+	
+			
+		}
+	}
+		return ret;
+	}
+	private void initialize()
+	{
+		
+		frame = new JFrame();
+		frame.setBounds(100, 100, 600, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		//LinkedList <JButton> botones =new LinkedList <JButton>();
+		frame.getContentPane().add(generarBoton(10,11));
+		frame.getContentPane().add(generarBoton(159,11));
+		frame.getContentPane().add(generarBoton(304,11));		
+		frame.getContentPane().add(generarBoton(454,11));
+		frame.getContentPane().add(generarBoton(10, 156));
+		frame.getContentPane().add(generarBoton(159, 156));
+		frame.getContentPane().add(generarBoton(304, 156));
+		frame.getContentPane().add(generarBoton(454, 156));
+		frame.getContentPane().add(generarBoton(10, 300));
+		frame.getContentPane().add(generarBoton(159, 300));
+		frame.getContentPane().add(generarBoton(304, 300));
+		frame.getContentPane().add(generarBoton(454, 300));		
+		frame.getContentPane().add(generarBoton(454, 441));
+		frame.getContentPane().add(generarBoton(304, 441));
+		frame.getContentPane().add(generarBoton(159, 441));
+		frame.getContentPane().add(generarBoton(10, 441));
+
+        Component [] comp=frame.getContentPane().getComponents();
+        
+        for (Component jb: comp) 
+        {
+        	((JButton)jb).addActionListener((new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				matriz(comp);
 			}
-		});
-		b02.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		b02.setBounds(304, 11, 120, 120);
-		frame.getContentPane().add(b02);
+				
+			
+				
+				
+			
+		}));
+        }	
+        	 
+        for (Component jc: comp) 
+        {
+              	((JButton)jc).addKeyListener(new KeyAdapter() {
+      			public void keyReleased(KeyEvent e)
+      			{
+      				if (e.getKeyCode()==38)
+      				matriz(comp);
+      			}
+      				
+      			
+      				
+      				
+      			
+      		});	
+        }
+        
 		
-		JButton b03 = new JButton("");
-		b03.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		b03.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		b03.setBounds(454, 11, 120, 120);
-		frame.getContentPane().add(b03);
 		
-		JButton button_3 = new JButton("");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_3.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_3.setBounds(10, 156, 120, 120);
-		frame.getContentPane().add(button_3);
+	
 		
-		JButton button_4 = new JButton("");
-		button_4.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_4.setBounds(159, 156, 120, 120);
-		frame.getContentPane().add(button_4);
 		
-		JButton button_5 = new JButton("");
-		button_5.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_5.setBounds(304, 156, 120, 120);
-		frame.getContentPane().add(button_5);
 		
-		JButton button_6 = new JButton("");
-		button_6.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_6.setBounds(454, 156, 120, 120);
-		frame.getContentPane().add(button_6);
-		
-		JButton button_7 = new JButton("");
-		button_7.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_7.setBounds(10, 300, 120, 120);
-		frame.getContentPane().add(button_7);
-		
-		JButton button_8 = new JButton("");
-		button_8.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_8.setBounds(159, 300, 120, 120);
-		frame.getContentPane().add(button_8);
-		
-		JButton button_9 = new JButton("");
-		button_9.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_9.setBounds(304, 300, 120, 120);
-		frame.getContentPane().add(button_9);
-		
-		JButton button_10 = new JButton("");
-		button_10.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_10.setBounds(454, 300, 120, 120);
-		frame.getContentPane().add(button_10);
-		
-		JButton button_11 = new JButton("");
-		button_11.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_11.setBounds(454, 441, 120, 120);
-		frame.getContentPane().add(button_11);
-		
-		JButton button_12 = new JButton("");
-		button_12.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_12.setBounds(304, 441, 120, 120);
-		frame.getContentPane().add(button_12);
-		
-		JButton button_13 = new JButton("");
-		button_13.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_13.setBounds(159, 441, 120, 120);
-		frame.getContentPane().add(button_13);
-		
-		JButton button_14 = new JButton("");
-		button_14.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		button_14.setBounds(10, 441, 120, 120);
-		frame.getContentPane().add(button_14);
 		
 		
 	}
+
 }
