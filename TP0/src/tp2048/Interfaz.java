@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Interfaz {
@@ -58,6 +59,8 @@ public class Interfaz {
 		return b01;
 		
 	}
+	
+	
 	public static int [][] matriz(Component [] comp)
 	
 	{
@@ -79,15 +82,53 @@ public class Interfaz {
 	}
 		return ret;
 	}
+	
+	public static void matriz_sumas(Component [] comp)
+	
+	{
+		for (int j=0;j<comp.length;j++)
+		{
+			
+			 JButton boton=(JButton)comp[j];
+			 String nombre=boton.getText();
+			 Integer suma=Integer.parseInt(nombre);
+			 suma+=1;
+			
+			 ((JButton) comp[j]).setText(suma.toString());
+			
+	
+			
+		}
+	}
+public static void matriz_restas(Component [] comp)
+	
+	{
+		for (int j=0;j<comp.length;j++)
+		{
+			
+			 JButton boton=(JButton)comp[j];
+			 String nombre=boton.getText();
+			 Integer suma=Integer.parseInt(nombre);
+			 suma-=1;
+			
+			 ((JButton) comp[j]).setText(suma.toString());
+			
+	
+			
+		}
+	}
+		
+	
 	private void initialize()
 	{
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setFocusable(true);
 		
-		//LinkedList <JButton> botones =new LinkedList <JButton>();
+
 		frame.getContentPane().add(generarBoton(10,11));
 		frame.getContentPane().add(generarBoton(159,11));
 		frame.getContentPane().add(generarBoton(304,11));		
@@ -106,29 +147,26 @@ public class Interfaz {
 		frame.getContentPane().add(generarBoton(10, 441));
 
         Component [] comp=frame.getContentPane().getComponents();
+       
+        for (Component j: comp) 
+        {
+        	((JButton)j).setFocusable(false);
+        }
         
-        for (Component jb: comp) 
-        {
-        	((JButton)jb).addActionListener((new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-			{
-				matriz(comp);
-			}
-				
-			
-				
-				
-			
-		}));
-        }	
-        	 
-        for (Component jc: comp) 
-        {
-              	((JButton)jc).addKeyListener(new KeyAdapter() {
+              	
+        frame.addKeyListener(new KeyAdapter() {
       			public void keyReleased(KeyEvent e)
       			{
       				if (e.getKeyCode()==38)
       				matriz(comp);
+      				
+      				if (e.getKeyCode()==39)
+      					matriz_sumas(comp);
+      				
+      				if (e.getKeyCode()==37)
+      					matriz_restas(comp);
+      				
+      				
       			}
       				
       			
@@ -136,16 +174,6 @@ public class Interfaz {
       				
       			
       		});	
-        }
-        
-		
-		
-	
-		
-		
-		
-		
-		
 	}
 
 }
