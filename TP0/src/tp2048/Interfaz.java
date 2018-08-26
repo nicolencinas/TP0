@@ -50,7 +50,7 @@ public class Interfaz {
 	public static JButton generarBoton(int x,int y) 
 	{
 		JButton b01 = new JButton("");
-		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
+		b01.setFont(new Font("Tahoma", Font.PLAIN, 45));
 		b01.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -77,8 +77,9 @@ public class Interfaz {
 			 ((JButton) comp[but]).setText(""+e);
 			but++;
 	
-			
+			System.out.print(ret[i][j]+" ");
 		}
+		System.out.println("");
 	}
 		return ret;
 	}
@@ -92,6 +93,7 @@ public class Interfaz {
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
+			 if (suma!=100)
 			 suma+=1;
 			
 			 ((JButton) comp[j]).setText(suma.toString());
@@ -109,10 +111,12 @@ public static void matriz_restas(Component [] comp)
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
+			 if (suma!=0)
 			 suma-=1;
 			
-			 ((JButton) comp[j]).setText(suma.toString());
 			
+			 ((JButton) comp[j]).setText(suma.toString());
+			 			
 	
 			
 		}
@@ -141,19 +145,23 @@ public static void matriz_restas(Component [] comp)
 		frame.getContentPane().add(generarBoton(159, 300));
 		frame.getContentPane().add(generarBoton(304, 300));
 		frame.getContentPane().add(generarBoton(454, 300));		
-		frame.getContentPane().add(generarBoton(454, 441));
-		frame.getContentPane().add(generarBoton(304, 441));
-		frame.getContentPane().add(generarBoton(159, 441));
 		frame.getContentPane().add(generarBoton(10, 441));
+		frame.getContentPane().add(generarBoton(159, 441));
+		frame.getContentPane().add(generarBoton(304, 441));
+		frame.getContentPane().add(generarBoton(454, 441));
 
         Component [] comp=frame.getContentPane().getComponents();
        
         for (Component j: comp) 
         {
-        	((JButton)j).setFocusable(false);
+        	JButton boton=(JButton)j;
+        	(boton).setFocusable(false);
+        	
+        	
+        	
         }
         
-              	
+        matriz (comp);
         frame.addKeyListener(new KeyAdapter() {
       			public void keyReleased(KeyEvent e)
       			{
@@ -167,6 +175,8 @@ public static void matriz_restas(Component [] comp)
       					matriz_restas(comp);
       				
       				
+      				
+      				
       			}
       				
       			
@@ -174,6 +184,9 @@ public static void matriz_restas(Component [] comp)
       				
       			
       		});	
+        
+  
+        
 	}
 
 }
