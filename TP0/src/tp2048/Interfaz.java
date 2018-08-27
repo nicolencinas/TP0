@@ -99,7 +99,7 @@ public class Interfaz {
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
-			 //if (suma!=100)
+			
 			 suma+=1;
 			
 			 ((JButton) comp[j]).setText(suma.toString());
@@ -114,18 +114,13 @@ public static void matriz_restas(Component [] comp)
 	{
 		for (int j=0;j<comp.length;j++)
 		{
-			
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
-			 //if (suma!=0)
+			
 			 suma-=1;
 			
-			
 			 ((JButton) comp[j]).setText(suma.toString());
-			 			
-	
-			
 		}
 		corregir(comp);
 	}
@@ -140,16 +135,14 @@ public static void corregir(Component [] comp)
 		 Integer num=Integer.parseInt(nombre);
 		 
 		 if (num>=100 && num<1000) 
-		 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		 
-		 if (num>=1000) boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		 if (num>=1000) 
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		 
-		 if(num<100) boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
-			 
-    	 
-    	
-    	
+		 if(num<100) 
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
+
     }
 }
 		
@@ -164,17 +157,7 @@ public static void corregir(Component [] comp)
 		
 		JButton btnNewButton = new JButton("Iniciar Juego");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				frame.setBounds(inicio.getBounds());
-				frame.setEnabled(true);
-				frame.setVisible(true);
-				inicio.setVisible(false);
-				inicio.setEnabled(false);
-				
-			}
-		});
+	
 		btnNewButton.setBounds(112, 103, 363, 90);
 		inicio.getContentPane().add(btnNewButton);
 		
@@ -220,6 +203,18 @@ public static void corregir(Component [] comp)
 		
 
         Component [] comp=frame.getContentPane().getComponents();
+    	btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				matriz(comp);
+				frame.setBounds(inicio.getBounds());
+				frame.setEnabled(true);
+				frame.setVisible(true);
+				inicio.setVisible(false);
+				inicio.setEnabled(false);
+				
+			}
+		});
        
         for (Component j: comp) 
         {
