@@ -250,6 +250,13 @@ public static void corregir(Component [] comp)
       					inicio.setVisible(true);
       					frame.setVisible(false);
       					frame.setEnabled(false);
+      					
+      					for (Component j: comp) 
+      			        {
+      			        	JButton boton=(JButton)j;
+      			        	(boton).setText("");
+      			        }
+      						
       				}
       				
       				
