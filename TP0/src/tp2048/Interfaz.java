@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 public class Interfaz {
 
 	private JFrame frame;
+	
 
 	/**
 	 * Launch the application.
@@ -50,7 +51,7 @@ public class Interfaz {
 	public static JButton generarBoton(int x,int y) 
 	{
 		JButton b01 = new JButton("");
-		b01.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
 		b01.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -93,7 +94,7 @@ public class Interfaz {
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
-			 if (suma!=100)
+			 //if (suma!=100)
 			 suma+=1;
 			
 			 ((JButton) comp[j]).setText(suma.toString());
@@ -101,6 +102,7 @@ public class Interfaz {
 	
 			
 		}
+		corregir(comp);
 	}
 public static void matriz_restas(Component [] comp)
 	
@@ -111,7 +113,7 @@ public static void matriz_restas(Component [] comp)
 			 JButton boton=(JButton)comp[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
-			 if (suma!=0)
+			 //if (suma!=0)
 			 suma-=1;
 			
 			
@@ -120,7 +122,31 @@ public static void matriz_restas(Component [] comp)
 	
 			
 		}
+		corregir(comp);
 	}
+
+public static void corregir(Component [] comp)
+{
+    for (Component j: comp) 
+    {
+    	
+    	JButton boton=(JButton)j;
+		 String nombre=boton.getText();
+		 Integer num=Integer.parseInt(nombre);
+		 
+		 if (num>=100 && num<1000) 
+		 
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		 
+		 if (num>=1000) boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		 
+		 if(num<100) boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
+			 
+    	 
+    	
+    	
+    }
+}
 		
 	
 	private void initialize()
