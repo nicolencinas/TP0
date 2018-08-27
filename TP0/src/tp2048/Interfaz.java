@@ -203,6 +203,7 @@ public static void corregir(Component [] comp)
 		
 
         Component [] comp=frame.getContentPane().getComponents();
+        
     	btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
