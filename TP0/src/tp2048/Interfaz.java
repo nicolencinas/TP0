@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 public class Interfaz {
 
 	private JFrame frame;
+	private JFrame inicio;
 	
 
 	/**
@@ -29,7 +30,12 @@ public class Interfaz {
 			public void run() {
 				try {
 					Interfaz window = new Interfaz();
-					window.frame.setVisible(true);
+					window.frame.setVisible(false);
+					window.frame.setEnabled(false);
+					window.inicio.setVisible(true);
+					
+					window.frame.setResizable(false);
+					window.inicio.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,8 +66,7 @@ public class Interfaz {
 		return b01;
 		
 	}
-	
-	
+
 	public static int [][] matriz(Component [] comp)
 	
 	{
@@ -151,12 +156,47 @@ public static void corregir(Component [] comp)
 	
 	private void initialize()
 	{
+		
+		inicio = new JFrame();
+		inicio.setBounds(100, 100, 600, 600);
+		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inicio.getContentPane().setLayout(null);
+		
+		JButton btnNewButton = new JButton("Iniciar Juego");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				frame.setBounds(inicio.getBounds());
+				frame.setEnabled(true);
+				frame.setVisible(true);
+				inicio.setVisible(false);
+				inicio.setEnabled(false);
+				
+			}
+		});
+		btnNewButton.setBounds(112, 103, 363, 90);
+		inicio.getContentPane().add(btnNewButton);
+		
+		JButton button = new JButton("Ver estadisitcas");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		button.setBounds(112, 222, 363, 90);
+		inicio.getContentPane().add(button);
+		
+		JButton button_1 = new JButton("Cargar");
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		button_1.setBounds(112, 342, 363, 90);
+		inicio.getContentPane().add(button_1);
 
+		
+		//Declaracion del Frame principal
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setFocusable(true);
+		frame.setEnabled(false);
+		frame.setVisible(false);
 		
 
 		frame.getContentPane().add(generarBoton(10,11));
@@ -175,6 +215,9 @@ public static void corregir(Component [] comp)
 		frame.getContentPane().add(generarBoton(159, 441));
 		frame.getContentPane().add(generarBoton(304, 441));
 		frame.getContentPane().add(generarBoton(454, 441));
+		
+		
+		
 
         Component [] comp=frame.getContentPane().getComponents();
        
@@ -200,7 +243,14 @@ public static void corregir(Component [] comp)
       				if (e.getKeyCode()==37)
       					matriz_restas(comp);
       				
-      				
+      				if (e.getKeyCode()==27)
+      				{
+      					inicio.setBounds(frame.getBounds());
+      					inicio.setEnabled(true);
+      					inicio.setVisible(true);
+      					frame.setVisible(false);
+      					frame.setEnabled(false);
+      				}
       				
       				
       			}
