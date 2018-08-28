@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import Animacion.Animacion;
 import java.awt.GridLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EjAnim {
 
@@ -64,6 +67,18 @@ public class EjAnim {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		JButton btnNuevoJuego = new JButton("Nuevo Juego");
+		btnNuevoJuego.setBounds(73, 39, 111, 23);
+		panel.add(btnNuevoJuego);
+		
+		JButton button = new JButton("Guardar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button.setBounds(254, 39, 111, 23);
+		panel.add(button);
+		
 		
 		
 		
@@ -88,9 +103,6 @@ public class EjAnim {
 		
 			
 		}
-		
-		
-		
 			public void im_up()
 			{
 		icono.setIcon(new ImageIcon("subir.png"));
@@ -100,10 +112,7 @@ public class EjAnim {
 			{
 		icono.setIcon(new ImageIcon("bajar.png"));
 			}
-		
-		
 			});
-		//panel.setBorder(lblNewLabel.getBorder());
 		
 	
 		
