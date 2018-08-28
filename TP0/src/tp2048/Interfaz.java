@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -173,7 +175,7 @@ public static void corregir(Component [] comp)
 
 		
 		//Declaracion del Frame principal
-		frame = new JFrame();
+		frame = new JFrame("Juego 2048");
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -199,11 +201,11 @@ public static void corregir(Component [] comp)
 		frame.getContentPane().add(generarBoton(304, 441));
 		frame.getContentPane().add(generarBoton(454, 441));
 		
-		
-		
+	
 
         Component [] comp=frame.getContentPane().getComponents();
         
+      
     	btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
