@@ -49,37 +49,64 @@ public class EjAnim {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+			
+		JLabel icono = new JLabel("");
+		icono.setBounds(204, 0, 30, 15);
+		
+		frame.getContentPane().add(icono);
+		
+		icono.setBackground(Color.WHITE);
+		icono.setIcon(new ImageIcon("bajar.png"));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 442, 96);
+		panel.setBounds(0, -100, 442, 96);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(95, 156, 243, 15);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		
+		
+		
+		icono.addMouseListener(new MouseAdapter() 
+			{
+		
+		public void mouseReleased(MouseEvent e)
+		{
+			int posicion=icono.getY();
+			if (posicion>0)
+			{
+				Animacion.subir(80, 0, 2, icono);
+			Animacion.subir(0, -100, 2, panel);
+			
+			im_down();
+			}else
+			{
+				Animacion.bajar(-100, 0, 2, panel);
+				Animacion.bajar(0,80,  2, icono);
+				im_up();
+			}
 		
 			
-			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setBounds(206, 95, 30, 15);
-			frame.getContentPane().add(lblNewLabel);
-			lblNewLabel.setLabelFor(panel);
-			panel.setBorder(lblNewLabel.getBorder());
-			lblNewLabel.addMouseListener(new MouseAdapter() 
+		}
+		
+		
+		
+			public void im_up()
 			{
-				boolean continuar=true;
-				public void mouseReleased(MouseEvent e)
-				{
-					Animacion.bajar(-110, 0, 5, panel);
-				}
-				
+		icono.setIcon(new ImageIcon("subir.png"));
+			}
 			
-				
-				
+			public void im_down()
+			{
+		icono.setIcon(new ImageIcon("bajar.png"));
+			}
+		
+		
 			});
-			lblNewLabel.setBackground(Color.WHITE);
-			lblNewLabel.setIcon(new ImageIcon("C:\\Users\\usuario\\Downloads\\drop-down-colores\\limon\\bajar.png"));
+		//panel.setBorder(lblNewLabel.getBorder());
+		
+	
+		
+	
 	}
 }
