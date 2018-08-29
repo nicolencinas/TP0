@@ -1,6 +1,8 @@
 package tp2048;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,10 +15,16 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.ToolTipManager;
+
+import Animacion.Animacion;
 
 public class Interfaz {
 
@@ -55,7 +63,7 @@ public class Interfaz {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	
+	//Genera un unico boton 
 	public static JButton generarBoton(int x,int y) 
 	{
 		JButton b01 = new JButton("");
@@ -68,7 +76,19 @@ public class Interfaz {
 		return b01;
 		
 	}
+	
+	//Utilizada como recurso grafico para cambiar imagen de un drop menu
+	public void im_up(JLabel icono)
+	{
+icono.setIcon(new ImageIcon("subir.png"));
+	}
+	//Utilizada como recurso grafico para cambiar imagen de un drop menu
+	public void im_down(JLabel icono)
+	{
+icono.setIcon(new ImageIcon("bajar.png"));
+	}
 
+	//Utilizada para generar una matriz a partir de una lista de botones //En un futuro recibira una matriz para poder graficar lo que reciba de la clase negocio
 	public static int [][] matriz(Component [] comp)
 	
 	{
@@ -82,6 +102,7 @@ public class Interfaz {
 			int e=(gen.nextInt(2)+1)*2;
 			ret[i][j]=e;
 			
+			((JButton) comp[but]).setFont(new Font("Tahoma", Font.PLAIN, 65));
 			 ((JButton) comp[but]).setText(""+e);
 			but++;
 	
@@ -92,7 +113,8 @@ public class Interfaz {
 		return ret;
 	}
 	
-	public static void matriz_sumas(Component [] comp)
+	//Utilizada en pruebas actualiza la matriz
+	public static void matriz_sumas(JButton [] comp)
 	
 	{
 		for (int j=0;j<comp.length;j++)
@@ -111,7 +133,8 @@ public class Interfaz {
 		}
 		corregir(comp);
 	}
-public static void matriz_restas(Component [] comp)
+	//Utilizada en pruebas actualiza la matriz
+public static void matriz_restas(JButton [] comp)
 	
 	{
 		for (int j=0;j<comp.length;j++)
@@ -127,15 +150,54 @@ public static void matriz_restas(Component [] comp)
 		corregir(comp);
 	}
 
-public static void corregir(Component [] comp)
+//Utilizada para mejorar la interfaz grafica evitando dibujado sobre dibujado
+public static void activar(Component [] comp) 
 {
-    for (Component j: comp) 
+    
+		for (Component j: comp) 
+        {
+        	try 
+        	{
+        		j.setEnabled(true);
+        	
+        	}catch (Exception e1) 
+        	{
+        		
+        	}
+        }
+}
+//Utilizada para mejorar la interfaz grafica evitando dibujado sobre dibujado
+
+public static void desactivar(JButton [] comp) 
+{
+    
+		for (JButton j: comp) 
+        {
+        	try 
+        	{
+        		j.setEnabled(false);
+        	
+        	}catch (Exception e1) 
+        	{
+        		
+        	}
+        }
+}
+
+//Utilizada como rescurso grafico para cambiar el tamaño del texto dependiendo de la cantidad de caracteres que se encuentren dentro del JButton
+public static void corregir(JButton [] comp)
+{
+    for (JButton j: comp) 
     {
     	
     	JButton boton=(JButton)j;
 		 String nombre=boton.getText();
 		 Integer num=Integer.parseInt(nombre);
 		 
+		 if (num<10) 
+		 {
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
+		 }
 		 if (num>=100 && num<1000) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		 
@@ -150,31 +212,67 @@ public static void corregir(Component [] comp)
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
     }
 }
+	
+//Genera la matriz de botones que se dibujara
+public static JButton[] generarBotones() 
+{
+	JButton[] ret = new JButton[16];;
+	int i[]= {10,159,304,454};
+	int e[]= {11,156,300,441};
+	int indi=0;
+	int inde=0;
+	
+	for (int o=0;o<16;o++) 
+	{
+		if (indi>=3) 
+		{
+			indi=0;
+			inde++;
+		}else indi++;
 		
+		if (inde>=4) inde=0;
+		
+		ret[o]=generarBoton(i[indi],e[inde]+50);
+	}
+	return ret;
+}
 	
 	private void initialize()
 	{
-		
+		//Aqui comienza el codigo referente al frame utilizado como pantalla de inicio
 		inicio = new JFrame();
-		inicio.setBounds(100, 100, 600, 600);
+		inicio.setBounds(100, 100, 600, 700);
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicio.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Iniciar Juego");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		JButton start = new JButton("Iniciar Juego");
+		start.setFont(new Font("Tahoma", Font.PLAIN, 39));
 	
-		btnNewButton.setBounds(112, 103, 363, 90);
-		inicio.getContentPane().add(btnNewButton);
+		start.setBounds(112, 103, 363, 90);
+		inicio.getContentPane().add(start);
 		
-		JButton button = new JButton("Ver estadisitcas");
-		button.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		button.setBounds(112, 222, 363, 90);
-		inicio.getContentPane().add(button);
+		JButton stats = new JButton("Ver estadisitcas");
+		stats.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		stats.setBounds(112, 222, 363, 90);
+		inicio.getContentPane().add(stats);
 		
-		JButton button_1 = new JButton("Cargar");
-		button_1.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		button_1.setBounds(112, 342, 363, 90);
-		inicio.getContentPane().add(button_1);
+		JButton cargar = new JButton("Cargar");
+		cargar.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		cargar.setBounds(112, 342, 363, 90);
+		inicio.getContentPane().add(cargar);
+		
+		JButton salir=new JButton("Salir");
+		salir.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		salir .setBounds(200, 462, 200, 70);
+		inicio.getContentPane().add(salir);
+		
+		salir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				inicio.dispose();
+			}
+			
+		});
 
 		
 		//Declaracion del Frame principal
@@ -186,33 +284,99 @@ public static void corregir(Component [] comp)
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
-
-		frame.getContentPane().add(generarBoton(10,11));
-		frame.getContentPane().add(generarBoton(159,11));
-		frame.getContentPane().add(generarBoton(304,11));		
-		frame.getContentPane().add(generarBoton(454,11));
-		frame.getContentPane().add(generarBoton(10, 156));
-		frame.getContentPane().add(generarBoton(159, 156));
-		frame.getContentPane().add(generarBoton(304, 156));
-		frame.getContentPane().add(generarBoton(454, 156));
-		frame.getContentPane().add(generarBoton(10, 300));
-		frame.getContentPane().add(generarBoton(159, 300));
-		frame.getContentPane().add(generarBoton(304, 300));
-		frame.getContentPane().add(generarBoton(454, 300));		
-		frame.getContentPane().add(generarBoton(10, 441));
-		frame.getContentPane().add(generarBoton(159, 441));
-		frame.getContentPane().add(generarBoton(304, 441));
-		frame.getContentPane().add(generarBoton(454, 441));
 		
+		//Aqui comienza la definicion del panel de drop menu
+	JLabel icono = new JLabel("");
+	icono.setBounds(300, 1, 30, 15);
 	
+	frame.getContentPane().add(icono);
+	
+	icono.setBackground(Color.WHITE);
+	icono.setIcon(new ImageIcon("bajar.png"));
+	
+	JPanel panel = new JPanel();
+	panel.setBackground(Color.WHITE);
+	panel.setBounds(0, -100, 600, 96);
+	frame.getContentPane().add(panel);
+	panel.setLayout(null);
+	
+	JButton newG = new JButton("Nuevo Juego");
+	newG.setBounds(150, 39, 111, 23);
 
-        Component [] comp=frame.getContentPane().getComponents();
-        
-      
-    	btnNewButton.addActionListener(new ActionListener() {
+	panel.add(newG);
+	
+	JButton guardar = new JButton("Guardar");
+	guardar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
+	guardar.setBounds(350, 39, 111, 23);
+	panel.add(guardar);
+
+	icono.setToolTipText("Desplegar drop menu");
+	
+	
+	//Genero los botones y los agrego al frame
+	JButton[] botones=generarBotones();
+	for (int i=0;i<16;i++) 
+	{
+		frame.getContentPane().add(botones[i]);
+	}
+	
+	newG.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e)
+		{
+			
+			frame.setFocusable(true);
+			matriz(botones);
+			activar(botones);
+			Animacion.subir(80, 0, 0, icono);
+			Animacion.subir(0, -100, 0, panel);
+		    im_down(icono);
+			
+		}
+	});
+	//Controlo los mouse events realizados en el drop menu
+	icono.addMouseListener(new MouseAdapter() 
+	{
+
+public void mouseReleased(MouseEvent e)
+{
+	int posicion=icono.getY();
+	if (posicion>0)
+	{
+		activar(botones);
+		Animacion.subir(80, 0, 2, icono);
+	Animacion.subir(0, -100, 2, panel);
+  
+	
+	im_down(icono);
+	}else
+	{
+		desactivar(botones);
+		Animacion.bajar(-100, 0, 2, panel);
+		Animacion.bajar(0,80,  2, icono);
+		im_up(icono);
+		
+		
+		
+	}
+
+	
+}
+
+
+
+
+
+	});
+
+	
+	
+    	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				matriz(comp);
+				matriz(botones);
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
 				frame.setVisible(true);
@@ -222,27 +386,37 @@ public static void corregir(Component [] comp)
 			}
 		});
        
-        for (Component j: comp) 
+        for (JButton j: botones) 
         {
-        	JButton boton=(JButton)j;
-        	(boton).setFocusable(false);
+        	try 
+        	{
+        		j.setFocusable(false);
+        	
+        	}catch (Exception e) 
+        	{
+        		
+        	}
         	
         	
         	
         }
         
-        matriz (comp);
+	
+        
+       // matriz (comp);
+	
         frame.addKeyListener(new KeyAdapter() {
       			public void keyPressed(KeyEvent e)
       			{
       				if (e.getKeyCode()==38)
-      				matriz(comp);
+      					//System.out.println(e.getID());
+      				matriz(botones);
       				
       				if (e.getKeyCode()==39)
-      					matriz_sumas(comp);
+      					matriz_sumas(botones);
       				
       				if (e.getKeyCode()==37)
-      					matriz_restas(comp);
+      					matriz_restas(botones);
       				
       				if (e.getKeyCode()==27)
       				{
@@ -252,7 +426,7 @@ public static void corregir(Component [] comp)
       					frame.setVisible(false);
       					frame.setEnabled(false);
       					
-      					for (Component j: comp) 
+      					for (Component j: botones) 
       			        {
       			        	JButton boton=(JButton)j;
       			        	(boton).setText("");
