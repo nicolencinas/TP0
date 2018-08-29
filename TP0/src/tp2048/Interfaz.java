@@ -79,7 +79,7 @@ public class Interfaz {
 	{
 		for (int j=0;j<ret.length;j++)
 		{
-			int e=gen.nextInt(100);
+			int e=(gen.nextInt(2)+1)*2;
 			ret[i][j]=e;
 			
 			 ((JButton) comp[but]).setText(""+e);
@@ -102,7 +102,7 @@ public class Interfaz {
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
 			
-			 suma+=1;
+			 suma*=2;
 			
 			 ((JButton) comp[j]).setText(suma.toString());
 			
@@ -120,7 +120,7 @@ public static void matriz_restas(Component [] comp)
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
 			
-			 suma-=1;
+			 suma/=2;
 			
 			 ((JButton) comp[j]).setText(suma.toString());
 		}
@@ -230,7 +230,7 @@ public static void corregir(Component [] comp)
         
         matriz (comp);
         frame.addKeyListener(new KeyAdapter() {
-      			public void keyReleased(KeyEvent e)
+      			public void keyPressed(KeyEvent e)
       			{
       				if (e.getKeyCode()==38)
       				matriz(comp);
