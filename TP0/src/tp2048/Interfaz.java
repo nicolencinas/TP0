@@ -327,7 +327,7 @@ public static JButton[] generarBotones()
 		public void actionPerformed(ActionEvent e)
 		{
 			
-			frame.setFocusable(true);
+			frame.requestFocus();
 			matriz(botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0, icono);
