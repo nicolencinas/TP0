@@ -365,14 +365,10 @@ public void mouseReleased(MouseEvent e)
 	
 }
 
-
-
-
-
 	});
 
 	
-	
+	//Aqui cierro el frame de inicio y abro el frame de juego
     	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -380,12 +376,12 @@ public void mouseReleased(MouseEvent e)
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
 				frame.setVisible(true);
-				inicio.setVisible(false);
-				inicio.setEnabled(false);
+				inicio.dispose();
 				
 			}
 		});
-       
+    	
+       //Le saco el foco a todos los botones ya que no se utilizaran para nada y hara que se pierda el foco en el frame
         for (JButton j: botones) 
         {
         	try 
@@ -396,14 +392,10 @@ public void mouseReleased(MouseEvent e)
         	{
         		
         	}
-        	
-        	
-        	
+
         }
-        
-	
-        
-       // matriz (comp);
+
+       //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
       			public void keyPressed(KeyEvent e)
