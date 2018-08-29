@@ -342,22 +342,21 @@ public static JButton[] generarBotones()
 
 public void mouseReleased(MouseEvent e)
 {
-	int posicion=icono.getY();
-	if (posicion>0)
+	int posicion=panel.getY();
+	if (posicion>=0)
 	{
-		activar(botones);
+		
 		Animacion.subir(80, 0, 2, icono);
-	Animacion.subir(0, -100, 2, panel);
-  
-	
-	im_down(icono);
+		Animacion.subir(0, -100, 2, panel);
+		activar(botones);
+		im_down(icono);
 	}else
 	{
-		desactivar(botones);
+		
 		Animacion.bajar(-100, 0, 2, panel);
 		Animacion.bajar(0,80,  2, icono);
 		im_up(icono);
-		
+		desactivar(botones);
 		
 		
 	}
