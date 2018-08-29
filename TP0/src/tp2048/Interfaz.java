@@ -145,6 +145,9 @@ public static void corregir(Component [] comp)
 		 if(num<100) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
 
+		 
+		 if(num>10000) 
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
     }
 }
 		

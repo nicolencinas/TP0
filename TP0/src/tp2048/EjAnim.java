@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -15,6 +17,8 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class EjAnim {
 
@@ -79,6 +83,12 @@ public class EjAnim {
 		button.setBounds(254, 39, 111, 23);
 		panel.add(button);
 		
+		JLabel lblDesplegarBarra = new JLabel("Desplegar barra");
+		lblDesplegarBarra.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblDesplegarBarra.setBounds(244, 0, 89, 14);
+		lblDesplegarBarra.setVisible(false);
+		frame.getContentPane().add(lblDesplegarBarra);
+		
 		
 		
 		
@@ -103,6 +113,22 @@ public class EjAnim {
 		
 			
 		}
+		
+		
+		public void mouseEntered(MouseEvent e)
+		{
+			icono.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			lblDesplegarBarra.setVisible(true);
+		}
+		public void mouseExited(MouseEvent e)
+		{
+			icono.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			lblDesplegarBarra.setVisible(false);
+
+		}
+		
+		
+		
 			public void im_up()
 			{
 		icono.setIcon(new ImageIcon("subir.png"));
