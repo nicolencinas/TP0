@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -296,25 +298,32 @@ public static int [][]  genera_matriz()
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicio.getContentPane().setLayout(null);
 		
+		JLabel imagen = new JLabel("");
+		imagen.setSize(200,200);
+		imagen.setLocation(210,-20);
+		Image im=new ImageIcon("50935.png").getImage();
+		imagen.setIcon(new ImageIcon( im.getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
+
 		JButton start = new JButton("Iniciar Juego");
 		start.setFont(new Font("Tahoma", Font.PLAIN, 39));
-	
-		start.setBounds(112, 103, 363, 90);
+	 
+		inicio.add(imagen);
+		start.setBounds(112, 153, 363, 90);
 		inicio.getContentPane().add(start);
 		
 		JButton stats = new JButton("Ver estadisitcas");
 		stats.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		stats.setBounds(112, 222, 363, 90);
+		stats.setBounds(112, 272, 363, 90);
 		inicio.getContentPane().add(stats);
 		
 		JButton cargar = new JButton("Cargar");
 		cargar.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		cargar.setBounds(112, 342, 363, 90);
+		cargar.setBounds(112, 392, 363, 90);
 		inicio.getContentPane().add(cargar);
 		
 		JButton salir=new JButton("Salir");
 		salir.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		salir .setBounds(200, 462, 200, 70);
+		salir .setBounds(200, 512, 200, 70);
 		inicio.getContentPane().add(salir);
 		
 		salir.addActionListener(new ActionListener() {
