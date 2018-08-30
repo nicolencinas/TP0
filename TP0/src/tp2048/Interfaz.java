@@ -89,7 +89,7 @@ icono.setIcon(new ImageIcon("bajar.png"));
 	}
 
 	//Utilizada para generar una matriz a partir de una lista de botones //En un futuro recibira una matriz para poder graficar lo que reciba de la clase negocio
-	public static int [][] matriz(JButton [] comp)
+	public static int [][] matriz(JButton [] botones)
 	
 	{
 		Random gen =new Random();
@@ -102,8 +102,8 @@ icono.setIcon(new ImageIcon("bajar.png"));
 			int e=(gen.nextInt(2)+1)*2;
 			ret[i][j]=e;
 			
-			((JButton) comp[but]).setFont(new Font("Tahoma", Font.PLAIN, 65));
-			 ((JButton) comp[but]).setText(""+e);
+			((JButton) botones[but]).setFont(new Font("Tahoma", Font.PLAIN, 65));
+			 ((JButton) botones[but]).setText(""+e);
 			but++;
 	
 			System.out.print(ret[i][j]+" ");
@@ -113,25 +113,48 @@ icono.setIcon(new ImageIcon("bajar.png"));
 		return ret;
 	}
 	
-	//Utilizada en pruebas actualiza la matriz
-	public static void matriz_sumas(JButton [] comp)
+public static int [][] dibujar(int[][] matriz , JButton [] botones)
 	
 	{
-		for (int j=0;j<comp.length;j++)
+		
+		int but=0;
+		for (int i=0;i<matriz.length;i++) 
+	{
+		for (int j=0;j<matriz.length;j++)
 		{
 			
-			 JButton boton=(JButton)comp[j];
+			int e=matriz[i][j];
+			
+			botones[but].setFont(new Font("Tahoma", Font.PLAIN, 65));
+			botones[but].setText(""+e);
+			but++;
+	
+			System.out.print(matriz[i][j]+" ");
+		}
+		System.out.println("");
+	}
+		return matriz;
+	}
+	
+	//Utilizada en pruebas actualiza la matriz
+	public static void matriz_sumas(JButton [] botones)
+	
+	{
+		for (int j=0;j<botones.length;j++)
+		{
+			
+			 JButton boton=(JButton)botones[j];
 			 String nombre=boton.getText();
 			 Integer suma=Integer.parseInt(nombre);
 			
 			 suma*=2;
 			
-			 ((JButton) comp[j]).setText(suma.toString());
+			 ((JButton) botones[j]).setText(suma.toString());
 			
 	
 			
 		}
-		corregir(comp);
+		corregir(botones);
 	}
 	//Utilizada en pruebas actualiza la matriz
 public static void matriz_restas(JButton [] comp)
@@ -245,6 +268,25 @@ public static JButton[] generarBotones()
 	}
 	return ret;
 }
+
+public static int [][]  genera_matriz() 
+{
+	
+	Random gen =new Random();
+	int [][] ret=new int [4][4];
+	
+	for (int i=0;i<ret.length;i++) 
+    {
+	for (int j=0;j<ret.length;j++)
+	{
+		int e=(gen.nextInt(2)+1)*2;
+		ret[i][j]=e;
+		
+		System.out.print(ret[i][j]+" ");
+	}
+	System.out.println("");
+}return ret;
+}
 	
 	private void initialize()
 	{
@@ -293,6 +335,7 @@ public static JButton[] generarBotones()
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
+	
 		
 		//Aqui comienza la definicion del panel de drop menu
 	JLabel icono = new JLabel("");
@@ -337,7 +380,7 @@ public static JButton[] generarBotones()
 		{
 			
 			frame.requestFocus();
-			matriz(botones);
+			dibujar(genera_matriz(),botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0, icono);
 			Animacion.subir(0, -100, 0, panel);
@@ -380,7 +423,7 @@ public void mouseReleased(MouseEvent e)
     	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				matriz(botones);
+				dibujar(genera_matriz(),botones);
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
 				frame.setVisible(true);
@@ -406,11 +449,11 @@ public void mouseReleased(MouseEvent e)
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
-      			public void keyPressed(KeyEvent e)
+      			public void keyReleased(KeyEvent e)
       			{
       				if (e.getKeyCode()==38)
       					//System.out.println(e.getID());
-      				matriz(botones);
+      				dibujar(genera_matriz(),botones);
       				
       				if (e.getKeyCode()==39)
       					matriz_sumas(botones);
