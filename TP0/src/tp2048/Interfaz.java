@@ -89,7 +89,7 @@ icono.setIcon(new ImageIcon("bajar.png"));
 	}
 
 	//Utilizada para generar una matriz a partir de una lista de botones //En un futuro recibira una matriz para poder graficar lo que reciba de la clase negocio
-	public static int [][] matriz(Component [] comp)
+	public static int [][] matriz(JButton [] comp)
 	
 	{
 		Random gen =new Random();
@@ -224,15 +224,24 @@ public static JButton[] generarBotones()
 	
 	for (int o=0;o<16;o++) 
 	{
+		ret[o]=generarBoton(i[indi],e[inde]+50);
+		
 		if (indi>=3) 
 		{
-			indi=0;
 			inde++;
-		}else indi++;
+			indi=0;
+		}
+				
+		else 
+		{
+			indi++;
+			
+		}
 		
-		if (inde>=4) inde=0;
+	
 		
-		ret[o]=generarBoton(i[indi],e[inde]+50);
+		
+		
 	}
 	return ret;
 }
