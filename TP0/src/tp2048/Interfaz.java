@@ -3,6 +3,7 @@ package tp2048;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -12,10 +13,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -298,32 +301,73 @@ public static int [][]  genera_matriz()
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicio.getContentPane().setLayout(null);
 		
+		//Esta es la definicion de Un Jlabel que se usara como contenedor de un hipervinculo que envia al usuario a un instructivo del juego
+		// en la pagina de wikipedia
+		
 		JLabel imagen = new JLabel("");
-		imagen.setSize(200,200);
-		imagen.setLocation(210,-20);
+		imagen.setSize(270,270);
+		imagen.setLocation(165,0);
 		Image im=new ImageIcon("50935.png").getImage();
-		imagen.setIcon(new ImageIcon( im.getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
+		imagen.setIcon(new ImageIcon( im.getScaledInstance(270, 270, Image.SCALE_SMOOTH)));
+		imagen.setToolTipText("Ver informacion del juego");
+		
+		
+		imagen.addMouseListener(new MouseAdapter() 
+		{
 
+			public void mouseReleased(MouseEvent e)
+			{
+				String uri="https://es.wikipedia.org/wiki/2048_(videojuego)";
+				try 
+				{
+					Desktop.getDesktop().browse(java.net.URI.create(uri));
+				} catch (IOException e1)
+				{
+			
+					e1.printStackTrace();
+				}
+			}
+			
+			public void mouseEntered(MouseEvent e)
+			{
+				try {
+					Thread.sleep(600);
+				} catch (InterruptedException e1)
+				{
+				
+					e1.printStackTrace();
+				}
+				imagen.setBorder(BorderFactory.createBevelBorder(1));
+			}
+			
+			public void  mouseExited(MouseEvent e)
+			{
+				imagen.setBorder(null);
+			}
+
+		});
+		
+		//Botones del frame de inicio
 		JButton start = new JButton("Iniciar Juego");
-		start.setFont(new Font("Tahoma", Font.PLAIN, 39));
+		start.setFont(new Font("Tahoma", Font.PLAIN, 30));
 	 
 		inicio.add(imagen);
-		start.setBounds(112, 153, 363, 90);
+		start.setBounds(144, 310, 313, 60);
 		inicio.getContentPane().add(start);
 		
 		JButton stats = new JButton("Ver estadisitcas");
-		stats.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		stats.setBounds(112, 272, 363, 90);
+		stats.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		stats.setBounds(144, 390, 313, 60);
 		inicio.getContentPane().add(stats);
 		
 		JButton cargar = new JButton("Cargar");
-		cargar.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		cargar.setBounds(112, 392, 363, 90);
+		cargar.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		cargar.setBounds(144, 470, 313, 60);
 		inicio.getContentPane().add(cargar);
 		
 		JButton salir=new JButton("Salir");
-		salir.setFont(new Font("Tahoma", Font.PLAIN, 39));
-		salir .setBounds(200, 512, 200, 70);
+		salir.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		salir .setBounds(200, 590, 200, 60);
 		inicio.getContentPane().add(salir);
 		
 		salir.addActionListener(new ActionListener() {
