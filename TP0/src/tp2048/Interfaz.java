@@ -2,7 +2,6 @@ package tp2048;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -14,20 +13,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Random;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 
 import Animacion.Animacion;
 
@@ -35,6 +29,7 @@ public class Interfaz {
 
 	private JFrame frame;
 	private JFrame inicio;
+	Negocio negocio=new Negocio();
 	
 
 	/**
@@ -61,8 +56,16 @@ public class Interfaz {
 	/**
 	 * Create the application.
 	 */
-	public Interfaz() {
+	public Interfaz()
+	{
 		initialize();
+//		try
+//		{
+//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//		}catch (Exception e)
+//		{
+//			
+//		}
 	}
 
 	/**
@@ -351,6 +354,8 @@ public static int [][]  genera_matriz()
 		JButton start = new JButton("Iniciar Juego");
 		start.setFont(new Font("Tahoma", Font.PLAIN, 30));
 	 
+	
+		inicio.setTitle("Juego 2048: Menu de seleccion");
 		inicio.add(imagen);
 		start.setBounds(144, 310, 313, 60);
 		inicio.getContentPane().add(start);
@@ -405,16 +410,18 @@ public static int [][]  genera_matriz()
 	frame.getContentPane().add(panel);
 	panel.setLayout(null);
 	
+	JLabel message=new JLabel();
+	message.setText("Partida guardada");
+	message.setBounds(10,450,100,30);
+	frame.add(message);
+	
 	JButton newG = new JButton("Nuevo Juego");
 	newG.setBounds(150, 39, 111, 23);
 
 	panel.add(newG);
 	
 	JButton guardar = new JButton("Guardar");
-	guardar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		}
-	});
+	
 	guardar.setBounds(350, 39, 111, 23);
 	panel.add(guardar);
 
@@ -423,6 +430,7 @@ public static int [][]  genera_matriz()
 	
 	//Genero los botones y los agrego al frame
 	JButton[] botones=generarBotones();
+	
 	for (int i=0;i<16;i++) 
 	{
 		frame.getContentPane().add(botones[i]);
@@ -439,6 +447,20 @@ public static int [][]  genera_matriz()
 			Animacion.subir(0, -100, 0, panel);
 		    im_down(icono);
 			
+		}
+	});
+	
+	guardar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e)
+		{
+			negocio.guardar(botones);
+			
+			frame.requestFocus();
+			//dibujar(genera_matriz(),botones);
+			activar(botones);
+			Animacion.subir(80, 0, 0, icono);
+			Animacion.subir(0, -100, 0, panel);
+		    im_down(icono);
 		}
 	});
 	//Controlo los mouse events realizados en el drop menu
