@@ -455,24 +455,22 @@ public static int [][]  genera_matriz()
 	guardar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
 		{
-			negocio.guardar(botones);
+			//negocio.guardar(botones);
 			
-			frame.requestFocus();
+			
 			//dibujar(genera_matriz(),botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0, icono);
 			Animacion.subir(0, -100, 0, panel);
 			im_down(icono);
-			Animacion.bajar(-100, 10, 6, message);
+			
+			if (panel.getY()<0)
+			Animacion.bajar(-100, 20, 30, message);
 		
-//			try {
-//				Thread.sleep(6000);
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-			//Animacion.subir(10, -100, 2, message);
-		   
+			else
+			Animacion.subir(0, -100, 30, message);
+			
+		   frame.requestFocus();
 		    
 		}
 	});
