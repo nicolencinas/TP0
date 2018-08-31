@@ -412,7 +412,9 @@ public static int [][]  genera_matriz()
 	
 	JLabel message=new JLabel();
 	message.setText("Partida guardada");
-	message.setBounds(10,450,100,30);
+	message.setBounds(450,-100,110,30);
+	message.setBackground(Color.white);
+	message.setBorder(BorderFactory.createEtchedBorder(1));
 	frame.add(message);
 	
 	JButton newG = new JButton("Nuevo Juego");
@@ -460,7 +462,18 @@ public static int [][]  genera_matriz()
 			activar(botones);
 			Animacion.subir(80, 0, 0, icono);
 			Animacion.subir(0, -100, 0, panel);
-		    im_down(icono);
+			im_down(icono);
+			Animacion.bajar(-100, 10, 6, message);
+		
+//			try {
+//				Thread.sleep(6000);
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+			//Animacion.subir(10, -100, 2, message);
+		   
+		    
 		}
 	});
 	//Controlo los mouse events realizados en el drop menu
