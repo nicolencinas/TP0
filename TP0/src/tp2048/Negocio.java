@@ -12,19 +12,19 @@ import javax.swing.JButton;
 public class Negocio 
 {
 
-	FileWriter fw;
+	FileWriter fw=null;
 	ArrayList<String> list;
 	
 	String elem;
 	
 	public Negocio()
 	{
-		try {
-			this.fw= new FileWriter("d:/save.txt");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			//this.fw= new FileWriter("D:/save2.txt");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		list=new ArrayList<String>();
 		elem="";
 		
@@ -39,7 +39,7 @@ public class Negocio
 		}
 		
 		try {
-        	fw = new FileWriter("d:/save.txt");
+        	fw = new FileWriter("D:/save2.txt");
         	for (int i=0; i<list.size(); i++){
             	if (i>0)
             	{
@@ -63,28 +63,15 @@ public class Negocio
         	}
     	}
 }
-	public int [][] cargar2() 
-	{
-		 int [][] matriz=new int [4][4]; 
-		 int num=1;
-		for (int i=0;i<4;i++) 
-		{
-			for (int j=0;j<4;j++) 
-			{
-				matriz[i][j]=num;
-				num++;
-			}
-		}
-		return matriz;
-	}
+
 	public int [][] cargar()
 	{
 		
 	int matriz[][] =new int [4][4];
-	File f = new File( "d:\\save2.txt" ); 
+	File f = new File( "D:\\save2.txt" ); 
 	int i=0;
 	int j=0;
-	int c=0;
+	
 	BufferedReader entrada = null; 
 	try 
 	{ 
@@ -92,6 +79,7 @@ public class Negocio
 	String linea;
 	
 	int [] line=new int [4];
+	
 	while(entrada.ready())
 	{ 
 	linea = entrada.readLine(); 

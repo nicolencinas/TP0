@@ -487,6 +487,7 @@ public static int [][]  genera_matriz()
 		public void actionPerformed(ActionEvent e) 
 		{
 			dibujar(negocio.cargar(),botones);
+			corregir(botones);
 		
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);
