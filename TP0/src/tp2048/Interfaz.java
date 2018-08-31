@@ -464,11 +464,11 @@ public static int [][]  genera_matriz()
 			Animacion.subir(0, -100, 0, panel);
 			im_down(icono);
 			
-			if (panel.getY()<0)
-			Animacion.bajar(-100, 20, 30, message);
+			if (panel.getY()<-10)
+			Animacion.bajar(-100, 20, 15, message);
 		
 			else
-			Animacion.subir(0, -100, 30, message);
+			Animacion.subir(20, -100, 25, message);
 			
 		   frame.requestFocus();
 		    

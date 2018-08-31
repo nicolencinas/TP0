@@ -17,7 +17,7 @@ public class Negocio
 	public Negocio()
 	{
 		try {
-			this.fw= new FileWriter("c:/save.txt");
+			this.fw= new FileWriter("d:/save.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class Negocio
 		}
 		
 		try {
-        	fw = new FileWriter("c:/save.txt");
+        	fw = new FileWriter("d:/save.txt");
         	for (int i=0; i<list.size(); i++){
             	if (i>0)
             	{
