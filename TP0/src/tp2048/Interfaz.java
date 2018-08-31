@@ -76,10 +76,7 @@ public class Interfaz {
 	{
 		JButton b01 = new JButton("");
 		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		b01.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		b01.setBounds(x, y, 120, 120);
 		return b01;
 		
@@ -241,6 +238,8 @@ public static void corregir(JButton [] comp)
 		 
 		 if(num>10000) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		 if (num>100000)
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
     }
 }
 	
@@ -340,11 +339,13 @@ public static int [][]  genera_matriz()
 				
 					e1.printStackTrace();
 				}
-				imagen.setBorder(BorderFactory.createBevelBorder(1));
+				imagen.setBounds(164, 0, 270, 270);
+				imagen.setBorder(BorderFactory.createLineBorder(new Color(58,76,186)));
 			}
 			
 			public void  mouseExited(MouseEvent e)
 			{
+				imagen.setBounds(165, 0, 270, 270);
 				imagen.setBorder(null);
 			}
 
@@ -370,6 +371,7 @@ public static int [][]  genera_matriz()
 		cargar.setBounds(144, 470, 313, 60);
 		inicio.getContentPane().add(cargar);
 		
+
 		JButton salir=new JButton("Salir");
 		salir.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		salir .setBounds(200, 590, 200, 60);
@@ -442,20 +444,20 @@ public static int [][]  genera_matriz()
 		public void actionPerformed(ActionEvent e)
 		{
 			
-			frame.requestFocus();
+			
 			dibujar(genera_matriz(),botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0, icono);
 			Animacion.subir(0, -100, 0, panel);
 		    im_down(icono);
-			
+			frame.requestFocus();
 		}
 	});
 	
 	guardar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
 		{
-			//negocio.guardar(botones);
+			negocio.guardar(botones);
 			
 			
 			//dibujar(genera_matriz(),botones);
@@ -464,16 +466,36 @@ public static int [][]  genera_matriz()
 			Animacion.subir(0, -100, 0, panel);
 			im_down(icono);
 			
-			if (panel.getY()<-10)
-			Animacion.bajar(-100, 20, 15, message);
+			if (panel.getY()<-10) 
+			{
+							     Animacion.bajar(-100, 20, 15, message);
+
+			}
 		
-			else
-			Animacion.subir(20, -100, 25, message);
+			else 
+			{
+				Animacion.subir(20, -100, 35, message);
+			}
+			
 			
 		   frame.requestFocus();
 		    
 		}
 	});
+	
+	cargar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) 
+		{
+			dibujar(negocio.cargar2(),botones);
+		
+			frame.setBounds(inicio.getBounds());
+			frame.setEnabled(true);
+			frame.setVisible(true);
+			inicio.dispose();
+			
+		}
+		
+	});	
 	//Controlo los mouse events realizados en el drop menu
 	icono.addMouseListener(new MouseAdapter() 
 	{
