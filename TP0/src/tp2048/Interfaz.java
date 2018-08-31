@@ -486,7 +486,7 @@ public static int [][]  genera_matriz()
 	cargar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
-			dibujar(negocio.cargar2(),botones);
+			dibujar(negocio.cargar(),botones);
 		
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);

@@ -84,6 +84,7 @@ public class Negocio
 	File f = new File( "d:\\save2.txt" ); 
 	int i=0;
 	int j=0;
+	int c=0;
 	BufferedReader entrada = null; 
 	try 
 	{ 
@@ -99,24 +100,25 @@ public class Negocio
 	{
 		int num=Integer.parseInt(linea);
 		line[i]=num;
-		//i++;
+		i++;
 		
-		if (i>=3)
+		if (i==4)
 		{
-			i=0;
-			for (int l=0;l<4;l++) 
-			{
-				matriz[i][j]=line[l];
-			}
-			j++;
 			
+			for (int l=0;l<line.length;l++) 
+			{
+				matriz[j][l]=line[l];
+			}
+			
+			j++;
+			i=0;
 			
 			
 		}
 		
 	}catch (Exception e)
 	{
-		
+		e.printStackTrace();
 	}
 	
 	
