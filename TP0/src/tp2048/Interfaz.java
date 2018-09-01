@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
@@ -414,10 +415,18 @@ public static int [][]  genera_matriz()
 	
 	JLabel message=new JLabel();
 	message.setText("Partida guardada");
-	message.setBounds(450,-100,110,30);
+	message.setBounds(430,-100,160,30);
 	message.setBackground(Color.white);
-	message.setBorder(BorderFactory.createEtchedBorder(1));
+	message.setBorder(new RoundedBorder(30));
 	frame.add(message);
+	
+	JLabel cargada=new JLabel();
+	cargada.setText("Partida cargada");
+	cargada.setVisible(false);
+	cargada.setBounds(30,20,160,30);
+	cargada.setBackground(Color.white);
+	cargada.setBorder(new RoundedBorder(30));
+	frame.add(cargada);
 	
 	JButton newG = new JButton("Nuevo Juego");
 	newG.setBounds(150, 39, 111, 23);
@@ -447,8 +456,8 @@ public static int [][]  genera_matriz()
 			
 			dibujar(genera_matriz(),botones);
 			activar(botones);
-			Animacion.subir(80, 0, 0, icono);
-			Animacion.subir(0, -100, 0, panel);
+			Animacion.subir(80, 0, 0,1, icono);
+			Animacion.subir(0, -100, 0,1, panel);
 		    im_down(icono);
 			frame.requestFocus();
 		}
@@ -462,19 +471,19 @@ public static int [][]  genera_matriz()
 			
 			//dibujar(genera_matriz(),botones);
 			activar(botones);
-			Animacion.subir(80, 0, 0, icono);
-			Animacion.subir(0, -100, 0, panel);
+			Animacion.subir(80, 0, 0,1, icono);
+			Animacion.subir(0, -100, 0,1, panel);
 			im_down(icono);
 			
-			if (panel.getY()<-10) 
+			if (message.getY()<0) 
 			{
-							     Animacion.bajar(-100, 20, 15, message);
+							     Animacion.bajar(-100, 20, 15,1, message);
 
 			}
 		
 			else 
 			{
-				Animacion.subir(20, -100, 35, message);
+				Animacion.subir(20, -100, 35,1, message);
 			}
 			
 			
@@ -486,7 +495,23 @@ public static int [][]  genera_matriz()
 	cargar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
-			dibujar(negocio.cargar(),botones);
+			if (!negocio.rutinacarga()) 
+			{
+				dibujar(genera_matriz(),botones);
+			
+				JOptionPane.showMessageDialog(null,"No existe una partida guardada. Iniciando juego nuevo:","Error",JOptionPane.ERROR_MESSAGE);
+		
+			}
+			else 
+			{
+				dibujar(negocio.cargar(),botones);
+				cargada.setVisible(true);
+			Animacion.mover_izquierda(30, -200, 15,1, cargada);
+			}
+			
+			
+			
+			
 			corregir(botones);
 		
 			frame.setBounds(inicio.getBounds());
@@ -507,15 +532,15 @@ public void mouseReleased(MouseEvent e)
 	if (posicion>=0)
 	{
 		
-		Animacion.subir(80, 0, 2, icono);
-		Animacion.subir(0, -100, 2, panel);
+		Animacion.subir(80, 0, 2,1, icono);
+		Animacion.subir(0, -100, 2,1, panel);
 		activar(botones);
 		im_down(icono);
 	}else
 	{
 		
-		Animacion.bajar(-100, 0, 2, panel);
-		Animacion.bajar(0,80,  2, icono);
+		Animacion.bajar(-100, 0, 2,1, panel);
+		Animacion.bajar(0,80,  2,1, icono);
 		im_up(icono);
 		desactivar(botones);
 		

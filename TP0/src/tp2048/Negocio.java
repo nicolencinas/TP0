@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class Negocio 
 {
 
 	FileWriter fw=null;
 	ArrayList<String> list;
-	
+	int matriz[][] =new int [4][4];
 	String elem;
 	
 	public Negocio()
@@ -32,6 +33,12 @@ public class Negocio
 	
 	public void guardar(JButton[] j)
 	{
+		matriz=new int[4][4];
+		File f=new File("D:/save2.txt");
+
+
+		
+		
 		for (JButton boton : j)
 		{
 			String s =(String)boton.getText();
@@ -39,7 +46,7 @@ public class Negocio
 		}
 		
 		try {
-        	fw = new FileWriter("D:/save2.txt");
+        	fw = new FileWriter(f);
         	for (int i=0; i<list.size(); i++){
             	if (i>0)
             	{
@@ -64,12 +71,21 @@ public class Negocio
     	}
 }
 
+	
 	public int [][] cargar()
 	{
+		return matriz;
+	}
+	
+	public boolean rutinacarga()
+	{
 		
-	int matriz[][] =new int [4][4];
+	
 	File f = new File( "D:\\save2.txt" ); 
-	int i=0;
+	
+	if (f.exists()) 
+	{
+		int i=0;
 	int j=0;
 	
 	BufferedReader entrada = null; 
@@ -117,10 +133,20 @@ public class Negocio
 	finally 
 	{ 
 	try{ 
-	entrada.close(); 
+	entrada.close();
+	return true;
 	}catch(IOException e1){} 
-	} return matriz;
 	} 
+	}
+	else 
+	{ 
+		return false;
+	}
+	return false;
+	
+	
+	}
+	
 	
 	 {
 		
