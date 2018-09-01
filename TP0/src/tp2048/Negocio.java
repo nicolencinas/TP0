@@ -20,12 +20,7 @@ public class Negocio
 	
 	public Negocio()
 	{
-//		try {
-//			//this.fw= new FileWriter("D:/save2.txt");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
 		list=new ArrayList<String>();
 		elem="";
 		
@@ -33,12 +28,10 @@ public class Negocio
 	
 	public void guardar(JButton[] j)
 	{
-		matriz=new int[4][4];
+		list.clear();
+		
 		File f=new File("D:/save2.txt");
-
-
-		
-		
+	
 		for (JButton boton : j)
 		{
 			String s =(String)boton.getText();

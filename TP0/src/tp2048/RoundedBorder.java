@@ -27,7 +27,7 @@ class RoundedBorder implements Border {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height)
     {
     	c.setBackground(new Color(241,245,169));
-    	g.setColor(new Color (162,172,4));
+    	g.setColor(new Color (34,20,235));
     	
         g.drawRoundRect(x, y, width-1, height-1, radius, radius);
     }

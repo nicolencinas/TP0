@@ -475,9 +475,9 @@ public static int [][]  genera_matriz()
 			Animacion.subir(0, -100, 0,1, panel);
 			im_down(icono);
 			
-			if (message.getY()<0) 
+			if (panel.getY()<-10) 
 			{
-							     Animacion.bajar(-100, 20, 15,1, message);
+			     Animacion.bajar(-100, 20, 15,1, message);
 
 			}
 		
