@@ -312,7 +312,7 @@ public static int [][]  genera_matriz()
 		imagen.setLocation(165,0);
 		Image im=new ImageIcon("50935.png").getImage();
 		imagen.setIcon(new ImageIcon( im.getScaledInstance(270, 270, Image.SCALE_SMOOTH)));
-		imagen.setToolTipText("Ver informacion del juego");
+		imagen.setToolTipText("Ver informacion del juego. Go to: https://es.wikipedia.org/wiki/2048_(videojuego)");
 		
 		
 		imagen.addMouseListener(new MouseAdapter() 
@@ -334,7 +334,7 @@ public static int [][]  genera_matriz()
 			public void mouseEntered(MouseEvent e)
 			{
 				try {
-					Thread.sleep(600);
+					Thread.sleep(300);
 				} catch (InterruptedException e1)
 				{
 				
@@ -400,7 +400,7 @@ public static int [][]  genera_matriz()
 		
 		//Aqui comienza la definicion del panel de drop menu
 	JLabel icono = new JLabel("");
-	icono.setBounds(300, 1, 30, 15);
+	icono.setBounds(280, 1, 30, 15);
 	
 	frame.getContentPane().add(icono);
 	
@@ -409,16 +409,17 @@ public static int [][]  genera_matriz()
 	
 	JPanel panel = new JPanel();
 	panel.setBackground(Color.WHITE);
-	panel.setBounds(0, -100, 600, 96);
+	panel.setBounds(10, -100, 570, 96);
 	frame.getContentPane().add(panel);
 	panel.setLayout(null);
+	panel.setBorder(new RoundedBorder(30));
 	
-	JLabel message=new JLabel();
-	message.setText("Partida guardada");
-	message.setBounds(430,-100,160,30);
-	message.setBackground(Color.white);
-	message.setBorder(new RoundedBorder(30));
-	frame.add(message);
+	JLabel guardada=new JLabel();
+	guardada.setText("Partida guardada");
+	guardada.setBounds(430,-100,160,30);
+	guardada.setBackground(Color.white);
+	guardada.setBorder(new RoundedBorder(30));
+	frame.add(guardada);
 	
 	JLabel cargada=new JLabel();
 	cargada.setText("Partida cargada");
@@ -429,16 +430,24 @@ public static int [][]  genera_matriz()
 	frame.add(cargada);
 	
 	JButton newG = new JButton("Nuevo Juego");
-	newG.setBounds(150, 39, 111, 23);
-
+	newG.setBounds(100, 39, 111, 23);
+    newG.setBorder(new RoundedBorder(10));
 	panel.add(newG);
 	
 	JButton guardar = new JButton("Guardar");
-	
-	guardar.setBounds(350, 39, 111, 23);
+	guardar.setBorder(new RoundedBorder(10));
+	guardar.setBounds(360, 39, 111, 23);
 	panel.add(guardar);
+    
+
 
 	icono.setToolTipText("Desplegar drop menu");
+	
+	//Cambio el borde de los botones principales
+		cargar.setBorder(new RoundedBorder(30));
+		start.setBorder(new RoundedBorder(30));
+		salir.setBorder(new RoundedBorder(30));
+		stats.setBorder(new RoundedBorder(30));
 	
 	
 	//Genero los botones y los agrego al frame
@@ -449,12 +458,18 @@ public static int [][]  genera_matriz()
 		frame.getContentPane().add(botones[i]);
 	}
 	
+	//Defino las acciones del boton de nuevo juego del drop menu
 	newG.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
 		{
+			int ret=JOptionPane.showConfirmDialog(guardar, "¿Deseas Comenzar un nuevo juego?","Confirmar Nuevo Juego",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+			if (ret==0) 
+			{
+				dibujar(genera_matriz(),botones);
+
+			}
 			
-			
-			dibujar(genera_matriz(),botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0,1, icono);
 			Animacion.subir(0, -100, 0,1, panel);
@@ -463,35 +478,30 @@ public static int [][]  genera_matriz()
 		}
 	});
 	
+	//Defino las acciones del boton guardar del drop menu
 	guardar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
 		{
-			negocio.guardar(botones);
+			int ret=JOptionPane.showConfirmDialog(guardar, "¿Deseas Guardar la partida?","Confirmar Guardado",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
+			if (ret==0)
+			{
+				negocio.guardar(botones);
+				Animacion.subir(20, -100, 35,1, guardada);
+			}
 			
-			//dibujar(genera_matriz(),botones);
 			activar(botones);
 			Animacion.subir(80, 0, 0,1, icono);
 			Animacion.subir(0, -100, 0,1, panel);
 			im_down(icono);
-			
-			if (panel.getY()<-10) 
-			{
-			     Animacion.bajar(-100, 20, 15,1, message);
-
-			}
-		
-			else 
-			{
-				Animacion.subir(20, -100, 35,1, message);
-			}
-			
 			
 		   frame.requestFocus();
 		    
 		}
 	});
 	
+	
+	//Defino las acciones del Boton de cargar juego de la pantalla incicial
 	cargar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -522,35 +532,8 @@ public static int [][]  genera_matriz()
 		}
 		
 	});	
-	//Controlo los mouse events realizados en el drop menu
-	icono.addMouseListener(new MouseAdapter() 
-	{
-
-public void mouseReleased(MouseEvent e)
-{
-	int posicion=panel.getY();
-	if (posicion>=0)
-	{
-		
-		Animacion.subir(80, 0, 2,1, icono);
-		Animacion.subir(0, -100, 2,1, panel);
-		activar(botones);
-		im_down(icono);
-	}else
-	{
-		
-		Animacion.bajar(-100, 0, 2,1, panel);
-		Animacion.bajar(0,80,  2,1, icono);
-		im_up(icono);
-		desactivar(botones);
-		
-		
-	}
-
 	
-}
 
-	});
 
 	
 	//Aqui cierro el frame de inicio y abro el frame de juego
@@ -566,6 +549,39 @@ public void mouseReleased(MouseEvent e)
 			}
 		});
     	
+    		//Controlo los mouse events realizados en el drop menu
+	icono.addMouseListener(new MouseAdapter() 
+	{
+
+public void mouseReleased(MouseEvent e)
+{
+	int posicion=panel.getY();
+	if (posicion>=0)
+	{
+		
+		Animacion.subir(80, 0, 2,1, icono);
+		Animacion.subir(0, -100, 2,1, panel);
+		activar(botones);
+		icono.setToolTipText("Desplegar drop menu");
+
+		im_down(icono);
+	}else
+	{
+		
+		Animacion.bajar(-100, 0, 2,1, panel);
+		Animacion.bajar(0,80,  2,1, icono);
+		im_up(icono);
+		icono.setToolTipText("Retraer drop menu");
+		desactivar(botones);
+		
+		
+	}
+
+	
+}
+
+	});
+	
        //Le saco el foco a todos los botones ya que no se utilizaran para nada y hara que se pierda el foco en el frame
         for (JButton j: botones) 
         {
