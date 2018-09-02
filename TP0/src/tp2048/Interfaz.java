@@ -77,7 +77,7 @@ public class Interfaz {
 	{
 		JButton b01 = new JButton("");
 		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		
+		b01.setFocusable(false);
 		b01.setBounds(x, y, 120, 120);
 		return b01;
 		
@@ -94,32 +94,7 @@ icono.setIcon(new ImageIcon("subir.png"));
 icono.setIcon(new ImageIcon("bajar.png"));
 	}
 
-	//Utilizada para generar una matriz a partir de una lista de botones //En un futuro recibira una matriz para poder graficar lo que reciba de la clase negocio
-	public static int [][] matriz(JButton [] botones)
-	
-	{
-		Random gen =new Random();
-		int [][] ret=new int [4][4];
-		int but=0;
-		for (int i=0;i<ret.length;i++) 
-	{
-		for (int j=0;j<ret.length;j++)
-		{
-			int e=(gen.nextInt(2)+1)*2;
-			ret[i][j]=e;
-			
-			((JButton) botones[but]).setFont(new Font("Tahoma", Font.PLAIN, 65));
-			 ((JButton) botones[but]).setText(""+e);
-			but++;
-	
-			System.out.print(ret[i][j]+" ");
-		}
-		System.out.println("");
-	}
-		return ret;
-	}
-	
-public static int [][] dibujar(int[][] matriz , JButton [] botones)
+public static void  dibujar(int[][] matriz , JButton [] botones)
 	
 	{
 		
@@ -139,7 +114,7 @@ public static int [][] dibujar(int[][] matriz , JButton [] botones)
 		}
 		System.out.println("");
 	}
-		return matriz;
+		
 	}
 	
 	//Utilizada en pruebas actualiza la matriz
@@ -268,11 +243,6 @@ public static JButton[] generarBotones()
 			indi++;
 			
 		}
-		
-	
-		
-		
-		
 	}
 	return ret;
 }
@@ -439,8 +409,7 @@ public static int [][]  genera_matriz()
 	guardar.setBounds(360, 39, 111, 23);
 	panel.add(guardar);
     
-
-
+	
 	icono.setToolTipText("Desplegar drop menu");
 	
 	//Cambio el borde de los botones principales
@@ -505,37 +474,49 @@ public static int [][]  genera_matriz()
 	cargar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
+			int seleccion=-1;
 			if (!negocio.rutinacarga()) 
 			{
-				dibujar(genera_matriz(),botones);
+				
+				
 			
-				JOptionPane.showMessageDialog(null,"No existe una partida guardada. Iniciando juego nuevo:","Error",JOptionPane.ERROR_MESSAGE);
+				seleccion=JOptionPane.showConfirmDialog(cargar,"No existe una partida guardada. Iniciando juego nuevo:","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
 		
 			}
 			else 
 			{
+				
 				dibujar(negocio.cargar(),botones);
 				cargada.setVisible(true);
-			Animacion.mover_izquierda(30, -200, 15,1, cargada);
+				Animacion.mover_izquierda(30, -200, 15,1, cargada);
+			corregir(botones);
+			frame.setBounds(inicio.getBounds());
+			frame.setEnabled(true);
+			frame.setVisible(true);
+			inicio.dispose();
+			}
+				
+			 if (seleccion==0)
+			{
+				dibujar(genera_matriz(),botones);
+				frame.setBounds(inicio.getBounds());
+				frame.setEnabled(true);
+				frame.setVisible(true);
+				inicio.dispose();
+			
+		
+			
 			}
 			
 			
 			
 			
-			corregir(botones);
-		
-			frame.setBounds(inicio.getBounds());
-			frame.setEnabled(true);
-			frame.setVisible(true);
-			inicio.dispose();
+			
 			
 		}
 		
 	});	
-	
 
-
-	
 	//Aqui cierro el frame de inicio y abro el frame de juego
     	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -577,25 +558,9 @@ public void mouseReleased(MouseEvent e)
 		
 	}
 
-	
 }
-
 	});
 	
-       //Le saco el foco a todos los botones ya que no se utilizaran para nada y hara que se pierda el foco en el frame
-        for (JButton j: botones) 
-        {
-        	try 
-        	{
-        		j.setFocusable(false);
-        	
-        	}catch (Exception e) 
-        	{
-        		
-        	}
-
-        }
-
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
