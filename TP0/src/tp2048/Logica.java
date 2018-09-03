@@ -1,5 +1,6 @@
 package tp2048;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public class Logica
@@ -21,7 +22,7 @@ public class Logica
 	
 	public int [][]  nuevo_juego() 
 	{
-		//matriz=new int [4][4] ;//Actualizo la matriz 
+		matriz=new int [4][4] ;//Actualizo la matriz 
 		
 		Random gen=new Random();
 		int primero=(gen.nextInt(2)+1)*2;
@@ -74,9 +75,11 @@ public class Logica
 			
 			if (dezp>0)
 			{
+				
 				int aux=fila[i];
 				fila[i]=0;
-				fila[i+dezp]=aux;
+				fila[i+dezp]=aux;	
+		
 				
 			}
 		}

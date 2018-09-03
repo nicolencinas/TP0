@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-public class Negocio 
+public class SavesManager 
 {
 
 	FileWriter fw=null;
@@ -18,7 +18,7 @@ public class Negocio
 	int matriz[][] =new int [4][4];
 	String elem;
 	
-	public Negocio()
+	public SavesManager()
 	{
 
 		list=new ArrayList<String>();

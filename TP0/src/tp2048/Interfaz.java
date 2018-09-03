@@ -30,7 +30,7 @@ public class Interfaz {
 
 	private JFrame frame;
 	private JFrame inicio;
-	Negocio negocio=new Negocio();
+	SavesManager saveManager=new SavesManager();
 	Logica logica =new Logica();
 	
 
@@ -461,7 +461,7 @@ public static int [][]  genera_matriz()
 			
 			if (ret==0)
 			{
-				negocio.guardar(botones);
+				saveManager.guardar(botones);
 				Animacion.subir(20, -100, 35,1, guardada);
 			}
 			
@@ -481,7 +481,7 @@ public static int [][]  genera_matriz()
 		public void actionPerformed(ActionEvent e) 
 		{
 			int seleccion=-1;
-			if (!negocio.rutinacarga()) 
+			if (!saveManager.rutinacarga()) 
 			{
 				
 				
@@ -492,7 +492,7 @@ public static int [][]  genera_matriz()
 			else 
 			{
 				
-				dibujar(negocio.cargar(),botones);
+				dibujar(saveManager.cargar(),botones);
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
 			
