@@ -31,6 +31,7 @@ public class Interfaz {
 	private JFrame frame;
 	private JFrame inicio;
 	Negocio negocio=new Negocio();
+	Logica logica =new Logica();
 	
 
 	/**
@@ -440,7 +441,7 @@ public static int [][]  genera_matriz()
 
 			if (ret==0) 
 			{
-				dibujar(genera_matriz(),botones);
+				dibujar(logica.nuevo_juego(),botones);
 
 			}
 			
@@ -575,8 +576,12 @@ public void mouseReleased(MouseEvent e)
       					//System.out.println(e.getID());
       				dibujar(genera_matriz(),botones);
       				
-      				if (e.getKeyCode()==39)
-      					matriz_sumas(botones);
+      				if (e.getKeyCode()==39) 
+      				{
+      					
+      					 dibujar(logica.mover_derecha(),botones);
+
+      				}
       				
       				if (e.getKeyCode()==37)
       					matriz_restas(botones);
