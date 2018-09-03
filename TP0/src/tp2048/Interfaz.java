@@ -112,9 +112,10 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 	
 			System.out.print(matriz[i][j]+" ");
 		}
+	
 		System.out.println("");
 	}
-		
+		corregir(botones);
 	}
 	
 	//Utilizada en pruebas actualiza la matriz
@@ -198,10 +199,11 @@ public static void corregir(JButton [] comp)
 		 String nombre=boton.getText();
 		 Integer num=Integer.parseInt(nombre);
 		 
+		
 		 if (num<10) 
-		 {
+		 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		 }
+		 
 		 if (num>=100 && num<1000) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		 
@@ -211,6 +213,9 @@ public static void corregir(JButton [] comp)
 		 if(num<100) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
 
+		  if (num==0) 
+		 
+			 boton.setFont(new Font("Tahoma", Font.PLAIN, 0));
 		 
 		 if(num>10000) 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -489,7 +494,7 @@ public static int [][]  genera_matriz()
 				dibujar(negocio.cargar(),botones);
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
-			corregir(botones);
+			
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);
 			frame.setVisible(true);

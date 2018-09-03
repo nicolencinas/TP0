@@ -1,5 +1,8 @@
 package tp2048;
 
-public class Logica {
+
+
+public class Logica
+{
 
 }
