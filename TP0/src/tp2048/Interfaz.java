@@ -117,11 +117,11 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Animacion.bajar(0, 275, 15, 3, score);
+				Animacion.bajar(0, 250, 15, 3, score);
 				
-				Animacion.mover_izquierda(520, 370, 9, 1, score);
+				Animacion.mover_izquierda(520, 375, 9, 1, score);
 				
-				Animacion.bajar(0, 275, 15, 3, hscore);
+				Animacion.bajar(0, 250, 15, 3, hscore);
 				
 				Animacion.mover_derecha(27, 167, 9, 1, hscore);
 				hscoreinfo.setText("200");
@@ -570,15 +570,19 @@ public static int [][]  genera_matriz()
 	cargar.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
+		
 			int seleccion=-1;
 			if (!saveManager.rutinacarga()) 
 			{
 				
 				
 			
-				seleccion=JOptionPane.showConfirmDialog(cargar,"No existe una partida guardada. Iniciando juego nuevo:","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
+				seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
 		
 			}
+			
+			
+			
 			else 
 			{
 				
@@ -586,8 +590,8 @@ public static int [][]  genera_matriz()
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
 			
-				Animacion.mover_derecha(-1000, 27, 10, 2, hscore);
-				Animacion.mover_derecha(-1000, 5, 10, 2, hscoreinfo);
+				Animacion.mover_derecha(-800, 27, 10, 2, hscore);
+				Animacion.mover_derecha(-800, 5, 10, 2, hscoreinfo);
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);
 			frame.setVisible(true);
