@@ -86,15 +86,15 @@ public class Interfaz {
 		return b01;
 		
 	}
-	public void gameOver(JLabel score,JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
+	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
 	{
 		int scorey=score.getY();
 			
 			int ub=gameover.getY();
 			if (ub>134) 
 			{
-			Animacion.subir(800,20, 2, 1, mensajefinal);
-			Animacion.subir(800, 134, 2, 1, gameover);
+			Animacion.subir(800,20, 1, 1, mensajefinal);
+			Animacion.subir(800, 134, 1, 1, gameover);
 			
 			icono.setBounds(-100, -100, -100, -100);
 			desactivar(botones);
@@ -107,6 +107,10 @@ public class Interfaz {
 				
 				Animacion.mover_izquierda(490, 350, 10, 1, scoreinfo);
 				
+				
+                Animacion.bajar(1, 300, 15, 3, hscoreinfo);
+				
+				Animacion.mover_derecha(5, 145, 10, 1, hscoreinfo);
 				try {
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
@@ -116,6 +120,11 @@ public class Interfaz {
 				Animacion.bajar(0, 275, 15, 3, score);
 				
 				Animacion.mover_izquierda(520, 370, 9, 1, score);
+				
+				Animacion.bajar(0, 275, 15, 3, hscore);
+				
+				Animacion.mover_derecha(27, 167, 9, 1, hscore);
+				hscoreinfo.setText("200");
 				
 				score.setText("Score final");
 			}	
@@ -691,7 +700,7 @@ public void mouseReleased(MouseEvent e)
       					if (perdiste) 
       					{
       						frame.setFocusable(false);
-      						gameOver(score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       				
       					
       					}
