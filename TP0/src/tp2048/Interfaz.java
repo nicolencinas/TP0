@@ -73,6 +73,8 @@ public class Interfaz {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+
 	//Genera un unico boton 
 	public static JButton generarBoton(int x,int y) 
 	{
@@ -372,7 +374,19 @@ public static int [][]  genera_matriz()
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
-	
+		//Definicion del panel de fin del juego
+		JPanel gameover=  new JPanel();
+		gameover.setVisible(true);
+		gameover.setBounds(20,800,560,334);
+		gameover.setBorder(new RoundedBorder(30));
+		gameover.setBackground(Color.WHITE);
+		
+		frame.getContentPane().add(gameover);
+		JLabel mensajefinal= new JLabel("Perdiste");
+		mensajefinal.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		gameover.add(mensajefinal);
+		
+		
 		
 		//Aqui comienza la definicion del panel de drop menu
 	JLabel icono = new JLabel("");
@@ -432,6 +446,10 @@ public static int [][]  genera_matriz()
 	{
 		frame.getContentPane().add(botones[i]);
 	}
+	
+	
+	
+	
 	
 	//Defino las acciones del boton de nuevo juego del drop menu
 	newG.addActionListener(new ActionListener() {
@@ -513,12 +531,7 @@ public static int [][]  genera_matriz()
 		
 			
 			}
-			
-			
-			
-			
-			
-			
+
 		}
 		
 	});	
@@ -567,6 +580,9 @@ public void mouseReleased(MouseEvent e)
 }
 	});
 	
+
+	
+	
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
@@ -586,6 +602,17 @@ public void mouseReleased(MouseEvent e)
       				if (e.getKeyCode()==37)
       					matriz_restas(botones);
       				
+      				if (e.getKeyCode()==40)
+      				{
+      					int ub=gameover.getY();
+      					if (ub>134) 
+      					{
+      					Animacion.subir(800, 134, 2, 1, gameover);
+      					icono.setBounds(-100, -100, -100, -100);
+      					desactivar(botones);	
+      					}
+      					
+      				}
       				if (e.getKeyCode()==27)
       				{
       					inicio.setBounds(frame.getBounds());
