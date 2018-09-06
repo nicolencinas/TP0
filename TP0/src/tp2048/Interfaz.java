@@ -86,7 +86,7 @@ public class Interfaz {
 		return b01;
 		
 	}
-	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal, JButton reset) 
+	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
 	{
 		int scorey=score.getY();
 			
@@ -102,8 +102,7 @@ public class Interfaz {
 			if (scorey<=300) 
 			{
 				
-				//reset.setVisible(true);
-				Animacion.subir(1900,400 , 10, 10, reset);
+				
 				Animacion.bajar(0, 300, 15, 3, scoreinfo);
 				
 				Animacion.mover_izquierda(490, 350, 10, 1, scoreinfo);
@@ -118,7 +117,6 @@ public class Interfaz {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 				Animacion.bajar(0, 250, 15, 3, score);
 				
 				Animacion.mover_izquierda(520, 375, 9, 1, score);
@@ -472,26 +470,18 @@ public static int [][]  genera_matriz()
 		//Definicion del panel de fin del juego
 		
 		
-	    JButton reset=new JButton("");
-	    reset.setBounds(280,800,50,50);
-	    Image ima=new ImageIcon("reset.png").getImage();
-	    
-	    reset.setIcon(new ImageIcon(ima.getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
-	    reset.setFocusable(perdiste);
-	   // reset.setVisible(false);
-	    frame.add(reset);
-	    
+	
 		
-		JLabel hscore=new JLabel ("HighScore");
-		hscore.setBounds(27,1,100,15);
-		JLabel hscoreinfo=new JLabel("100");
-		hscoreinfo.setBackground(Color.WHITE);
-		hscoreinfo.setBorder(new RoundedBorder(30));
-		hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
-		hscoreinfo.setBounds(5,14 , 100, 40);
-		frame.getContentPane().add(hscore);
-		frame.getContentPane().add(hscoreinfo);
-		
+	JLabel hscore=new JLabel ("HighScore");
+	hscore.setBounds(27,1,100,15);
+	JLabel hscoreinfo=new JLabel("100");
+	hscoreinfo.setBackground(Color.WHITE);
+	hscoreinfo.setBorder(new RoundedBorder(30));
+	hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+	hscoreinfo.setBounds(5,14 , 100, 40);
+	frame.getContentPane().add(hscore);
+	frame.getContentPane().add(hscoreinfo);
+	
 	
 		JLabel score=new JLabel ("Score");
 		score.setBounds(522,1,100,10);
@@ -717,11 +707,8 @@ public void mouseReleased(MouseEvent e)
       					if (perdiste) 
       					{
       						frame.setFocusable(false);
-      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal,reset) ;
+      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       				
-      					
-      						
-      						
       					
       					}
       					
