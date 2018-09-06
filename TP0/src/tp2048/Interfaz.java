@@ -6,6 +6,7 @@ import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -85,22 +86,38 @@ public class Interfaz {
 		return b01;
 		
 	}
-	public void gameOver(JLabel score,JPanel gameover,JButton [] botones,JLabel icono) 
+	public void gameOver(JLabel score,JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
 	{
 		int scorey=score.getY();
 			
 			int ub=gameover.getY();
 			if (ub>134) 
 			{
+			Animacion.subir(800,20, 2, 1, mensajefinal);
 			Animacion.subir(800, 134, 2, 1, gameover);
+			
 			icono.setBounds(-100, -100, -100, -100);
 			desactivar(botones);
 			
 			if (scorey<=300) 
 			{
-				Animacion.bajar(0, 300, 15, 3, score);
 				
-				Animacion.mover_izquierda(500, 350, 10, 1, score);
+				
+				Animacion.bajar(0, 300, 15, 3, scoreinfo);
+				
+				Animacion.mover_izquierda(500, 350, 10, 1, scoreinfo);
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Animacion.bajar(0, 275, 15, 3, score);
+				
+				Animacion.mover_izquierda(530, 370, 10, 1, score);
+				
+				score.setText("Score final");
 			}	
 			
 			
@@ -396,24 +413,28 @@ public static int [][]  genera_matriz()
 		
 		//Definicion del panel de fin del juego
 		
-		JLabel score=new JLabel("100");
-		score.setBackground(Color.WHITE);
-		score.setBorder(new RoundedBorder(30));
-		score.setFont(new Font("Tahoma", Font.PLAIN, 20));;
-		score.setBounds(500,0 , 100, 40);
+		JLabel score=new JLabel ("Score");
+		score.setBounds(530,0,100,10);
+		JLabel scoreinfo=new JLabel("100");
+		scoreinfo.setBackground(Color.WHITE);
+		scoreinfo.setBorder(new RoundedBorder(30));
+		scoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		scoreinfo.setBounds(500,12 , 100, 40);
 		frame.getContentPane().add(score);
+		frame.getContentPane().add(scoreinfo);
 		
 		JPanel gameover=  new JPanel();
 		gameover.setVisible(true);
 		gameover.setBounds(20,800,560,334);
 		gameover.setBorder(new RoundedBorder(30));
 		gameover.setBackground(Color.WHITE);
+		gameover.setLayout(null);
 		
-		frame.getContentPane().add(gameover);
 		JLabel mensajefinal= new JLabel("Perdiste");
 		mensajefinal.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		mensajefinal.setBounds(220,800,120,30);
 		gameover.add(mensajefinal);
-		
+		frame.getContentPane().add(gameover);
 		
 		
 		//Aqui comienza la definicion del panel de drop menu
@@ -609,8 +630,28 @@ public void mouseReleased(MouseEvent e)
 	});
 	
 
-	
-	
+//	gameover.addMouseListener(new MouseAdapter() 
+//	{
+//		public void mouseEntered(MouseEvent e) 
+//		{
+//			
+//			gameover.setVisible(false);
+//			
+//			
+//		}
+//		public void mouseExited(MouseEvent e) 
+//		{
+//			try {
+//				Thread.sleep(300);
+//			} catch (InterruptedException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			gameover.setVisible(true);
+//		}
+//	});
+//	
+//	
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
@@ -635,8 +676,8 @@ public void mouseReleased(MouseEvent e)
       					perdiste=true;
       					if (perdiste) 
       					{
-      						
-      						gameOver(score,gameover, botones, icono) ;
+      						frame.setFocusable(false);
+      						gameOver(score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       				
       					
       					}
@@ -644,6 +685,9 @@ public void mouseReleased(MouseEvent e)
       				}
       				if (e.getKeyCode()==27)
       				{
+      					int i=JOptionPane.showConfirmDialog(frame,"En realidad quiere salir. Se perderan la partida actual","Confirmar Salida",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
+      					if (i==0) 
+      					{
       					inicio.setBounds(frame.getBounds());
       					inicio.setEnabled(true);
       					inicio.setVisible(true);
@@ -655,6 +699,8 @@ public void mouseReleased(MouseEvent e)
       			        	JButton boton=(JButton)j;
       			        	(boton).setText("");
       			        }
+      					}
+      				
       						
       				}
       				
@@ -666,6 +712,14 @@ public void mouseReleased(MouseEvent e)
       				
       			
       		});	
+        
+			if (perdiste) 
+			{
+				
+				//gameOver(scoreinfo,gameover, botones, icono,mensajefinal) ;
+		
+			
+			}
         
   
         
