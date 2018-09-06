@@ -32,7 +32,7 @@ public class Interfaz {
 	private JFrame inicio;
 	SavesManager saveManager=new SavesManager();
 	Logica logica =new Logica();
-	
+	boolean perdiste=false;
 
 	/**
 	 * Launch the application.
@@ -85,7 +85,27 @@ public class Interfaz {
 		return b01;
 		
 	}
-	
+	public void gameOver(JLabel score,JPanel gameover,JButton [] botones,JLabel icono) 
+	{
+		int scorey=score.getY();
+			
+			int ub=gameover.getY();
+			if (ub>134) 
+			{
+			Animacion.subir(800, 134, 2, 1, gameover);
+			icono.setBounds(-100, -100, -100, -100);
+			desactivar(botones);
+			
+			if (scorey<=300) 
+			{
+				Animacion.bajar(0, 300, 15, 3, score);
+				
+				Animacion.mover_izquierda(500, 350, 10, 1, score);
+			}	
+			
+			
+			}
+	}
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_up(JLabel icono)
 	{
@@ -612,27 +632,14 @@ public void mouseReleased(MouseEvent e)
       				
       				if (e.getKeyCode()==40)
       				{
-      					
-      					int scorey=score.getY();
-      					
-      					int ub=gameover.getY();
-      					if (ub>134) 
+      					perdiste=true;
+      					if (perdiste) 
       					{
-      					Animacion.subir(800, 134, 2, 1, gameover);
-      					icono.setBounds(-100, -100, -100, -100);
-      					desactivar(botones);
-      					
-      					if (scorey<=300) 
-      					{
-      						Animacion.bajar(0, 300, 15, 3, score);
       						
-      						Animacion.mover_izquierda(500, 350, 10, 1, score);
-      					}	
-      					
+      						gameOver(score,gameover, botones, icono) ;
+      				
       					
       					}
-      					
-      					
       					
       				}
       				if (e.getKeyCode()==27)
