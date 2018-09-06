@@ -105,7 +105,7 @@ public class Interfaz {
 				
 				Animacion.bajar(0, 300, 15, 3, scoreinfo);
 				
-				Animacion.mover_izquierda(500, 350, 10, 1, scoreinfo);
+				Animacion.mover_izquierda(490, 350, 10, 1, scoreinfo);
 				
 				try {
 					Thread.sleep(200);
@@ -115,7 +115,7 @@ public class Interfaz {
 				}
 				Animacion.bajar(0, 275, 15, 3, score);
 				
-				Animacion.mover_izquierda(530, 370, 10, 1, score);
+				Animacion.mover_izquierda(520, 370, 9, 1, score);
 				
 				score.setText("Score final");
 			}	
@@ -411,30 +411,7 @@ public static int [][]  genera_matriz()
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
-		//Definicion del panel de fin del juego
-		
-		JLabel score=new JLabel ("Score");
-		score.setBounds(530,0,100,10);
-		JLabel scoreinfo=new JLabel("100");
-		scoreinfo.setBackground(Color.WHITE);
-		scoreinfo.setBorder(new RoundedBorder(30));
-		scoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
-		scoreinfo.setBounds(500,12 , 100, 40);
-		frame.getContentPane().add(score);
-		frame.getContentPane().add(scoreinfo);
-		
-		JPanel gameover=  new JPanel();
-		gameover.setVisible(true);
-		gameover.setBounds(20,800,560,334);
-		gameover.setBorder(new RoundedBorder(30));
-		gameover.setBackground(Color.WHITE);
-		gameover.setLayout(null);
-		
-		JLabel mensajefinal= new JLabel("Perdiste");
-		mensajefinal.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		mensajefinal.setBounds(220,800,120,30);
-		gameover.add(mensajefinal);
-		frame.getContentPane().add(gameover);
+
 		
 		
 		//Aqui comienza la definicion del panel de drop menu
@@ -481,6 +458,41 @@ public static int [][]  genera_matriz()
 	
 	icono.setToolTipText("Desplegar drop menu");
 	
+		//Definicion del panel de fin del juego
+		
+	JLabel hscore=new JLabel ("HighScore");
+	hscore.setBounds(27,1,100,15);
+	JLabel hscoreinfo=new JLabel("100");
+	hscoreinfo.setBackground(Color.WHITE);
+	hscoreinfo.setBorder(new RoundedBorder(30));
+	hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+	hscoreinfo.setBounds(5,14 , 100, 40);
+	frame.getContentPane().add(hscore);
+	frame.getContentPane().add(hscoreinfo);
+	
+	
+		JLabel score=new JLabel ("Score");
+		score.setBounds(522,1,100,10);
+		JLabel scoreinfo=new JLabel("100");
+		scoreinfo.setBackground(Color.WHITE);
+		scoreinfo.setBorder(new RoundedBorder(30));
+		scoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		scoreinfo.setBounds(490,14 , 100, 40);
+		frame.getContentPane().add(score);
+		frame.getContentPane().add(scoreinfo);
+		
+		JPanel gameover=  new JPanel();
+		gameover.setVisible(true);
+		gameover.setBounds(20,800,560,334);
+		gameover.setBorder(new RoundedBorder(30));
+		gameover.setBackground(Color.WHITE);
+		gameover.setLayout(null);
+		
+		JLabel mensajefinal= new JLabel("Perdiste");
+		mensajefinal.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		mensajefinal.setBounds(220,800,120,30);
+		gameover.add(mensajefinal);
+		frame.getContentPane().add(gameover);
 	//Cambio el borde de los botones principales
 		cargar.setBorder(new RoundedBorder(30));
 		start.setBorder(new RoundedBorder(30));
@@ -529,6 +541,8 @@ public static int [][]  genera_matriz()
 			if (ret==0)
 			{
 				saveManager.guardar(botones);
+				Animacion.mover_izquierda(1000, 490, 10, 2, scoreinfo);
+				Animacion.mover_izquierda(1000, 520, 10, 2, score);
 				Animacion.subir(20, -100, 35,1, guardada);
 			}
 			
@@ -563,6 +577,8 @@ public static int [][]  genera_matriz()
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
 			
+				Animacion.mover_derecha(-1000, 27, 10, 2, hscore);
+				Animacion.mover_derecha(-1000, 5, 10, 2, hscoreinfo);
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);
 			frame.setVisible(true);
@@ -622,8 +638,6 @@ public void mouseReleased(MouseEvent e)
 		im_up(icono);
 		icono.setToolTipText("Retraer drop menu");
 		desactivar(botones);
-		
-		
 	}
 
 }
