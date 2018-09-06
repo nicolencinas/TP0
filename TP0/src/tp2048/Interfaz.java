@@ -375,6 +375,14 @@ public static int [][]  genera_matriz()
 		frame.setVisible(false);
 		
 		//Definicion del panel de fin del juego
+		
+		JLabel score=new JLabel("100");
+		score.setBackground(Color.WHITE);
+		score.setBorder(new RoundedBorder(30));
+		score.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		score.setBounds(500,0 , 100, 40);
+		frame.getContentPane().add(score);
+		
 		JPanel gameover=  new JPanel();
 		gameover.setVisible(true);
 		gameover.setBounds(20,800,560,334);
@@ -604,13 +612,27 @@ public void mouseReleased(MouseEvent e)
       				
       				if (e.getKeyCode()==40)
       				{
+      					
+      					int scorey=score.getY();
+      					
       					int ub=gameover.getY();
       					if (ub>134) 
       					{
       					Animacion.subir(800, 134, 2, 1, gameover);
       					icono.setBounds(-100, -100, -100, -100);
-      					desactivar(botones);	
+      					desactivar(botones);
+      					
+      					if (scorey<=300) 
+      					{
+      						Animacion.bajar(0, 300, 15, 3, score);
+      						
+      						Animacion.mover_izquierda(500, 350, 10, 1, score);
+      					}	
+      					
+      					
       					}
+      					
+      					
       					
       				}
       				if (e.getKeyCode()==27)
