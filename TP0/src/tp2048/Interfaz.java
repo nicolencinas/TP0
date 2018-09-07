@@ -124,7 +124,8 @@ public class Interfaz {
 				Animacion.bajar(0, 250, 15, 3, hscore);
 				
 				Animacion.mover_derecha(27, 167, 9, 1, hscore);
-				hscoreinfo.setText("200");
+				Integer hsc=Integer.parseInt(hscoreinfo.getText())+100;
+				hscoreinfo.setText(hsc.toString());
 				
 				score.setText("Score final");
 			}	
@@ -467,20 +468,19 @@ public static int [][]  genera_matriz()
 	
 	icono.setToolTipText("Desplegar drop menu");
 	
-		//Definicion del panel de fin del juego
-		
 		
 	
+	//Definicion del panel de fin del juego
 		
-	JLabel hscore=new JLabel ("HighScore");
-	hscore.setBounds(27,1,100,15);
-	JLabel hscoreinfo=new JLabel("100");
-	hscoreinfo.setBackground(Color.WHITE);
-	hscoreinfo.setBorder(new RoundedBorder(30));
-	hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
-	hscoreinfo.setBounds(5,14 , 100, 40);
-	frame.getContentPane().add(hscore);
-	frame.getContentPane().add(hscoreinfo);
+		JLabel hscore=new JLabel ("HighScore");
+		hscore.setBounds(27,1,100,15);
+		JLabel hscoreinfo=new JLabel(saveManager.cargar_hscore());
+		hscoreinfo.setBackground(Color.WHITE);
+		hscoreinfo.setBorder(new RoundedBorder(30));
+		hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		hscoreinfo.setBounds(5,14 , 100, 40);
+		frame.getContentPane().add(hscore);
+		frame.getContentPane().add(hscoreinfo);
 	
 	
 		JLabel score=new JLabel ("Score");
@@ -505,6 +505,7 @@ public static int [][]  genera_matriz()
 		mensajefinal.setBounds(220,800,120,30);
 		gameover.add(mensajefinal);
 		frame.getContentPane().add(gameover);
+		
 	//Cambio el borde de los botones principales
 		cargar.setBorder(new RoundedBorder(30));
 		start.setBorder(new RoundedBorder(30));
@@ -660,35 +661,13 @@ public void mouseReleased(MouseEvent e)
 	});
 	
 
-//	gameover.addMouseListener(new MouseAdapter() 
-//	{
-//		public void mouseEntered(MouseEvent e) 
-//		{
-//			
-//			gameover.setVisible(false);
-//			
-//			
-//		}
-//		public void mouseExited(MouseEvent e) 
-//		{
-//			try {
-//				Thread.sleep(300);
-//			} catch (InterruptedException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			gameover.setVisible(true);
-//		}
-//	});
-//	
-//	
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
       			public void keyReleased(KeyEvent e)
       			{
       				if (e.getKeyCode()==38)
-      					//System.out.println(e.getID());
+      					
       				dibujar(genera_matriz(),botones);
       				
       				if (e.getKeyCode()==39) 
@@ -708,7 +687,7 @@ public void mouseReleased(MouseEvent e)
       					{
       						frame.setFocusable(false);
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      				
+      						saveManager.grabar_hscore(hscoreinfo);
       					
       					}
       					

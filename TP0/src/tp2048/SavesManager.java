@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class SavesManager 
@@ -69,6 +70,78 @@ public class SavesManager
 	{
 		return matriz; //LA matriz ira cambiando y obtenemos su valor luego de hacer la rutina de carga
 	}
+	
+	public void grabar_hscore(JLabel label)
+	{
+	
+		File f = new File( "C:/high.txt" );
+		try {
+			fw= new FileWriter(f);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			fw.write(label.getText());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	finally{
+        	if (fw!=null){
+            	try {
+                	fw.close(); //cerramos el archivo
+            	} catch (IOException e) {
+                	e.printStackTrace();
+            	}
+            	fw = null;//Cambiamos el valor del FileWriter a null para borrar los datos almacernados en tiempo de ejeccuion
+        	}
+    	}
+		
+		
+	}
+	
+	public String cargar_hscore()
+	{
+		File f = new File( "C:\\high.txt" ); 
+		
+		if (!f.exists())
+		{
+			return ""+100;
+		}
+		
+		BufferedReader entrada = null; 
+		try
+		{
+			entrada=new BufferedReader(new FileReader(f));
+			String linea=null;
+			
+			if(entrada.ready())
+			
+				linea=entrada.readLine();
+			return linea;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{ 
+		try{ 
+		entrada.close();
+		
+		}catch(IOException e1){} 
+		}
+		return elem; 
+		
+		
+		
+		
+		
+		}
+		
+		
+		
 	
 	public boolean rutinacarga()
 	{
