@@ -273,7 +273,20 @@ public static void corregir(JButton [] comp)
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
     }
 }
+	public static void corregirLabel(JLabel label)
+	{
+
+    	
+		 String nombre=label.getText();
+		 Integer num=Integer.parseInt(nombre);
+		 
+		
 	
+		 if (num>=1000) 
+			label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		 
+		
+	}
 //Genera la matriz de botones que se dibujara
 public static JButton[] generarBotones() 
 {
@@ -475,9 +488,10 @@ public static int [][]  genera_matriz()
 		JLabel hscore=new JLabel ("HighScore");
 		hscore.setBounds(27,1,100,15);
 		JLabel hscoreinfo=new JLabel(saveManager.cargar_hscore());
+		corregirLabel (hscoreinfo);
 		hscoreinfo.setBackground(Color.WHITE);
 		hscoreinfo.setBorder(new RoundedBorder(30));
-		hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		//hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
 		hscoreinfo.setBounds(5,14 , 100, 40);
 		frame.getContentPane().add(hscore);
 		frame.getContentPane().add(hscoreinfo);
