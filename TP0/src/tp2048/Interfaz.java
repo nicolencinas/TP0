@@ -171,42 +171,6 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 		corregir(botones);
 	}
 	
-	//Utilizada en pruebas actualiza la matriz
-	public static void matriz_sumas(JButton [] botones)
-	
-	{
-		for (int j=0;j<botones.length;j++)
-		{
-			
-			 JButton boton=(JButton)botones[j];
-			 String nombre=boton.getText();
-			 Integer suma=Integer.parseInt(nombre);
-			
-			 suma*=2;
-			
-			 ((JButton) botones[j]).setText(suma.toString());
-			
-	
-			
-		}
-		corregir(botones);
-	}
-	//Utilizada en pruebas actualiza la matriz
-public static void matriz_restas(JButton [] comp)
-	
-	{
-		for (int j=0;j<comp.length;j++)
-		{
-			 JButton boton=(JButton)comp[j];
-			 String nombre=boton.getText();
-			 Integer suma=Integer.parseInt(nombre);
-			
-			 suma/=2;
-			
-			 ((JButton) comp[j]).setText(suma.toString());
-		}
-		corregir(comp);
-	}
 
 //Utilizada para mejorar la interfaz grafica evitando dibujado sobre dibujado
 public static void activar(Component [] comp) 
@@ -317,26 +281,6 @@ public static JButton[] generarBotones()
 	}
 	return ret;
 }
-
-public static int [][]  genera_matriz() 
-{
-	
-	Random gen =new Random();
-	int [][] ret=new int [4][4];
-	
-	for (int i=0;i<ret.length;i++) 
-    {
-	for (int j=0;j<ret.length;j++)
-	{
-		int e=(gen.nextInt(2)+1)*2;
-		ret[i][j]=e;
-		
-		System.out.print(ret[i][j]+" ");
-	}
-	System.out.println("");
-}return ret;
-}
-	
 	private void initialize()
 	{
 		//Aqui comienza el codigo referente al frame utilizado como pantalla de inicio
@@ -622,7 +566,7 @@ public static int [][]  genera_matriz()
 				
 			 if (seleccion==0)
 			{
-				dibujar(genera_matriz(),botones);
+				dibujar(tablero.getmatriz(),botones);
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
 				frame.setVisible(true);
@@ -640,6 +584,7 @@ public static int [][]  genera_matriz()
     	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+				tablero.nuevoJuego();
 				dibujar(tablero.getmatriz(),botones);
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
@@ -773,27 +718,12 @@ public void mouseReleased(MouseEvent e)
       			        	JButton boton=(JButton)j;
       			        	(boton).setText("");
       			        }
-      					}
-      				
-      						
       				}
-      				
-      				
       			}
-      				
-      			
-      				
-      				
-      			
-      		});	
-        
-			if (perdiste) 
-			{
-				
-				//gameOver(scoreinfo,gameover, botones, icono,mensajefinal) ;
-		
-			
-			}
+      					
+      		}
+      					
+      	});	
         
   
         
