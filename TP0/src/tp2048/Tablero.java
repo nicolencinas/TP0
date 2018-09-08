@@ -242,7 +242,7 @@ public class Tablero {
 			int posComparador = 1;
 			int aux = 0;
 			while (posActual <= 3 && posComparador < 4) {
-				if (posActual < 3 && casilla[posActual][i] == casilla[posComparador][i] && casilla[posActual][i].getCasillero() != 0)
+				if (posActual < 3 && casilla[posActual][i].getCasillero() == casilla[posComparador][i].getCasillero() && casilla[posActual][i].getCasillero() != 0)
 				{
 					int suma = casilla[posComparador][i].getCasillero() + casilla[posActual][i].getCasillero();
 					casilla[posActual][i].setCasillero(0);
