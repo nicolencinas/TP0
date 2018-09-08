@@ -571,7 +571,7 @@ public static int [][]  genera_matriz()
 			
 			if (ret==0)
 			{
-				saveManager.guardar(botones);
+				tablero.guardarJuego(botones);
 				Animacion.mover_izquierda(1000, 490, 10, 2, scoreinfo);
 				Animacion.mover_izquierda(1000, 520, 10, 2, score);
 				Animacion.subir(20, -100, 35,1, guardada);
@@ -594,7 +594,7 @@ public static int [][]  genera_matriz()
 		{
 		
 			int seleccion=-1;
-			if (!saveManager.rutinacarga()) 
+			if (!tablero.saves.rutinacarga()) 
 			{
 				
 				
@@ -607,8 +607,8 @@ public static int [][]  genera_matriz()
 			
 			else 
 			{
-				
-				dibujar(saveManager.cargar(),botones);
+				tablero.cargarJuego();
+				dibujar(tablero.getmatriz(),botones);
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
 			

@@ -7,8 +7,8 @@ public class Casillero {
 
 	private int numero;
 	//constructor
-	Casillero(){
-		this.numero=0;
+	Casillero(int num){
+		this.numero=num;
 	}
 	
 	//agrega 2 al primer casillero elegido aleatoriamete
@@ -46,7 +46,7 @@ public class Casillero {
 	
 	public static void main(String[] args) {
 	
-		Casillero cas1 = new Casillero();
+		Casillero cas1 = new Casillero(0);
 		System.out.println(cas1.toSting());
 //		cas1.agregarPrimerCasillero();
 //		System.out.println(cas1.toSting());

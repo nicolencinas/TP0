@@ -2,21 +2,25 @@ package tp2048;
 
 import java.util.Random;
 
+import javax.swing.JButton;
+
 public class Tablero {
 
 	private int ultimo;
 	private  Casillero[][] casilla;
 	private  int fila;
 	private  int columna;
+	SavesManager saves=new SavesManager();
 
 	// constructor
-	Tablero()
+	public Tablero()
 	{
 		this.casilla = new Casillero[4][4];
 		crearCasilleros();
 		//this.getCasilla()=
 	
 	}
+	
 
 	// crea casilleros
 
@@ -32,6 +36,24 @@ public class Tablero {
 		int uno=(gen.nextInt(3));
 		int dos=(gen.nextInt(3));
 		casilla[uno][dos].agregarCasillero();
+	}
+	
+	public void cargarJuego() 
+	{
+		int [][] matriz=saves.cargar();
+		for (int i=0;i<matriz.length;i++) 
+		{
+			for (int j=0;j<matriz.length;j++) 
+			{
+				
+				casilla[i][j]=new Casillero(matriz[i][j]);
+			}
+		}
+	}
+	
+	public void guardarJuego(JButton [] j) 
+	{
+		saves.guardar(j);
 	}
 	public int [][] getmatriz() 
 	{
@@ -49,7 +71,7 @@ public class Tablero {
 	public void crearCasilleros() {
 		for (int i = 0; i < getCasilla().length; i++) {
 			for (int j = 0; j < getCasilla()[i].length; j++) {
-				getCasilla()[i][j] = new Casillero();
+				getCasilla()[i][j] = new Casillero(0);
 			}
 		}
 	}
