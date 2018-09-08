@@ -32,7 +32,8 @@ public class Interfaz {
 	private JFrame frame;
 	private JFrame inicio;
 	SavesManager saveManager=new SavesManager();
-	Logica logica =new Logica();
+	static Tablero tablero=new Tablero();
+	
 	boolean perdiste=false;
 
 	/**
@@ -42,6 +43,8 @@ public class Interfaz {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					tablero.elegirCasillero().agregarPrimerCasillero();
+					tablero.elegirCasillero().agregarCasillero();
 					Interfaz window = new Interfaz();
 					window.frame.setVisible(false);
 					window.frame.setEnabled(false);
@@ -547,7 +550,8 @@ public static int [][]  genera_matriz()
 
 			if (ret==0) 
 			{
-				dibujar(logica.nuevo_juego(),botones);
+				tablero.nuevoJuego();
+				dibujar(tablero.getmatriz(),botones);
 
 			}
 			
@@ -636,7 +640,7 @@ public static int [][]  genera_matriz()
     	start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				dibujar(genera_matriz(),botones);
+				dibujar(tablero.getmatriz(),botones);
 				frame.setBounds(inicio.getBounds());
 				frame.setEnabled(true);
 				frame.setVisible(true);
@@ -682,27 +686,74 @@ public void mouseReleased(MouseEvent e)
       			{
       				if (e.getKeyCode()==38)
       					
-      				dibujar(genera_matriz(),botones);
+      				{
+      					for (JButton b :botones) 
+      					{
+      						b.setForeground(Color.BLACK);
+      					}
+      					Tablero.desplazamientoArriba();
+      					tablero.elegirCasillero().agregarCasillero();
+      					botones[tablero.getultimo()].setForeground(Color.green);
+      					dibujar(tablero.getmatriz(),botones);
+      					if (tablero.estaLleno())
+      					{
+      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+      						saveManager.grabar_hscore(hscoreinfo);
+      					}
+      				}
+      				
       				
       				if (e.getKeyCode()==39) 
       				{
-      					
-      					 dibujar(logica.mover_derecha(),botones);
+      					for (JButton b :botones) 
+      					{
+      						b.setForeground(Color.BLACK);
+      					}
+      					Tablero.desplazamientoDer();
+      					tablero.elegirCasillero().agregarCasillero();
+      					dibujar(tablero.getmatriz(),botones);
+      					botones[tablero.getultimo()].setForeground(Color.green);
+      					if (tablero.estaLleno())
+      					{
+      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+      						saveManager.grabar_hscore(hscoreinfo);
+      					}
 
       				}
       				
       				if (e.getKeyCode()==37)
-      					matriz_restas(botones);
+      				{
+      					for (JButton b :botones) 
+      					{
+      						b.setForeground(Color.BLACK);
+      					}
+      					Tablero.desplazamientoIzq();
+      					tablero.elegirCasillero().agregarCasillero();
+      					botones[tablero.getultimo()].setForeground(Color.green);
+      					dibujar(tablero.getmatriz(),botones);
+      					if (tablero.estaLleno())
+      					{
+      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+      						saveManager.grabar_hscore(hscoreinfo);
+      					}
+      				}
       				
       				if (e.getKeyCode()==40)
       				{
-      					perdiste=true;
-      					if (perdiste) 
+      					for (JButton b :botones) 
       					{
-      						frame.setFocusable(false);
+      						b.setForeground(Color.BLACK);
+      					}
+      					Tablero.desplazamientoAbajo();
+      					tablero.elegirCasillero().agregarCasillero();
+      					botones[tablero.getultimo()].setForeground(Color.green);
+      					dibujar(tablero.getmatriz(),botones);
+
+
+      					if (tablero.estaLleno())
+      					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
-      					
       					}
       					
       				}
