@@ -691,7 +691,7 @@ public void mouseReleased(MouseEvent e)
       					{
       						b.setForeground(Color.BLACK);
       					}
-      					Tablero.desplazamientoArriba();
+      					tablero.desplazamientoArriba();
       					tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
@@ -709,11 +709,11 @@ public void mouseReleased(MouseEvent e)
       					{
       						b.setForeground(Color.BLACK);
       					}
-      					Tablero.desplazamientoDer();
+      					tablero.desplazamientoDer();
       					tablero.elegirCasillero().agregarCasillero();
       					dibujar(tablero.getmatriz(),botones);
       					botones[tablero.getultimo()].setForeground(Color.green);
-      					if (tablero.estaLleno())
+      					if (!tablero.exiteMovPosible())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
@@ -727,7 +727,7 @@ public void mouseReleased(MouseEvent e)
       					{
       						b.setForeground(Color.BLACK);
       					}
-      					Tablero.desplazamientoIzq();
+      					tablero.desplazamientoIzq();
       					tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
@@ -744,7 +744,7 @@ public void mouseReleased(MouseEvent e)
       					{
       						b.setForeground(Color.BLACK);
       					}
-      					Tablero.desplazamientoAbajo();
+      					tablero.desplazamientoAbajo();
       					tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
