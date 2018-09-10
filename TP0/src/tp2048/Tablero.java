@@ -148,24 +148,25 @@ public class Tablero {
 			{
 				Casillero comparando=casilla[i][posActual];
 				Casillero comparador= casilla[i][posAcomparar];
+				
 				if (posActual > 0 && comparando.equals(comparador) == true && comparando.getCasillero() != 0 ) 
 				{
-					int suma = casilla[i][posAcomparar].getCasillero() + casilla[i][posActual].getCasillero();
-					casilla[i][posActual].setCasillero(0);
-					casilla[i][posAcomparar].setCasillero(0);
+					int suma = casilla[i][posAcomparar].getCasillero() + comparando.getCasillero();
+					comparando.setCasillero(0);
+					comparador.setCasillero(0);
 					casilla[i][aux].setCasillero(suma);
 					aux--;
 					posActual = posAcomparar - 1;
 					posAcomparar -= 2;
-				} else if (casilla[i][posActual].getCasillero() == 0) {
+				} else if (comparando.getCasillero() == 0) {
 					
 					posActual--;
 					posAcomparar--;
-				} else if (casilla[i][posAcomparar].getCasillero() == 0) {
+				} else if (comparador.getCasillero() == 0) {
 					posAcomparar--;
 				} else {
-					int guardado = casilla[i][posActual].getCasillero();
-					casilla[i][posActual].setCasillero(0);
+					int guardado = comparando.getCasillero();
+					comparando.setCasillero(0);
 					casilla[i][aux].setCasillero(guardado);
 					aux--;
 					posActual = posAcomparar;
@@ -193,22 +194,22 @@ public class Tablero {
 				Casillero comparador=casilla[i][posAcomparar];
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0) 
 				{
-					int suma = casilla[i][posAcomparar].getCasillero() + casilla[i][posActual].getCasillero();
-					casilla[i][posActual].setCasillero(0);
-					casilla[i][posAcomparar].setCasillero(0);
+					int suma = comparador.getCasillero() + comparando.getCasillero();
+					comparando.setCasillero(0);
+					comparador.setCasillero(0);
 					casilla[i][aux].setCasillero(suma);
 					aux++;
 					posActual = posAcomparar + 1;
 					posAcomparar += 2;
 
-				} else if (casilla[i][posActual].getCasillero() == 0) {
+				} else if (comparando.getCasillero() == 0) {
 					posActual++;
 					posAcomparar++;
-				} else if (casilla[i][posAcomparar].getCasillero() == 0) {
+				} else if (comparador.getCasillero() == 0) {
 					posAcomparar++;
 				} else {
-					int guardado = casilla[i][posActual].getCasillero();
-					casilla[i][posActual].setCasillero(0);
+					int guardado = comparando.getCasillero();
+					comparando.setCasillero(0);
 					casilla[i][aux].setCasillero(guardado);
 					aux++;
 					posActual = posAcomparar;
@@ -234,24 +235,24 @@ public class Tablero {
 				Casillero comparando=casilla[posActual][i];
 				Casillero comparador=casilla[posAcomparar][i];
 				if (posActual > 0 && comparando.equals(comparador) && comparando.getCasillero() != 0
-						&& casilla[posAcomparar][i].getCasillero() != 0) {
-					int suma = casilla[posAcomparar][i].getCasillero() + casilla[posActual][i].getCasillero();
-					casilla[posActual][i].setCasillero(0);
-					casilla[posAcomparar][i].setCasillero(0);
+						&& comparador.getCasillero() != 0) {
+					int suma = comparador.getCasillero() + comparando.getCasillero();
+					comparando.setCasillero(0);
+					comparador.setCasillero(0);
 					casilla[aux][i].setCasillero(suma);
 					
 					aux--;
 					posActual=posAcomparar-1;
 					posAcomparar-=2;
 
-				} else if (casilla[posActual][i].getCasillero() == 0) {
+				} else if (comparando.getCasillero() == 0) {
 					posActual--;
 					posAcomparar--;
-				} else if (casilla[posAcomparar][i].getCasillero() == 0) {
+				} else if (comparador.getCasillero() == 0) {
 					posAcomparar--;
 				} else {
-					int guardado = casilla[posActual][i].getCasillero();
-					casilla[posActual][i].setCasillero(0);
+					int guardado = comparando.getCasillero();
+					comparando.setCasillero(0);
 					casilla[aux][i].setCasillero(guardado);
 					aux--;
 					posActual = posAcomparar;
@@ -278,28 +279,28 @@ public class Tablero {
 				Casillero comparador=casilla[posComparador][i];
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0)
 				{
-					int suma = casilla[posComparador][i].getCasillero() + casilla[posActual][i].getCasillero();
-					casilla[posActual][i].setCasillero(0);
-					casilla[posComparador][i].setCasillero(0);
+					int suma = comparador.getCasillero() + comparando.getCasillero();
+					comparando.setCasillero(0);
+					comparador.setCasillero(0);
 					casilla[aux][i].setCasillero(suma);;
 					aux++;
 					posActual = posComparador + 1;
 					posComparador += 2;
 					
 				}
-				else if (casilla[posActual][i].getCasillero() == 0)
+				else if (comparando.getCasillero() == 0)
 				{
 					posActual++;
 					posComparador++;
 				} 
-				else if (casilla[posComparador][i].getCasillero() == 0)
+				else if (comparador.getCasillero() == 0)
 				{
 					posComparador++;
 				} 
 				else 
 				{
-					int guardado = casilla[posActual][i].getCasillero();
-					casilla[posActual][i].setCasillero(0);
+					int guardado = comparando.getCasillero();
+					comparando.setCasillero(0);
 					casilla[aux][i].setCasillero(guardado);
 					aux++;
 					posActual = posComparador;
