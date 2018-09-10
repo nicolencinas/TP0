@@ -12,7 +12,8 @@ public class Casillero {
 	}
 	
 	//agrega 2 al primer casillero elegido aleatoriamete
-	public void agregarPrimerCasillero(){
+	public void agregarPrimerCasillero()
+	{
 		setCasillero(2);
 	}
 	
@@ -29,10 +30,17 @@ public class Casillero {
 	}
 
 	//get
-	public int getCasillero(){
+	public int getCasillero()
+	{
 		return this.numero;
 	}
 	
+	
+	public boolean equals(Casillero cas) 
+	{
+		return this.getCasillero()==cas.getCasillero();
+		
+	}
 	//set
 	public void setCasillero(int num){
 		this.numero=num;

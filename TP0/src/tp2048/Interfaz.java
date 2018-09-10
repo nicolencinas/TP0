@@ -482,10 +482,6 @@ public static JButton[] generarBotones()
 		frame.getContentPane().add(botones[i]);
 	}
 	
-	
-	
-	
-	
 	//Defino las acciones del boton de nuevo juego del drop menu
 	newG.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
