@@ -205,7 +205,12 @@ public static void desactivar(JButton [] comp)
         	}
         }
 }
-
+public void setScore(Integer num, JLabel label ) 
+{
+	
+	label.setText(num.toString());
+	
+}
 //Utilizada como rescurso grafico para cambiar el tamaño del texto dependiendo de la cantidad de caracteres que se encuentren dentro del JButton
 public static void corregir(JButton [] comp)
 {
@@ -446,7 +451,7 @@ public static JButton[] generarBotones()
 	
 		JLabel score=new JLabel ("Score");
 		score.setBounds(522,1,100,10);
-		JLabel scoreinfo=new JLabel("100");
+		JLabel scoreinfo=new JLabel("0");
 		scoreinfo.setBackground(Color.WHITE);
 		scoreinfo.setBorder(new RoundedBorder(30));
 		scoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
@@ -633,13 +638,16 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoArriba();
-      					tablero.elegirCasillero().agregarCasillero();
+      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
-      					if (tablero.estaLleno())
+      					setScore(tablero.getScore(),scoreinfo);
+      					
+      					if (!tablero.exiteMovPosible())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
+      						frame.setFocusable(false);
       					}
       				}
       				
@@ -651,13 +659,15 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoDer();
-      					tablero.elegirCasillero().agregarCasillero();
+      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
       					dibujar(tablero.getmatriz(),botones);
       					botones[tablero.getultimo()].setForeground(Color.green);
+      					setScore(tablero.getScore(),scoreinfo);
       					if (!tablero.exiteMovPosible())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
+      						frame.setFocusable(false);
       					}
 
       				}
@@ -669,14 +679,19 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoIzq();
-      					tablero.elegirCasillero().agregarCasillero();
+      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
-      					if (tablero.estaLleno())
+      					setScore(tablero.getScore(),scoreinfo);
+      					
+      					System.out.println(tablero.getScore());
+      					if (!tablero.exiteMovPosible())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
+      						frame.setFocusable(false);
       					}
+      					
       				}
       				
       				if (e.getKeyCode()==40)
@@ -686,20 +701,25 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoAbajo();
-      					tablero.elegirCasillero().agregarCasillero();
+      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
+      					setScore(tablero.getScore(),scoreinfo);
 
-
-      					if (tablero.estaLleno())
+      					if (!tablero.exiteMovPosible())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
+      						frame.setFocusable(false);
       					}
       					
       				}
       				if (e.getKeyCode()==27)
       				{
+      					if (tablero.estaLleno()) frame.dispose();
+      					
+      					if (!tablero.estaLleno()) 
+      					{
       					int i=JOptionPane.showConfirmDialog(frame,"En realidad quiere salir. Se perderan la partida actual","Confirmar Salida",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
       					if (i==0) 
       					{
@@ -714,7 +734,9 @@ public void mouseReleased(MouseEvent e)
       			        	JButton boton=(JButton)j;
       			        	(boton).setText("");
       			        }
-      				}
+      				}	
+      					}
+      					
       			}
       					
       		}

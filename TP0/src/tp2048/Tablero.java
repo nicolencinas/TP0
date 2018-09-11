@@ -4,8 +4,10 @@ import java.util.Random;
 
 import javax.swing.JButton;
 
-public class Tablero {
+public class Tablero 
+{
 
+	private Integer score;
 	private int ultimo;
 	private  Casillero[][] casilla;
 	private  int fila;
@@ -17,6 +19,7 @@ public class Tablero {
 	{
 		this.casilla = new Casillero[4][4];
 		crearCasilleros();
+		score=0;
 		//this.getCasilla()=
 	
 	}
@@ -37,7 +40,10 @@ public class Tablero {
 		int dos=(gen.nextInt(3));
 		casilla[uno][dos].agregarCasillero();
 	}
-	
+	public int getScore() 
+	{
+		return score;
+	}
 	public void cargarJuego() 
 	{
 		int [][] matriz=saves.cargar();
@@ -152,6 +158,7 @@ public class Tablero {
 				if (posActual > 0 && comparando.equals(comparador) == true && comparando.getCasillero() != 0 ) 
 				{
 					int suma = casilla[i][posAcomparar].getCasillero() + comparando.getCasillero();
+					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
 					casilla[i][aux].setCasillero(suma);
@@ -195,6 +202,7 @@ public class Tablero {
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0) 
 				{
 					int suma = comparador.getCasillero() + comparando.getCasillero();
+					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
 					casilla[i][aux].setCasillero(suma);
@@ -237,6 +245,7 @@ public class Tablero {
 				if (posActual > 0 && comparando.equals(comparador) && comparando.getCasillero() != 0
 						&& comparador.getCasillero() != 0) {
 					int suma = comparador.getCasillero() + comparando.getCasillero();
+					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
 					casilla[aux][i].setCasillero(suma);
@@ -280,6 +289,7 @@ public class Tablero {
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0)
 				{
 					int suma = comparador.getCasillero() + comparando.getCasillero();
+					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
 					casilla[aux][i].setCasillero(suma);;
