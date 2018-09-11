@@ -624,6 +624,20 @@ public void mouseReleased(MouseEvent e)
 }
 	});
 	
+	
+	gameover.addMouseListener(new MouseAdapter() 
+	{
+
+public void mouseReleased(MouseEvent e)
+{
+	gameover.setVisible(false);
+	score.setVisible(false);
+	hscore.setVisible(false);
+	hscoreinfo.setVisible(false);
+	scoreinfo.setVisible(false);
+}
+
+	});
 
        //Agrego un KeyListener al frame para controlar la entrada de teclado
 	
@@ -638,12 +652,12 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoArriba();
-      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
+      					if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
       					setScore(tablero.getScore(),scoreinfo);
       					
-      					if (!tablero.exiteMovPosible())
+      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
@@ -663,7 +677,7 @@ public void mouseReleased(MouseEvent e)
       					dibujar(tablero.getmatriz(),botones);
       					botones[tablero.getultimo()].setForeground(Color.green);
       					setScore(tablero.getScore(),scoreinfo);
-      					if (!tablero.exiteMovPosible())
+      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
@@ -679,13 +693,13 @@ public void mouseReleased(MouseEvent e)
       						b.setForeground(Color.BLACK);
       					}
       					tablero.desplazamientoIzq();
-      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
+      					if ( !tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
       					botones[tablero.getultimo()].setForeground(Color.green);
       					dibujar(tablero.getmatriz(),botones);
       					setScore(tablero.getScore(),scoreinfo);
       					
       					System.out.println(tablero.getScore());
-      					if (!tablero.exiteMovPosible())
+      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);
@@ -706,7 +720,7 @@ public void mouseReleased(MouseEvent e)
       					dibujar(tablero.getmatriz(),botones);
       					setScore(tablero.getScore(),scoreinfo);
 
-      					if (!tablero.exiteMovPosible())
+      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
       						saveManager.grabar_hscore(hscoreinfo);

@@ -144,12 +144,15 @@ public class Tablero
 
 	// suma dos casilleros
 
-	public void desplazamientoDer() {
-		for (int i = 0; i < 4; i++) {
+	public boolean  desplazamientoDer()
+	{
+		boolean ret =false;
+		for (int i = 0; i < 4; i++) 
+		{
 			int posActual = 3;
 			int posAcomparar = 2;
 			int aux = 3;
-			
+		
 			while (posActual >= 0 && posAcomparar > -1) 
 			{
 				Casillero comparando=casilla[i][posActual];
@@ -165,6 +168,7 @@ public class Tablero
 					aux--;
 					posActual = posAcomparar - 1;
 					posAcomparar -= 2;
+					ret=true;
 				} else if (comparando.getCasillero() == 0) {
 					
 					posActual--;
@@ -178,6 +182,7 @@ public class Tablero
 					aux--;
 					posActual = posAcomparar;
 					posAcomparar--;
+					ret=true;
 				}
 			}
 
@@ -188,10 +193,14 @@ public class Tablero
 				casilla[i][aux].setCasillero(guardado1);
 			}
 		}
+		return ret;
 	}
 
-	public void desplazamientoIzq() {
-		for (int i = 0; i < 4; i++) {
+	public boolean desplazamientoIzq() 
+	{
+		boolean ret =false;
+		for (int i = 0; i < 4; i++) 
+		{
 			int posActual = 0;
 			int posAcomparar = 1;
 			int aux = 0;
@@ -209,6 +218,7 @@ public class Tablero
 					aux++;
 					posActual = posAcomparar + 1;
 					posAcomparar += 2;
+					ret =true;
 
 				} else if (comparando.getCasillero() == 0) {
 					posActual++;
@@ -222,6 +232,7 @@ public class Tablero
 					aux++;
 					posActual = posAcomparar;
 					posAcomparar++;
+					ret =true;
 				}
 			}
 			if (posActual <= 3) {
@@ -231,10 +242,14 @@ public class Tablero
 
 			}
 		}
+		return ret;
 	}
 
-	public void desplazamientoAbajo() {
-		for (int i = 0; i < 4; i++) {
+	public boolean desplazamientoAbajo()
+	{
+		boolean ret =false;
+		for (int i = 0; i < 4; i++)
+		{
 			int posActual = 3;
 			int posAcomparar = 2;
 			int aux = 3;
@@ -253,6 +268,7 @@ public class Tablero
 					aux--;
 					posActual=posAcomparar-1;
 					posAcomparar-=2;
+					ret =true;
 
 				} else if (comparando.getCasillero() == 0) {
 					posActual--;
@@ -266,6 +282,7 @@ public class Tablero
 					aux--;
 					posActual = posAcomparar;
 					posAcomparar--;
+					ret =true;
 				}
 			}
 			if (posActual >= 0) {
@@ -275,10 +292,14 @@ public class Tablero
 
 			}
 		}
+		return ret;
 	}
 
-	public void desplazamientoArriba() {
-		for (int i = 0; i < 4; i++) {
+	public boolean desplazamientoArriba() 
+	{
+		boolean ret =false;
+		for (int i = 0; i < 4; i++)
+		{
 			int posActual = 0;
 			int posComparador = 1;
 			int aux = 0;
@@ -296,6 +317,7 @@ public class Tablero
 					aux++;
 					posActual = posComparador + 1;
 					posComparador += 2;
+					ret =true;
 					
 				}
 				else if (comparando.getCasillero() == 0)
@@ -315,6 +337,7 @@ public class Tablero
 					aux++;
 					posActual = posComparador;
 					posComparador++;
+					ret =true;
 				}
 			}
 			if (posActual <= 3) {
@@ -324,33 +347,35 @@ public class Tablero
 
 			}
 		}
+		return ret;
 	}
 
-	public boolean exiteMovPosible() {
-		for (int i = 0; i < 3; i++) {
-			if (casilla[i][0].getCasillero() == 0 || casilla[i][1].getCasillero() == 0
-					|| casilla[i][0].getCasillero() == casilla[i][1].getCasillero()) {
-				return true;
-			}
-		}
-		for (int j = 2; j <= 3; j++) {
-			for (int i = 0; i <= 2; i++) {
-				if (casilla[i][j - 1].getCasillero() == 0 || casilla[i][j].getCasillero() == 0
-						|| casilla[i][j - 1].getCasillero() == casilla[i][j].getCasillero()) {
+	public boolean exiteMovPosible() 
+	{
+		for (int j=0;j<4;j++)
+		{
+			for (int i=1;i<4;i++)
+			{
+				Casillero comparando=casilla[i][j];
+				Casillero comparador=casilla[i-1][j];
+				if (comparando.getCasillero()==0 || comparador.getCasillero()==0 || comparando.equals(comparador) )
 					return true;
-				}
 			}
 		}
-		for (int i = 0; i < 3; i++) {
-			if (casilla[3][i].getCasillero() == casilla[3][i + 1].getCasillero()
-					|| casilla[i][3].getCasillero() == casilla[i + 1][3].getCasillero()) {
-				return true;
+		
+		for (int j=1;j<4;j++)
+		{
+			for (int i=0;i<4;i++)
+			{
+				Casillero comparando=casilla[i][j];
+				Casillero comparador=casilla[i][j-1];
+				if (comparando.getCasillero()==0 || comparador.getCasillero()==0 || comparando.equals(comparador) )
+					return true;
 			}
 		}
-		if (casilla[3][3].getCasillero() == 0) {
-			return true;
-		}
+		
 		return false;
+		
 	}
 
 }
