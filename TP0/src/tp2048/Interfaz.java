@@ -100,6 +100,7 @@ public class Interfaz {
 		if (sci>hsci)
 		{
 			tablero.grabar_score(scoreinfo);
+			hscoreinfo.setText(hsci.toString());
 		}
 		int scorey=score.getY();
 			
@@ -137,8 +138,8 @@ public class Interfaz {
 				Animacion.bajar(0, 250, 15, 3, hscore);
 				
 				Animacion.mover_derecha(27, 167, 9, 1, hscore);
-				Integer hsc=Integer.parseInt(hscoreinfo.getText())+100;
-				hscoreinfo.setText(hsc.toString());
+				
+				
 				
 				score.setText("Score final");
 			}	
