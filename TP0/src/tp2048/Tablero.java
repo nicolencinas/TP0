@@ -3,6 +3,7 @@ package tp2048;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class Tablero 
 {
@@ -43,6 +44,11 @@ public class Tablero
 	public int getScore() 
 	{
 		return score;
+	}
+	
+	public void grabar_score(JLabel label)
+	{
+		saves.grabar_hscore(label);
 	}
 	public void cargarJuego() 
 	{
@@ -158,7 +164,7 @@ public class Tablero
 				Casillero comparando=casilla[i][posActual];
 				Casillero comparador= casilla[i][posAcomparar];
 				
-				if (posActual > 0 && comparando.equals(comparador) == true && comparando.getCasillero() != 0 ) 
+				if (posActual > 0 && comparando.equals(comparador) && comparando.getCasillero() != 0 ) 
 				{
 					int suma = casilla[i][posAcomparar].getCasillero() + comparando.getCasillero();
 					score+=suma;
@@ -189,13 +195,14 @@ public class Tablero
 			if (posActual >= 0) {
 				int guardado1 = casilla[i][posActual].getCasillero();
 				casilla[i][posActual].setCasillero(0);
-				;
 				casilla[i][aux].setCasillero(guardado1);
 			}
 		}
 		return ret;
 	}
 
+	
+	
 	public boolean desplazamientoIzq() 
 	{
 		boolean ret =false;
@@ -340,7 +347,8 @@ public class Tablero
 					ret =true;
 				}
 			}
-			if (posActual <= 3) {
+			if (posActual <= 3) 
+			{
 				int guardado1 = casilla[posActual][i].getCasillero();
 				casilla[posActual][i].setCasillero(0);
 				casilla[aux][i].setCasillero(guardado1);

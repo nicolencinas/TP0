@@ -91,6 +91,16 @@ public class Interfaz {
 	}
 	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
 	{
+		String sc=scoreinfo.getText();
+		String hsce=hscoreinfo.getText();
+		
+		Integer sci=Integer.parseInt(sc);
+		Integer hsci=Integer.parseInt(hsce);
+		
+		if (sci>hsci)
+		{
+			tablero.grabar_score(scoreinfo);
+		}
 		int scorey=score.getY();
 			
 			int ub=gameover.getY();
@@ -168,6 +178,7 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 	
 		System.out.println("");
 	}
+		System.out.println("");
 		corregir(botones);
 	}
 	
@@ -386,7 +397,10 @@ public static JButton[] generarBotones()
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
-
+		JLabel j=new JLabel("Clickee sobre el panel para salir");
+		j.setBounds(210,300,600,300);
+		j.setVisible(false);
+		frame.getContentPane().add(j);
 		
 		
 		//Aqui comienza la definicion del panel de drop menu
@@ -625,16 +639,28 @@ public void mouseReleased(MouseEvent e)
 	});
 	
 	
+	
 	gameover.addMouseListener(new MouseAdapter() 
 	{
 
+		
+		public void mouseEntered(MouseEvent e)
+		{
+			j.setVisible(true);
+		}
+		
+		public void mouseExited(MouseEvent e)
+		{
+			j.setVisible(false);
+		}
 public void mouseReleased(MouseEvent e)
 {
-	gameover.setVisible(false);
-	score.setVisible(false);
-	hscore.setVisible(false);
-	hscoreinfo.setVisible(false);
-	scoreinfo.setVisible(false);
+	//gameover.setVisible(false);
+//	score.setVisible(false);
+//hscore.setVisible(false);
+//	hscoreinfo.setVisible(false);
+	//scoreinfo.setVisible(false);
+	frame.dispose();
 }
 
 	});
@@ -660,7 +686,7 @@ public void mouseReleased(MouseEvent e)
       					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						saveManager.grabar_hscore(hscoreinfo);
+      						//saveManager.grabar_hscore(hscoreinfo);
       						frame.setFocusable(false);
       					}
       				}
@@ -680,7 +706,7 @@ public void mouseReleased(MouseEvent e)
       					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						saveManager.grabar_hscore(hscoreinfo);
+      					//	saveManager.grabar_hscore(hscoreinfo);
       						frame.setFocusable(false);
       					}
 
@@ -702,7 +728,7 @@ public void mouseReleased(MouseEvent e)
       					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						saveManager.grabar_hscore(hscoreinfo);
+      						//saveManager.grabar_hscore(hscoreinfo);
       						frame.setFocusable(false);
       					}
       					
@@ -723,17 +749,15 @@ public void mouseReleased(MouseEvent e)
       					if (!tablero.exiteMovPosible() && tablero.estaLleno())
       					{
       						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						saveManager.grabar_hscore(hscoreinfo);
+      						//saveManager.grabar_hscore(hscoreinfo);
       						frame.setFocusable(false);
       					}
       					
       				}
       				if (e.getKeyCode()==27)
       				{
-      					if (tablero.estaLleno()) frame.dispose();
       					
-      					if (!tablero.estaLleno()) 
-      					{
+      					
       					int i=JOptionPane.showConfirmDialog(frame,"En realidad quiere salir. Se perderan la partida actual","Confirmar Salida",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
       					if (i==0) 
       					{
@@ -753,9 +777,11 @@ public void mouseReleased(MouseEvent e)
       					
       			}
       					
-      		}
+      		
       					
       	});	
+        
+        
         
   
         
