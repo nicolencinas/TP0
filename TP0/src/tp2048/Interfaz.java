@@ -80,6 +80,16 @@ public class Interfaz {
 	
 
 	//Genera un unico boton 
+	
+	public void jugar(JButton[] botones,JLabel scoreinfo,JLabel hscoreinfo,JLabel mensajefinal)
+	{
+		if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
+			botones[tablero.getultimo()].setForeground(Color.green);
+			dibujar(tablero.getmatriz(),botones);
+			setScore(tablero.getScore(),scoreinfo);
+			corregirLabel(scoreinfo);
+			if (tablero.gano() ) mensajefinal.setText("Ganaste");
+	}
 	public static JButton generarBoton(int x,int y) 
 	{
 		JButton b01 = new JButton("");
@@ -89,19 +99,30 @@ public class Interfaz {
 		return b01;
 		
 	}
+	
+	public void colorear(JButton [] botones)
+	{
+		for (JButton b :botones) 
+			{
+				b.setForeground(Color.BLACK);
+			}
+	}
 	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
 	{
-		String sc=scoreinfo.getText();
-		String hsce=hscoreinfo.getText();
+		String scoreText=scoreinfo.getText();
+		String hscoreText=hscoreinfo.getText();
 		
-		Integer sci=Integer.parseInt(sc);
-		Integer hsci=Integer.parseInt(hsce);
+		Integer scoreInt=Integer.parseInt(scoreText);
+		Integer hscoreInt=Integer.parseInt(hscoreText);
 		
-		if (sci>hsci)
+		if (scoreInt>hscoreInt)
 		{
+			hscore.setForeground(Color.BLUE);
+			hscoreinfo.setText(scoreInt.toString());
 			tablero.grabar_score(scoreinfo);
-			hscoreinfo.setText(hsci.toString());
+			
 		}
+		corregirLabel(hscoreinfo);
 		int scorey=score.getY();
 			
 			int ub=gameover.getY();
@@ -146,6 +167,8 @@ public class Interfaz {
 			
 			
 			}
+			
+			frame.setFocusable(false);
 	}
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_up(JLabel icono)
@@ -268,6 +291,9 @@ public static void corregir(JButton [] comp)
 	
 		 if (num>=1000) 
 			label.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		 
+		 if (num>=10000)
+			 label.setFont(new Font("Tahoma",Font.PLAIN,14));
 		 
 		
 	}
@@ -454,11 +480,12 @@ public static JButton[] generarBotones()
 		
 		JLabel hscore=new JLabel ("HighScore");
 		hscore.setBounds(27,1,100,15);
-		JLabel hscoreinfo=new JLabel(saveManager.cargar_hscore());
+		JLabel hscoreinfo=new JLabel(tablero.hscore());
 		corregirLabel (hscoreinfo);
 		hscoreinfo.setBackground(Color.WHITE);
 		hscoreinfo.setBorder(new RoundedBorder(30));
-		//hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
+		corregirLabel(hscoreinfo);
 		hscoreinfo.setBounds(5,14 , 100, 40);
 		frame.getContentPane().add(hscore);
 		frame.getContentPane().add(hscoreinfo);
@@ -671,89 +698,46 @@ public void mouseReleased(MouseEvent e)
         frame.addKeyListener(new KeyAdapter() {
       			public void keyReleased(KeyEvent e)
       			{
+      				
+      				 
       				if (e.getKeyCode()==38)
       					
       				{
-      					for (JButton b :botones) 
-      					{
-      						b.setForeground(Color.BLACK);
-      					}
-      					tablero.desplazamientoArriba();
-      					if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
-      					botones[tablero.getultimo()].setForeground(Color.green);
-      					dibujar(tablero.getmatriz(),botones);
-      					setScore(tablero.getScore(),scoreinfo);
+      					colorear(botones);
       					
-      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
-      					{
-      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						//saveManager.grabar_hscore(hscoreinfo);
-      						frame.setFocusable(false);
-      					}
+      					tablero.desplazamientoArriba();
+      					
+                      jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
+                      
+      				
       				}
       				
       				
       				if (e.getKeyCode()==39) 
       				{
-      					for (JButton b :botones) 
-      					{
-      						b.setForeground(Color.BLACK);
-      					}
+      					colorear(botones);
       					tablero.desplazamientoDer();
-      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
-      					dibujar(tablero.getmatriz(),botones);
-      					botones[tablero.getultimo()].setForeground(Color.green);
-      					setScore(tablero.getScore(),scoreinfo);
-      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
-      					{
-      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      					//	saveManager.grabar_hscore(hscoreinfo);
-      						frame.setFocusable(false);
-      					}
+      					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
+      				
 
       				}
       				
       				if (e.getKeyCode()==37)
       				{
-      					for (JButton b :botones) 
-      					{
-      						b.setForeground(Color.BLACK);
-      					}
+      					colorear(botones);
       					tablero.desplazamientoIzq();
-      					if ( !tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
-      					botones[tablero.getultimo()].setForeground(Color.green);
-      					dibujar(tablero.getmatriz(),botones);
-      					setScore(tablero.getScore(),scoreinfo);
+      					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
       					
-      					System.out.println(tablero.getScore());
-      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
-      					{
-      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						//saveManager.grabar_hscore(hscoreinfo);
-      						frame.setFocusable(false);
-      					}
-      					
+      				
       				}
       				
       				if (e.getKeyCode()==40)
       				{
-      					for (JButton b :botones) 
-      					{
-      						b.setForeground(Color.BLACK);
-      					}
+      					colorear(botones);
       					tablero.desplazamientoAbajo();
-      					if (!tablero.estaLleno())tablero.elegirCasillero().agregarCasillero();
-      					botones[tablero.getultimo()].setForeground(Color.green);
-      					dibujar(tablero.getmatriz(),botones);
-      					setScore(tablero.getScore(),scoreinfo);
+      					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
 
-      					if (!tablero.exiteMovPosible() && tablero.estaLleno())
-      					{
-      						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
-      						//saveManager.grabar_hscore(hscoreinfo);
-      						frame.setFocusable(false);
-      					}
-      					
+      		
       				}
       				if (e.getKeyCode()==27)
       				{
@@ -775,7 +759,12 @@ public void mouseReleased(MouseEvent e)
       			        }
       				}	
       					}
-      					
+      				
+      				if ((!tablero.exiteMovPosible() && tablero.estaLleno()) || tablero.gano())
+  					{
+  						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+  						
+  					}
       			}
       					
       		

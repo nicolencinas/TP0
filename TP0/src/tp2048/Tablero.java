@@ -36,10 +36,8 @@ public class Tablero
 	{
 		casilla=new Casillero[4][4];
 		crearCasilleros();
-		Random gen =new Random();
-		int uno=(gen.nextInt(3));
-		int dos=(gen.nextInt(3));
-		casilla[uno][dos].agregarCasillero();
+		this.elegirCasillero().agregarCasillero();
+		this.elegirCasillero().agregarPrimerCasillero();
 	}
 	public int getScore() 
 	{
@@ -62,7 +60,10 @@ public class Tablero
 			}
 		}
 	}
-	
+	public String hscore()
+	{
+		return saves.cargar_hscore();
+	}
 	public void guardarJuego(JButton [] j) 
 	{
 		saves.guardar(j);
@@ -88,6 +89,10 @@ public class Tablero
 		}
 	}
 
+	public void ganar() 
+	{
+		casilla[0][0].setCasillero(2048);
+	}
 	// elige una casilla aleatoria
 	public Casillero elegirCasillero() 
 	{
