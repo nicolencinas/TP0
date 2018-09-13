@@ -741,7 +741,7 @@ public static JButton[] generarBotones()
 
       		
       				}
-      				if (e.getKeyCode()==27 && tablero.estaLleno())
+      				if (e.getKeyCode()==27)
       				{
       				
       					int i=JOptionPane.showConfirmDialog(frame,"En realidad quiere salir. Se perderan la partida actual","Confirmar Salida",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
