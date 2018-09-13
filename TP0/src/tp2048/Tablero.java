@@ -36,6 +36,7 @@ public class Tablero
 	{
 		casilla=new Casillero[4][4];
 		crearCasilleros();
+		score=0;
 		this.elegirCasillero().agregarCasillero();
 		this.elegirCasillero().agregarPrimerCasillero();
 	}

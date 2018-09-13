@@ -539,6 +539,7 @@ public static JButton[] generarBotones()
 			{
 				tablero.nuevoJuego();
 				dibujar(tablero.getmatriz(),botones);
+				setScore(tablero.getScore(),scoreinfo);
 
 			}
 			
@@ -595,6 +596,7 @@ public static JButton[] generarBotones()
 			else 
 			{
 				tablero.cargarJuego();
+				
 				dibujar(tablero.getmatriz(),botones);
 				cargada.setVisible(true);
 				Animacion.mover_izquierda(30, -200, 15,1, cargada);
@@ -683,11 +685,7 @@ public void mouseReleased(MouseEvent e)
 		}
 public void mouseReleased(MouseEvent e)
 {
-	//gameover.setVisible(false);
-//	score.setVisible(false);
-//hscore.setVisible(false);
-//	hscoreinfo.setVisible(false);
-	//scoreinfo.setVisible(false);
+
 	frame.dispose();
 }
 
