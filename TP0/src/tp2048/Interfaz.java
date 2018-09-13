@@ -6,7 +6,6 @@ import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -14,8 +13,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
+
 
 import Animacion.Animacion;
 
@@ -326,11 +323,12 @@ public static JButton[] generarBotones()
 }
 	private void initialize()
 	{
-		//Aqui comienza el codigo referente al frame utilizado como pantalla de inicio
-		inicio = new JFrame();
+		//Declaracion del frame de inicio
+		inicio = new JFrame("Juego 2048: Menu de seleccion");
 		inicio.setBounds(100, 100, 600, 700);
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		inicio.getContentPane().setLayout(null);
+		inicio.getContentPane().setLayout(null);	
+		
 		
 		//Esta es la definicion de Un Jlabel que se usara como contenedor de un hipervinculo que envia al usuario a un instructivo del juego
 		// en la pagina de wikipedia
@@ -341,78 +339,35 @@ public static JButton[] generarBotones()
 		Image im=new ImageIcon("50935.png").getImage();
 		imagen.setIcon(new ImageIcon( im.getScaledInstance(270, 270, Image.SCALE_SMOOTH)));
 		imagen.setToolTipText("Ver informacion del juego. Go to: https://es.wikipedia.org/wiki/2048_(videojuego)");
+		inicio.add(imagen);
 		
 		
-		imagen.addMouseListener(new MouseAdapter() 
-		{
-
-			public void mouseReleased(MouseEvent e)
-			{
-				String uri="https://es.wikipedia.org/wiki/2048_(videojuego)";
-				try 
-				{
-					Desktop.getDesktop().browse(java.net.URI.create(uri));
-				} catch (IOException e1)
-				{
-			
-					e1.printStackTrace();
-				}
-			}
-			
-			public void mouseEntered(MouseEvent e)
-			{
-				try {
-					Thread.sleep(300);
-				} catch (InterruptedException e1)
-				{
-				
-					e1.printStackTrace();
-				}
-				imagen.setLocation(164, 0);
-				imagen.setBorder(BorderFactory.createLineBorder(new Color(58,76,186)));
-			}
-			
-			public void  mouseExited(MouseEvent e)
-			{
-				imagen.setLocation(165, 0);
-				imagen.setBorder(null);
-			}
-
-		});
+		// Declaracion de los botones del frame de inicio
 		
-		//Botones del frame de inicio
+		//Boton que dara inicio al juego
 		JButton start = new JButton("Iniciar Juego");
 		start.setFont(new Font("Tahoma", Font.PLAIN, 30));
-	 
-	
-		inicio.setTitle("Juego 2048: Menu de seleccion");
-		inicio.add(imagen);
 		start.setBounds(144, 310, 313, 60);
 		inicio.getContentPane().add(start);
 		
+		//Boton que dara las estadisiticas historicas del juego
 		JButton stats = new JButton("Ver estadisitcas");
 		stats.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		stats.setBounds(144, 390, 313, 60);
 		inicio.getContentPane().add(stats);
 		
+		//Boton que se utilizara para cargar la partida
 		JButton cargar = new JButton("Cargar");
 		cargar.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		cargar.setBounds(144, 470, 313, 60);
 		inicio.getContentPane().add(cargar);
 		
-
+		//Boton que se utiliza para salir del juego
 		JButton salir=new JButton("Salir");
 		salir.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		salir .setBounds(200, 590, 200, 60);
 		inicio.getContentPane().add(salir);
-		
-		salir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				inicio.dispose();
-			}
-			
-		});
+
 
 		
 		//Declaracion del Frame principal
@@ -424,60 +379,66 @@ public static JButton[] generarBotones()
 		frame.setEnabled(false);
 		frame.setVisible(false);
 		
+		//Label que se mostrara al finalizarse el juego
 		JLabel j=new JLabel("Clickee sobre el panel para salir");
 		j.setBounds(210,300,600,300);
 		j.setVisible(false);
 		frame.getContentPane().add(j);
 		
 		
-		//Aqui comienza la definicion del panel de drop menu
-	JLabel icono = new JLabel("");
-	icono.setBounds(280, 1, 30, 15);
-	
-	frame.getContentPane().add(icono);
-	
-	icono.setBackground(Color.WHITE);
-	icono.setIcon(new ImageIcon("bajar.png"));
-	
-	JPanel panel = new JPanel();
-	panel.setBackground(Color.WHITE);
-	panel.setBounds(10, -100, 570, 96);
-	frame.getContentPane().add(panel);
-	panel.setLayout(null);
-	panel.setBorder(new RoundedBorder(30));
-	
-	JLabel guardada=new JLabel();
-	guardada.setText("Partida guardada");
-	guardada.setBounds(430,-100,160,30);
-	guardada.setBackground(Color.white);
-	guardada.setBorder(new RoundedBorder(30));
-	frame.add(guardada);
-	
-	JLabel cargada=new JLabel();
-	cargada.setText("Partida cargada");
-	cargada.setVisible(false);
-	cargada.setBounds(30,20,160,30);
-	cargada.setBackground(Color.white);
-	cargada.setBorder(new RoundedBorder(30));
-	frame.add(cargada);
-	
-	JButton newG = new JButton("Nuevo Juego");
-	newG.setBounds(100, 39, 111, 23);
-    newG.setBorder(new RoundedBorder(10));
-	panel.add(newG);
-	
-	JButton guardar = new JButton("Guardar");
-	guardar.setBorder(new RoundedBorder(10));
-	guardar.setBounds(360, 39, 111, 23);
-	panel.add(guardar);
-    
-	
-	icono.setToolTipText("Desplegar drop menu");
-	
+		//Definicion de los componentes del panel de drop menu
 		
-	
-	//Definicion del panel de fin del juego
+		//Icono que consiste en una flecha que contendra la accion para desplegar el drop menu
+		JLabel icono = new JLabel("");
+		icono.setBounds(280, 1, 30, 15);
+		icono.setBackground(Color.WHITE);
+		icono.setIcon(new ImageIcon("bajar.png"));
+		icono.setToolTipText("Desplegar drop menu");
+		frame.getContentPane().add(icono);
 		
+		
+		//Panel que contendra los botones
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(10, -100, 570, 96);
+		panel.setLayout(null);
+		panel.setBorder(new RoundedBorder(30));
+		frame.getContentPane().add(panel);
+		
+		//Label que se mostrara cuando la partida sea guardada
+		JLabel guardada=new JLabel();
+		guardada.setText("Partida guardada");
+		guardada.setBounds(430,-100,160,30);
+		guardada.setBackground(Color.white);
+		guardada.setBorder(new RoundedBorder(30));
+		frame.add(guardada);
+		
+		//Label que se mostrara cuando la patida sea cargada
+		JLabel cargada=new JLabel();
+		cargada.setText("Partida cargada");
+		cargada.setVisible(false);
+		cargada.setBounds(30,20,160,30);
+		cargada.setBackground(Color.white);
+		cargada.setBorder(new RoundedBorder(30));
+		frame.add(cargada);
+		
+		//Boton que inicia un nuevo juego
+		JButton newG = new JButton("Nuevo Juego");
+		newG.setBounds(100, 39, 111, 23);
+	    newG.setBorder(new RoundedBorder(10));
+		panel.add(newG);
+		
+		//Boton que guarda el juego
+		JButton guardar = new JButton("Guardar");
+		guardar.setBorder(new RoundedBorder(10));
+		guardar.setBounds(360, 39, 111, 23);
+		panel.add(guardar);
+	    
+		
+    	//Definicion de los componentes del panel de fin del juego
+		
+		
+		//Labels que mostraran el highscore y su contenido
 		JLabel hscore=new JLabel ("HighScore");
 		hscore.setBounds(27,1,100,15);
 		JLabel hscoreinfo=new JLabel(tablero.hscore());
@@ -490,7 +451,7 @@ public static JButton[] generarBotones()
 		frame.getContentPane().add(hscore);
 		frame.getContentPane().add(hscoreinfo);
 	
-	
+		//Labels que mostrara el score y su contenido
 		JLabel score=new JLabel ("Score");
 		score.setBounds(522,1,100,10);
 		JLabel scoreinfo=new JLabel("0");
@@ -501,6 +462,7 @@ public static JButton[] generarBotones()
 		frame.getContentPane().add(score);
 		frame.getContentPane().add(scoreinfo);
 		
+		//Panel que se mostrara al final del juego con la informacion de fin del juego
 		JPanel gameover=  new JPanel();
 		gameover.setVisible(true);
 		gameover.setBounds(20,800,560,334);
@@ -508,20 +470,21 @@ public static JButton[] generarBotones()
 		gameover.setBackground(Color.WHITE);
 		gameover.setLayout(null);
 		
+		//JLabel que mostrara el mensaje correspondiente (gano o perdio)
 		JLabel mensajefinal= new JLabel("Perdiste");
 		mensajefinal.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mensajefinal.setBounds(220,800,120,30);
 		gameover.add(mensajefinal);
 		frame.getContentPane().add(gameover);
 		
-	//Cambio el borde de los botones principales
+		//Cambio el borde de los botones principales
 		cargar.setBorder(new RoundedBorder(30));
 		start.setBorder(new RoundedBorder(30));
 		salir.setBorder(new RoundedBorder(30));
 		stats.setBorder(new RoundedBorder(30));
 	
 	
-	//Genero los botones y los agrego al frame
+	// Por ultimo genero los botones y los agrego al frame
 	JButton[] botones=generarBotones();
 	
 	for (int i=0;i<16;i++) 
@@ -529,6 +492,116 @@ public static JButton[] generarBotones()
 		frame.getContentPane().add(botones[i]);
 	}
 	
+	//A partir de aca se definen las acciones de los componentes
+	//Acciones del logo
+	imagen.addMouseListener(new MouseAdapter() 
+	{
+
+		public void mouseReleased(MouseEvent e)
+		{
+			String uri="https://es.wikipedia.org/wiki/2048_(videojuego)";
+			try 
+			{
+				Desktop.getDesktop().browse(java.net.URI.create(uri));
+			} catch (IOException e1)
+			{
+		
+				e1.printStackTrace();
+			}
+		}
+		
+		public void mouseEntered(MouseEvent e)
+		{
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e1)
+			{
+			
+				e1.printStackTrace();
+			}
+			imagen.setLocation(164, 0);
+			imagen.setBorder(BorderFactory.createLineBorder(new Color(58,76,186)));
+		}
+		
+		public void  mouseExited(MouseEvent e)
+		{
+			imagen.setLocation(165, 0);
+			imagen.setBorder(null);
+		}
+
+	});
+	
+	//Aqui cierro el frame de inicio y abro el frame de juego
+	start.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) 
+		{
+			tablero.nuevoJuego();
+			dibujar(tablero.getmatriz(),botones);
+			frame.setBounds(inicio.getBounds());
+			frame.setEnabled(true);
+			frame.setVisible(true);
+			inicio.dispose();
+			
+		}
+	});
+	//Acciones del boton salir
+	salir.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) 
+		{
+			inicio.dispose();
+		}
+		
+	});
+	
+	//Defino las acciones del Boton de cargar juego de la pantalla incicial
+		cargar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+			
+				int seleccion=-1;
+				if (!tablero.saves.rutinacarga()) 
+				{
+					
+					
+				
+					seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
+			
+				}
+				
+				
+				
+				else 
+				{
+					tablero.cargarJuego();
+					
+					dibujar(tablero.getmatriz(),botones);
+					cargada.setVisible(true);
+					Animacion.mover_izquierda(30, -200, 15,1, cargada);
+				
+					Animacion.mover_derecha(-800, 27, 10, 2, hscore);
+					Animacion.mover_derecha(-800, 5, 10, 2, hscoreinfo);
+				frame.setBounds(inicio.getBounds());
+				frame.setEnabled(true);
+				frame.setVisible(true);
+				inicio.dispose();
+				}
+					
+				 if (seleccion==0)
+				{
+					dibujar(tablero.getmatriz(),botones);
+					frame.setBounds(inicio.getBounds());
+					frame.setEnabled(true);
+					frame.setVisible(true);
+					inicio.dispose();
+				
+			
+				
+				}
+
+			}
+			
+		});	
+
 	//Defino las acciones del boton de nuevo juego del drop menu
 	newG.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)
@@ -574,77 +647,13 @@ public static JButton[] generarBotones()
 		    
 		}
 	});
-	
-	
-	//Defino las acciones del Boton de cargar juego de la pantalla incicial
-	cargar.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) 
-		{
 		
-			int seleccion=-1;
-			if (!tablero.saves.rutinacarga()) 
-			{
-				
-				
-			
-				seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
-		
-			}
-			
-			
-			
-			else 
-			{
-				tablero.cargarJuego();
-				
-				dibujar(tablero.getmatriz(),botones);
-				cargada.setVisible(true);
-				Animacion.mover_izquierda(30, -200, 15,1, cargada);
-			
-				Animacion.mover_derecha(-800, 27, 10, 2, hscore);
-				Animacion.mover_derecha(-800, 5, 10, 2, hscoreinfo);
-			frame.setBounds(inicio.getBounds());
-			frame.setEnabled(true);
-			frame.setVisible(true);
-			inicio.dispose();
-			}
-				
-			 if (seleccion==0)
-			{
-				dibujar(tablero.getmatriz(),botones);
-				frame.setBounds(inicio.getBounds());
-				frame.setEnabled(true);
-				frame.setVisible(true);
-				inicio.dispose();
-			
-		
-			
-			}
-
-		}
-		
-	});	
-
-	//Aqui cierro el frame de inicio y abro el frame de juego
-    	start.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				tablero.nuevoJuego();
-				dibujar(tablero.getmatriz(),botones);
-				frame.setBounds(inicio.getBounds());
-				frame.setEnabled(true);
-				frame.setVisible(true);
-				inicio.dispose();
-				
-			}
-		});
-    	
-    		//Controlo los mouse events realizados en el drop menu
+    //Controlo los mouse events realizados en el drop menu
 	icono.addMouseListener(new MouseAdapter() 
 	{
 
-public void mouseReleased(MouseEvent e)
-{
+		public void mouseReleased(MouseEvent e)
+		{
 	int posicion=panel.getY();
 	if (posicion>=0)
 	{
@@ -668,8 +677,7 @@ public void mouseReleased(MouseEvent e)
 }
 	});
 	
-	
-	
+	//Defino un mouse listener para mostrar un  mensaje al posicionar el puntero sobre el label
 	gameover.addMouseListener(new MouseAdapter() 
 	{
 
@@ -683,15 +691,15 @@ public void mouseReleased(MouseEvent e)
 		{
 			j.setVisible(false);
 		}
-public void mouseReleased(MouseEvent e)
-{
+		public void mouseReleased(MouseEvent e)
+		{
 
-	frame.dispose();
-}
+			frame.dispose();
+		}
 
 	});
 
-       //Agrego un KeyListener al frame para controlar la entrada de teclado
+       //Por ultimo Agrego un KeyListener al frame para controlar la entrada de teclado
 	
         frame.addKeyListener(new KeyAdapter() {
       			public void keyReleased(KeyEvent e)
@@ -702,12 +710,8 @@ public void mouseReleased(MouseEvent e)
       					
       				{
       					colorear(botones);
-      					
       					tablero.desplazamientoArriba();
-      					
-                      jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
-                      
-      				
+      					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
       				}
       				
       				
@@ -737,10 +741,9 @@ public void mouseReleased(MouseEvent e)
 
       		
       				}
-      				if (e.getKeyCode()==27)
+      				if (e.getKeyCode()==27 && tablero.estaLleno())
       				{
-      					
-      					
+      				
       					int i=JOptionPane.showConfirmDialog(frame,"En realidad quiere salir. Se perderan la partida actual","Confirmar Salida",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
       					if (i==0) 
       					{
@@ -756,7 +759,7 @@ public void mouseReleased(MouseEvent e)
       			        	(boton).setText("");
       			        }
       				}	
-      					}
+      					} 
       				
       				if ((!tablero.exiteMovPosible() && tablero.estaLleno()) || tablero.gano())
   					{
@@ -764,9 +767,6 @@ public void mouseReleased(MouseEvent e)
   						
   					}
       			}
-      					
-      		
-      					
       	});	
         
         
