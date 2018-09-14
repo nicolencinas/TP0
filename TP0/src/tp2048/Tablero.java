@@ -47,12 +47,12 @@ public class Tablero
 		return score;
 	}
 	
-	public void grabar_score(JLabel label)
+	public void grabar_score(JLabel label) throws Exception
 	{
 		saves.grabar_hscore(label,scorepath);
 	}
 	
-	public void grabar_hscore(JLabel label)
+	public void grabar_hscore(JLabel label) throws Exception
 	{
 		saves.grabar_hscore(label,hscorepath);
 	}
@@ -80,7 +80,7 @@ public class Tablero
 		return saves.cargar_score(hscorepath);
 	}
 	
-	public void guardarJuego(JButton [] j, JLabel label) 
+	public void guardarJuego(JButton [] j, JLabel label) throws Exception 
 	{
 		saves.grabar_hscore(label, scorepath);
 		saves.guardar(j);

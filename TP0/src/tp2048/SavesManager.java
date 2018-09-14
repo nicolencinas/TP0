@@ -25,7 +25,7 @@ public class SavesManager
 		
 	}
 	
-	public void guardar(JButton[] j)
+	public void guardar(JButton[] j) throws Exception
 	{
 		list.clear(); //Limpiamos la matriz que guardara la info de los botones para evitar quedarnos con los datos anteriores en tiempo de ejecucion
 		
@@ -69,7 +69,7 @@ public class SavesManager
 		return matriz; //LA matriz ira cambiando y obtenemos su valor luego de hacer la rutina de carga
 	}
 	
-	public void grabar_hscore(JLabel label,String file)
+	public void grabar_hscore(JLabel label,String file) throws Exception
 	{
 	
 		File f = new File(file);
@@ -77,7 +77,7 @@ public class SavesManager
 			fw= new FileWriter(f);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 
 		try {

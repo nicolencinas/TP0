@@ -13,6 +13,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+
+import javax.imageio.IIOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -136,7 +138,7 @@ public class Interfaz {
 	{
 		for (JButton b :botones) 
 			{
-				b.setForeground(Color.BLACK);
+				b.setForeground(Color.DARK_GRAY);
 			}
 	}
 	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
@@ -151,7 +153,14 @@ public class Interfaz {
 		{
 			hscore.setForeground(Color.BLUE);
 			hscoreinfo.setText(scoreInt.toString());
-			tablero.grabar_hscore(scoreinfo);
+			try {
+				tablero.grabar_hscore(scoreinfo);
+			} catch (Exception e) 
+			{
+				
+				JOptionPane.showConfirmDialog(frame,"Acceso denegado  \n Administrator rights required ",
+						"Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
+			}
 			
 		}
 		corregirLabel(hscoreinfo);
@@ -663,12 +672,24 @@ public static JButton[] generarBotones()
 		{
 			int ret=JOptionPane.showConfirmDialog(guardar, "¿Deseas Guardar la partida?","Confirmar Guardado",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
+			int ex=-1;
 			if (ret==0)
 			{
-				tablero.guardarJuego(botones,scoreinfo);
-				Animacion.mover_izquierda(1000, 490, 10, 2, scoreinfo);
+				try {
+					tablero.guardarJuego(botones,scoreinfo);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showConfirmDialog(frame,"Acceso denegado, se necesitan derechos de administrador ",
+							"Error: Administrator rights required ",JOptionPane.CLOSED_OPTION,JOptionPane.ERROR_MESSAGE);
+					ex=0;
+				}
+				if (ex!=0)
+				{
+					Animacion.mover_izquierda(1000, 490, 10, 2, scoreinfo);
 				Animacion.mover_izquierda(1000, 520, 10, 2, score);
 				Animacion.subir(20, -100, 35,1, guardada);
+				}
+				
 			}
 			
 			activar(botones);
