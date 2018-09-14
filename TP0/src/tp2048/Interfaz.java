@@ -29,8 +29,8 @@ public class Interfaz {
 	private JFrame frame;
 	private JFrame inicio;
 	SavesManager saveManager=new SavesManager();
-	static Tablero tablero=new Tablero();
-	static Color [] paletaColores= {
+	private static Tablero tablero=new Tablero();
+	private static Color [] paletaColores= {
 			new Color(252, 243, 207),
 			new Color(247, 220, 111), 
 			new Color(241, 196, 15  ),
@@ -42,7 +42,8 @@ public class Interfaz {
 			new Color (176, 58, 46),
 			new Color (169, 50, 38  ),
 			new Color (200, 35, 15)};
-	static Color border=new Color(31, 97, 141);
+	private static Color border=new Color(31, 97, 141);
+	private static int [] fontSize= {0,65,65,50,35,30,25};
 	boolean perdiste=false;
 
 	/**
@@ -97,40 +98,48 @@ public class Interfaz {
 				 String nombre=boton.getText();
 				 Integer num=Integer.parseInt(nombre);
 				 
+				 
 				 if (num==0) 
 					 j.setBackground(Color.LIGHT_GRAY);
-				
-				 if (num==2) 
-					 j.setBackground(paletaColores[0]);
-					
-				 if (num==4) 
-					 j.setBackground(paletaColores[1]);
-			
-				 if (num==8) 
-					 j.setBackground(paletaColores[2]);
-				
-					 
-				 if (num==16) 
-					 j.setBackground(paletaColores[3]);
-				
-				 if (num==32)
-					 j.setBackground(paletaColores[4]);
 				 
-				 if (num==64)
-					 j.setBackground(paletaColores[5]);
+				 else 
+				 {
+				 int pos=(int) (Math.log10(num)/Math.log10(2))-1;
+				 System.out.println(pos);
+				 j.setBackground(paletaColores[pos]); 
+				 }
 				 
-				 if (num==128)
-					 j.setBackground(paletaColores[6]);
-				 
-				 if (num==256)
-					 j.setBackground(paletaColores[7]);
-				 if (num==512)
-					 j.setBackground(paletaColores[8]);
-				 if (num==1024)
-					 j.setBackground(paletaColores[9]);
-				 
-				 if (num==2048)
-					 j.setBackground(paletaColores[10]);
+//				 if (num==2) 
+//					 j.setBackground(paletaColores[0]);
+//					
+//				 if (num==4) 
+//					 j.setBackground(paletaColores[1]);
+//			
+//				 if (num==8) 
+//					 j.setBackground(paletaColores[2]);
+//				
+//					 
+//				 if (num==16) 
+//					 j.setBackground(paletaColores[3]);
+//				
+//				 if (num==32)
+//					 j.setBackground(paletaColores[4]);
+//				 
+//				 if (num==64)
+//					 j.setBackground(paletaColores[5]);
+//				 
+//				 if (num==128)
+//					 j.setBackground(paletaColores[6]);
+//				 
+//				 if (num==256)
+//					 j.setBackground(paletaColores[7]);
+//				 if (num==512)
+//					 j.setBackground(paletaColores[8]);
+//				 if (num==1024)
+//					 j.setBackground(paletaColores[9]);
+//				 
+//				 if (num==2048)
+//					 j.setBackground(paletaColores[10]);
 				 
 					
 		    }
@@ -318,28 +327,36 @@ public static void corregir(JButton [] comp)
 		 Integer num=Integer.parseInt(nombre);
 		 
 		
-		 if (num<10) 
-		 
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
-		 
-		 if (num>=100 && num<1000) 
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		 
-		 if (num>=1000) 
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		 
-		 if(num<100) 
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
+//		 if (num<10) 
+//		 
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
+//		 
+//		 if (num>=100 && num<1000) 
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
+//		 
+//		 if (num>=1000) 
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
+//		 
+//		 if(num<100) 
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
 
 		  if (num==0) 
 		 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 0));
+		  
+		  else 
+		  {
+			  int pos=nombre.length();
+			   boton.setFont(new Font("Tahoma", Font.PLAIN, fontSize[pos]));
+		  }
+			 
+		  }
 		 
-		 if(num>10000) 
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		 if (num>100000)
-			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-    }
+//		 if(num>10000) 
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
+//		 if (num>100000)
+//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
+//    }
 }
 
 
