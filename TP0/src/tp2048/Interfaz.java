@@ -542,6 +542,7 @@ public static JButton[] generarBotones()
 		public void actionPerformed(ActionEvent e) 
 		{
 			tablero.nuevoJuego();
+			setScore(tablero.getScore(),scoreinfo);
 			dibujar(tablero.getmatriz(),botones);
 			frame.setBounds(inicio.getBounds());
 			frame.setEnabled(true);
