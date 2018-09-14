@@ -6,7 +6,8 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.border.Border;
 
-class RoundedBorder implements Border {
+class RoundedBorder implements Border
+{
 
     private int radius;
 

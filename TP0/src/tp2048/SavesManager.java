@@ -69,10 +69,10 @@ public class SavesManager
 		return matriz; //LA matriz ira cambiando y obtenemos su valor luego de hacer la rutina de carga
 	}
 	
-	public void grabar_hscore(JLabel label)
+	public void grabar_hscore(JLabel label,String file)
 	{
 	
-		File f = new File( "C:/high.txt" );
+		File f = new File(file);
 		try {
 			fw= new FileWriter(f);
 		} catch (IOException e) {
@@ -99,9 +99,9 @@ public class SavesManager
 		
 	}
 	
-	public String cargar_hscore()
+	public String cargar_score(String file)
 	{
-		File f = new File( "C:\\high.txt" ); 
+		File f = new File(file); 
 		
 		if (!f.exists())
 		{

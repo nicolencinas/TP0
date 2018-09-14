@@ -116,7 +116,7 @@ public class Interfaz {
 		{
 			hscore.setForeground(Color.BLUE);
 			hscoreinfo.setText(scoreInt.toString());
-			tablero.grabar_score(scoreinfo);
+			tablero.grabar_hscore(scoreinfo);
 			
 		}
 		corregirLabel(hscoreinfo);
@@ -167,17 +167,20 @@ public class Interfaz {
 			
 			frame.setFocusable(false);
 	}
+	
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_up(JLabel icono)
 	{
 icono.setIcon(new ImageIcon("subir.png"));
 	}
+	
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_down(JLabel icono)
 	{
 icono.setIcon(new ImageIcon("bajar.png"));
 	}
 
+	//Metodo que vacia la matriz en los botones
 public static void  dibujar(int[][] matriz , JButton [] botones)
 	
 	{
@@ -277,6 +280,8 @@ public static void corregir(JButton [] comp)
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
     }
 }
+
+//utilizada para corregir el tamaño de la letra en el label cuando este cambia
 	public static void corregirLabel(JLabel label)
 	{
 
@@ -294,6 +299,7 @@ public static void corregir(JButton [] comp)
 		 
 		
 	}
+	
 //Genera la matriz de botones que se dibujara
 public static JButton[] generarBotones() 
 {
@@ -561,14 +567,9 @@ public static JButton[] generarBotones()
 				int seleccion=-1;
 				if (!tablero.saves.rutinacarga()) 
 				{
-					
-					
-				
-					seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ","Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
-			
+					seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ",
+							"Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
 				}
-				
-				
 				
 				else 
 				{
@@ -632,7 +633,7 @@ public static JButton[] generarBotones()
 			
 			if (ret==0)
 			{
-				tablero.guardarJuego(botones);
+				tablero.guardarJuego(botones,scoreinfo);
 				Animacion.mover_izquierda(1000, 490, 10, 2, scoreinfo);
 				Animacion.mover_izquierda(1000, 520, 10, 2, score);
 				Animacion.subir(20, -100, 35,1, guardada);
