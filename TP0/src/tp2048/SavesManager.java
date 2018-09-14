@@ -29,7 +29,7 @@ public class SavesManager
 	{
 		list.clear(); //Limpiamos la matriz que guardara la info de los botones para evitar quedarnos con los datos anteriores en tiempo de ejecucion
 		
-		File f=new File("C:/save2.txt");//creamos un nuevo File 
+		File f=new File("C:/save.txt");//creamos un nuevo File 
 	
 		for (JButton boton : j) //Recorremos la lista de botones y los agregamos a una lista 
 		{
@@ -145,7 +145,7 @@ public class SavesManager
 	{
 		
 	
-	File f = new File( "C:\\save2.txt" ); //Buscamos nuestro archivo .txt
+	File f = new File( "C:\\save.txt" ); //Buscamos nuestro archivo .txt
 	
 	if (f.exists())  //Si existe entramos en el codigo
 	{
