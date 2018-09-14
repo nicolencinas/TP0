@@ -574,6 +574,7 @@ public static JButton[] generarBotones()
 				else 
 				{
 					tablero.cargarJuego();
+					setScore(tablero.getScore(),scoreinfo);
 					
 					dibujar(tablero.getmatriz(),botones);
 					cargada.setVisible(true);

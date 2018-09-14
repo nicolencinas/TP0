@@ -63,7 +63,9 @@ public class Tablero
 	public void cargarJuego() 
 	{
 		int [][] matriz=saves.cargar();
-		score=(saves.rutinacarga() ? Integer.parseInt(saves.cargar_score(scorepath)) : 0);
+		String sc=saves.cargar_score(scorepath);
+		score=Integer.parseInt(sc);
+		System.out.println(sc);
 		for (int i=0;i<matriz.length;i++) 
 		{
 			for (int j=0;j<matriz.length;j++) 
