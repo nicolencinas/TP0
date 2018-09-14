@@ -10,9 +10,12 @@ class RoundedBorder implements Border
 {
 
     private int radius;
+    private Color color;
 
-    RoundedBorder(int radius) {
+    RoundedBorder(int radius, Color color)
+    {
         this.radius = radius;
+        this.color = color;
     }
 
     public Insets getBorderInsets(Component c) {
@@ -28,7 +31,7 @@ class RoundedBorder implements Border
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height)
     {
     	
-    	g.setColor(new Color (76,66,209));
+    	g.setColor(color);
     	
         g.drawRoundRect(x, y, width-1, height-1, radius, radius);
     }

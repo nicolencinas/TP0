@@ -30,7 +30,19 @@ public class Interfaz {
 	private JFrame inicio;
 	SavesManager saveManager=new SavesManager();
 	static Tablero tablero=new Tablero();
-	
+	static Color [] paletaColores= {
+			new Color(252, 243, 207),
+			new Color(247, 220, 111), 
+			new Color(241, 196, 15  ),
+			new Color(248, 196, 113),
+			new Color (243, 156, 18),
+			new Color(230, 126, 34),
+			new Color(211, 84, 0 ), 
+			new Color (231, 76, 60 ), 
+			new Color (176, 58, 46),
+			new Color (169, 50, 38  ),
+			new Color (200, 35, 15)};
+	static Color border=new Color(31, 97, 141);
 	boolean perdiste=false;
 
 	/**
@@ -77,7 +89,53 @@ public class Interfaz {
 	
 
 	//Genera un unico boton 
-	
+	public static void cambiar_color(JButton [] comp) 
+	{
+		 for (JButton j: comp) 
+		    {
+				JButton boton=(JButton)j;
+				 String nombre=boton.getText();
+				 Integer num=Integer.parseInt(nombre);
+				 
+				 if (num==0) 
+					 j.setBackground(Color.LIGHT_GRAY);
+				
+				 if (num==2) 
+					 j.setBackground(paletaColores[0]);
+					
+				 if (num==4) 
+					 j.setBackground(paletaColores[1]);
+			
+				 if (num==8) 
+					 j.setBackground(paletaColores[2]);
+				
+					 
+				 if (num==16) 
+					 j.setBackground(paletaColores[3]);
+				
+				 if (num==32)
+					 j.setBackground(paletaColores[4]);
+				 
+				 if (num==64)
+					 j.setBackground(paletaColores[5]);
+				 
+				 if (num==128)
+					 j.setBackground(paletaColores[6]);
+				 
+				 if (num==256)
+					 j.setBackground(paletaColores[7]);
+				 if (num==512)
+					 j.setBackground(paletaColores[8]);
+				 if (num==1024)
+					 j.setBackground(paletaColores[9]);
+				 
+				 if (num==2048)
+					 j.setBackground(paletaColores[10]);
+				 
+					
+		    }
+	}
+
 	public void jugar(JButton[] botones,JLabel scoreinfo,JLabel hscoreinfo,JLabel mensajefinal)
 	{
 		if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
@@ -93,6 +151,8 @@ public class Interfaz {
 		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
 		b01.setFocusable(false);
 		b01.setBounds(x, y, 120, 120);
+		b01.setBorder(new RoundedBorder(10,border));
+		b01.setBackground(Color.LIGHT_GRAY);
 		return b01;
 		
 	}
@@ -204,6 +264,7 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 	}
 		System.out.println("");
 		corregir(botones);
+		cambiar_color(botones);
 	}
 	
 
@@ -280,6 +341,7 @@ public static void corregir(JButton [] comp)
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
     }
 }
+
 
 //utilizada para corregir el tamaño de la letra en el label cuando este cambia
 	public static void corregirLabel(JLabel label)
@@ -408,7 +470,7 @@ public static JButton[] generarBotones()
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, -100, 570, 96);
 		panel.setLayout(null);
-		panel.setBorder(new RoundedBorder(30));
+		panel.setBorder(new RoundedBorder(30,border));
 		frame.getContentPane().add(panel);
 		
 		//Label que se mostrara cuando la partida sea guardada
@@ -416,7 +478,7 @@ public static JButton[] generarBotones()
 		guardada.setText("Partida guardada");
 		guardada.setBounds(430,-100,160,30);
 		guardada.setBackground(Color.white);
-		guardada.setBorder(new RoundedBorder(30));
+		guardada.setBorder(new RoundedBorder(30,border));
 		frame.add(guardada);
 		
 		//Label que se mostrara cuando la patida sea cargada
@@ -425,18 +487,18 @@ public static JButton[] generarBotones()
 		cargada.setVisible(false);
 		cargada.setBounds(30,20,160,30);
 		cargada.setBackground(Color.white);
-		cargada.setBorder(new RoundedBorder(30));
+		cargada.setBorder(new RoundedBorder(30,border));
 		frame.add(cargada);
 		
 		//Boton que inicia un nuevo juego
 		JButton newG = new JButton("Nuevo Juego");
 		newG.setBounds(100, 39, 111, 23);
-	    newG.setBorder(new RoundedBorder(10));
+	    newG.setBorder(new RoundedBorder(10,border));
 		panel.add(newG);
 		
 		//Boton que guarda el juego
 		JButton guardar = new JButton("Guardar");
-		guardar.setBorder(new RoundedBorder(10));
+		guardar.setBorder(new RoundedBorder(10,border));
 		guardar.setBounds(360, 39, 111, 23);
 		panel.add(guardar);
 	    
@@ -450,7 +512,7 @@ public static JButton[] generarBotones()
 		JLabel hscoreinfo=new JLabel(tablero.hscore());
 		corregirLabel (hscoreinfo);
 		hscoreinfo.setBackground(Color.WHITE);
-		hscoreinfo.setBorder(new RoundedBorder(30));
+		hscoreinfo.setBorder(new RoundedBorder(30,border));
 		hscoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
 		corregirLabel(hscoreinfo);
 		hscoreinfo.setBounds(5,14 , 100, 40);
@@ -462,7 +524,7 @@ public static JButton[] generarBotones()
 		score.setBounds(522,1,100,10);
 		JLabel scoreinfo=new JLabel("0");
 		scoreinfo.setBackground(Color.WHITE);
-		scoreinfo.setBorder(new RoundedBorder(30));
+		scoreinfo.setBorder(new RoundedBorder(30,border));
 		scoreinfo.setFont(new Font("Tahoma", Font.PLAIN, 20));;
 		scoreinfo.setBounds(490,14 , 100, 40);
 		frame.getContentPane().add(score);
@@ -472,7 +534,7 @@ public static JButton[] generarBotones()
 		JPanel gameover=  new JPanel();
 		gameover.setVisible(true);
 		gameover.setBounds(20,800,560,334);
-		gameover.setBorder(new RoundedBorder(30));
+		gameover.setBorder(new RoundedBorder(30,border));
 		gameover.setBackground(Color.WHITE);
 		gameover.setLayout(null);
 		
@@ -484,10 +546,10 @@ public static JButton[] generarBotones()
 		frame.getContentPane().add(gameover);
 		
 		//Cambio el borde de los botones principales
-		cargar.setBorder(new RoundedBorder(30));
-		start.setBorder(new RoundedBorder(30));
-		salir.setBorder(new RoundedBorder(30));
-		stats.setBorder(new RoundedBorder(30));
+		cargar.setBorder(new RoundedBorder(30,border));
+		start.setBorder(new RoundedBorder(30,border));
+		salir.setBorder(new RoundedBorder(30,border));
+		stats.setBorder(new RoundedBorder(30,border));
 	
 	
 	// Por ultimo genero los botones y los agrego al frame
@@ -729,6 +791,7 @@ public static JButton[] generarBotones()
       				{
       					colorear(botones);
       					tablero.desplazamientoDer();
+      					
       					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
       				
 
