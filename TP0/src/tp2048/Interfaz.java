@@ -604,6 +604,13 @@ public static JButton[] generarBotones()
 			
 		});	
 
+		stats.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				JOptionPane.showConfirmDialog(inicio, "Lo siento, la funcion requerida aun no fue desarrollada. ","Function: not implemented yet",JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE);
+			}
+		});
 	//Defino las acciones del boton de nuevo juego del drop menu
 	newG.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e)

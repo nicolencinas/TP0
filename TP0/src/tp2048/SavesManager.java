@@ -85,7 +85,9 @@ public class SavesManager
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	finally{
+		}
+		finally
+		{
         	if (fw!=null){
             	try {
                 	fw.close(); //cerramos el archivo
@@ -95,8 +97,6 @@ public class SavesManager
             	fw = null;//Cambiamos el valor del FileWriter a null para borrar los datos almacernados en tiempo de ejeccuion
         	}
     	}
-		
-		
 	}
 	
 	public String cargar_score(String file)
