@@ -90,7 +90,7 @@ public class Interfaz {
 	
 
 	//Genera un unico boton 
-	public static void cambiar_color(JButton [] comp) 
+	public static void colorear(JButton [] comp) 
 	{
 		 for (JButton j: comp) 
 		    {
@@ -107,41 +107,7 @@ public class Interfaz {
 				 int pos=(int) (Math.log10(num)/Math.log10(2))-1;
 				 System.out.println(pos);
 				 j.setBackground(paletaColores[pos]); 
-				 }
-				 
-//				 if (num==2) 
-//					 j.setBackground(paletaColores[0]);
-//					
-//				 if (num==4) 
-//					 j.setBackground(paletaColores[1]);
-//			
-//				 if (num==8) 
-//					 j.setBackground(paletaColores[2]);
-//				
-//					 
-//				 if (num==16) 
-//					 j.setBackground(paletaColores[3]);
-//				
-//				 if (num==32)
-//					 j.setBackground(paletaColores[4]);
-//				 
-//				 if (num==64)
-//					 j.setBackground(paletaColores[5]);
-//				 
-//				 if (num==128)
-//					 j.setBackground(paletaColores[6]);
-//				 
-//				 if (num==256)
-//					 j.setBackground(paletaColores[7]);
-//				 if (num==512)
-//					 j.setBackground(paletaColores[8]);
-//				 if (num==1024)
-//					 j.setBackground(paletaColores[9]);
-//				 
-//				 if (num==2048)
-//					 j.setBackground(paletaColores[10]);
-				 
-					
+				 }			
 		    }
 	}
 
@@ -166,7 +132,7 @@ public class Interfaz {
 		
 	}
 	
-	public void colorear(JButton [] botones)
+	public void blackfont(JButton [] botones)
 	{
 		for (JButton b :botones) 
 			{
@@ -273,7 +239,7 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 	}
 		System.out.println("");
 		corregir(botones);
-		cambiar_color(botones);
+		colorear(botones);
 	}
 	
 
@@ -325,25 +291,10 @@ public static void corregir(JButton [] comp)
     	JButton boton=(JButton)j;
 		 String nombre=boton.getText();
 		 Integer num=Integer.parseInt(nombre);
-		 
-		
-//		 if (num<10) 
-//		 
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
-//		 
-//		 if (num>=100 && num<1000) 
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 50));
-//		 
-//		 if (num>=1000) 
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 35));
-//		 
-//		 if(num<100) 
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 65));
 
 		  if (num==0) 
 		 
 			 boton.setFont(new Font("Tahoma", Font.PLAIN, 0));
-		  
 		  else 
 		  {
 			  int pos=nombre.length();
@@ -351,12 +302,7 @@ public static void corregir(JButton [] comp)
 		  }
 			 
 		  }
-		 
-//		 if(num>10000) 
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 30));
-//		 if (num>100000)
-//			 boton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-//    }
+
 }
 
 
@@ -368,8 +314,6 @@ public static void corregir(JButton [] comp)
 		 String nombre=label.getText();
 		 Integer num=Integer.parseInt(nombre);
 		 
-		
-	
 		 if (num>=1000) 
 			label.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		 
@@ -798,7 +742,7 @@ public static JButton[] generarBotones()
       				if (e.getKeyCode()==38)
       					
       				{
-      					colorear(botones);
+      					blackfont(botones);
       					tablero.desplazamientoArriba();
       					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
       				}
@@ -806,7 +750,7 @@ public static JButton[] generarBotones()
       				
       				if (e.getKeyCode()==39) 
       				{
-      					colorear(botones);
+      					blackfont(botones);
       					tablero.desplazamientoDer();
       					
       					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
@@ -816,7 +760,7 @@ public static JButton[] generarBotones()
       				
       				if (e.getKeyCode()==37)
       				{
-      					colorear(botones);
+      					blackfont(botones);
       					tablero.desplazamientoIzq();
       					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
       					
@@ -825,7 +769,7 @@ public static JButton[] generarBotones()
       				
       				if (e.getKeyCode()==40)
       				{
-      					colorear(botones);
+      					blackfont(botones);
       					tablero.desplazamientoAbajo();
       					jugar(botones,scoreinfo, hscoreinfo, mensajefinal);
 
