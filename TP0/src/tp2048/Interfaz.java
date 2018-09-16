@@ -107,8 +107,9 @@ public class Interfaz {
 				 else 
 				 {
 				 int pos=(int) (Math.log10(num)/Math.log10(2))-1;
-				 System.out.println(pos);
+				
 				 j.setBackground(paletaColores[pos]); 
+				// j.setBorder(new RoundedBorder(10,paletaColores[pos]));
 				 }			
 		    }
 	}
@@ -116,7 +117,8 @@ public class Interfaz {
 	public void jugar(JButton[] botones,JLabel scoreinfo,JLabel hscoreinfo,JLabel mensajefinal)
 	{
 		if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
-			botones[tablero.getultimo()].setForeground(Color.green);
+		
+			botones[tablero.getultimo()].setForeground(new Color (156, 8, 216));
 			dibujar(tablero.getmatriz(),botones);
 			setScore(tablero.getScore(),scoreinfo);
 			corregirLabel(scoreinfo);
@@ -241,12 +243,9 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 			botones[but].setText(""+e);
 			but++;
 	
-			System.out.print(matriz[i][j]+" ");
 		}
 	
-		System.out.println("");
 	}
-		System.out.println("");
 		corregir(botones);
 		colorear(botones);
 	}
