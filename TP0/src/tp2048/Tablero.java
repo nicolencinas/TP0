@@ -10,7 +10,7 @@ public class Tablero
 
 	private Integer score;
 	private int ultimo;
-	private  Casillero[][] casilla;
+	private  Casillero[][] celdas;
 	private  int fila;
 	private  int columna;
 	private SavesManager saves=new SavesManager();
@@ -24,7 +24,7 @@ public class Tablero
 	// constructor
 	public Tablero()
 	{
-		this.casilla = new Casillero[4][4];
+		this.celdas = new Casillero[4][4];
 		crearCasilleros();
 		score=0;
 		//this.getCasilla()=
@@ -40,7 +40,7 @@ public class Tablero
 	}
 	public void nuevoJuego()
 	{
-		casilla=new Casillero[4][4];
+		celdas=new Casillero[4][4];
 		crearCasilleros();
 		score= 0;
 		this.elegirCasillero().agregarCasillero();
@@ -75,7 +75,7 @@ public class Tablero
 			for (int j=0;j<matriz.length;j++) 
 			{
 				
-				casilla[i][j]=new Casillero(matriz[i][j]);
+				celdas[i][j]=new Casillero(matriz[i][j]);
 			}
 		}
 	}
@@ -103,7 +103,7 @@ public class Tablero
 		{
 			for (int j=0;j<4;j++) 
 			{
-				ret[i][j]=casilla[i][j].getCasillero();
+				ret[i][j]=celdas[i][j].getCasillero();
 			}
 		}
 		return ret;
@@ -118,7 +118,7 @@ public class Tablero
 
 	public void ganar() 
 	{
-		casilla[0][0].setCasillero(2048);
+		celdas[0][0].setCasillero(2048);
 	}
 	// elige una casilla aleatoria
 	public Casillero elegirCasillero() 
@@ -129,12 +129,12 @@ public class Tablero
 		fila = aleatorio.nextInt(4);
 		columna = aleatorio.nextInt(4);
 
-		while (casilla[fila][columna].getCasillero() != 0) {
+		while (celdas[fila][columna].getCasillero() != 0) {
 			fila = aleatorio.nextInt(4);
 			columna = aleatorio.nextInt(4);
 		}
 		ultimo=fila*4+columna;
-		return this.casilla[fila][columna];
+		return this.celdas[fila][columna];
 		
 	}
 
@@ -166,16 +166,17 @@ public class Tablero
 
 	// get
 	public Casillero[][] getCasilla() {
-		return casilla;
+		return celdas;
 	}
 
 	// set
 	public void setCasilla(Casillero[][] casilla) {
-		this.casilla = casilla;
+		this.celdas = casilla;
 	}
 
 	// verifica si dos casilleros tienen el mismo valor
-	public static boolean verificarValoresIguales(Casillero cas1, Casillero cas2) {
+	public static boolean verificarValoresIguales(Casillero cas1, Casillero cas2)
+	{
 		return (cas1.getCasillero() == cas2.getCasillero());
 		
 	}
@@ -193,16 +194,16 @@ public class Tablero
 		
 			while (posActual >= 0 && posAcomparar > -1) 
 			{
-				Casillero comparando=casilla[i][posActual];
-				Casillero comparador= casilla[i][posAcomparar];
+				Casillero comparando=celdas[i][posActual];
+				Casillero comparador= celdas[i][posAcomparar];
 				
 				if (posActual > 0 && comparando.equals(comparador) && comparando.getCasillero() != 0 ) 
 				{
-					int suma = casilla[i][posAcomparar].getCasillero() + comparando.getCasillero();
+					int suma = celdas[i][posAcomparar].getCasillero() + comparando.getCasillero();
 					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
-					casilla[i][aux].setCasillero(suma);
+					celdas[i][aux].setCasillero(suma);
 					aux--;
 					posActual = posAcomparar - 1;
 					posAcomparar -= 2;
@@ -216,7 +217,7 @@ public class Tablero
 				} else {
 					int guardado = comparando.getCasillero();
 					comparando.setCasillero(0);
-					casilla[i][aux].setCasillero(guardado);
+					celdas[i][aux].setCasillero(guardado);
 					aux--;
 					posActual = posAcomparar;
 					posAcomparar--;
@@ -225,9 +226,9 @@ public class Tablero
 			}
 
 			if (posActual >= 0) {
-				int guardado1 = casilla[i][posActual].getCasillero();
-				casilla[i][posActual].setCasillero(0);
-				casilla[i][aux].setCasillero(guardado1);
+				int guardado1 = celdas[i][posActual].getCasillero();
+				celdas[i][posActual].setCasillero(0);
+				celdas[i][aux].setCasillero(guardado1);
 			}
 		}
 		return ret;
@@ -245,15 +246,15 @@ public class Tablero
 			int aux = 0;
 			while (posActual <= 3 && posAcomparar < 4)
 			{
-				Casillero comparando=casilla[i][posActual];
-				Casillero comparador=casilla[i][posAcomparar];
+				Casillero comparando=celdas[i][posActual];
+				Casillero comparador=celdas[i][posAcomparar];
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0) 
 				{
 					int suma = comparador.getCasillero() + comparando.getCasillero();
 					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
-					casilla[i][aux].setCasillero(suma);
+					celdas[i][aux].setCasillero(suma);
 					aux++;
 					posActual = posAcomparar + 1;
 					posAcomparar += 2;
@@ -267,7 +268,7 @@ public class Tablero
 				} else {
 					int guardado = comparando.getCasillero();
 					comparando.setCasillero(0);
-					casilla[i][aux].setCasillero(guardado);
+					celdas[i][aux].setCasillero(guardado);
 					aux++;
 					posActual = posAcomparar;
 					posAcomparar++;
@@ -275,9 +276,9 @@ public class Tablero
 				}
 			}
 			if (posActual <= 3) {
-				int guardado1 = casilla[i][posActual].getCasillero();
-				casilla[i][posActual].setCasillero(0);
-				casilla[i][aux].setCasillero(guardado1);
+				int guardado1 = celdas[i][posActual].getCasillero();
+				celdas[i][posActual].setCasillero(0);
+				celdas[i][aux].setCasillero(guardado1);
 
 			}
 		}
@@ -294,15 +295,15 @@ public class Tablero
 			int aux = 3;
 			while (posActual >= 0 && posAcomparar > -1)
 			{
-				Casillero comparando=casilla[posActual][i];
-				Casillero comparador=casilla[posAcomparar][i];
+				Casillero comparando=celdas[posActual][i];
+				Casillero comparador=celdas[posAcomparar][i];
 				if (posActual > 0 && comparando.equals(comparador) && comparando.getCasillero() != 0
 						&& comparador.getCasillero() != 0) {
 					int suma = comparador.getCasillero() + comparando.getCasillero();
 					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
-					casilla[aux][i].setCasillero(suma);
+					celdas[aux][i].setCasillero(suma);
 					
 					aux--;
 					posActual=posAcomparar-1;
@@ -317,7 +318,7 @@ public class Tablero
 				} else {
 					int guardado = comparando.getCasillero();
 					comparando.setCasillero(0);
-					casilla[aux][i].setCasillero(guardado);
+					celdas[aux][i].setCasillero(guardado);
 					aux--;
 					posActual = posAcomparar;
 					posAcomparar--;
@@ -325,9 +326,9 @@ public class Tablero
 				}
 			}
 			if (posActual >= 0) {
-				int guardado = casilla[posActual][i].getCasillero();
-				casilla[posActual][i].setCasillero(0);
-				casilla[aux][i].setCasillero(guardado);
+				int guardado = celdas[posActual][i].getCasillero();
+				celdas[posActual][i].setCasillero(0);
+				celdas[aux][i].setCasillero(guardado);
 
 			}
 		}
@@ -344,15 +345,15 @@ public class Tablero
 			int aux = 0;
 			while (posActual <= 3 && posComparador < 4)
 			{
-				Casillero comparando=casilla[posActual][i];
-				Casillero comparador=casilla[posComparador][i];
+				Casillero comparando=celdas[posActual][i];
+				Casillero comparador=celdas[posComparador][i];
 				if (posActual < 3 && comparando.equals(comparador) && comparando.getCasillero() != 0)
 				{
 					int suma = comparador.getCasillero() + comparando.getCasillero();
 					score+=suma;
 					comparando.setCasillero(0);
 					comparador.setCasillero(0);
-					casilla[aux][i].setCasillero(suma);;
+					celdas[aux][i].setCasillero(suma);;
 					aux++;
 					posActual = posComparador + 1;
 					posComparador += 2;
@@ -372,7 +373,7 @@ public class Tablero
 				{
 					int guardado = comparando.getCasillero();
 					comparando.setCasillero(0);
-					casilla[aux][i].setCasillero(guardado);
+					celdas[aux][i].setCasillero(guardado);
 					aux++;
 					posActual = posComparador;
 					posComparador++;
@@ -381,9 +382,9 @@ public class Tablero
 			}
 			if (posActual <= 3) 
 			{
-				int guardado1 = casilla[posActual][i].getCasillero();
-				casilla[posActual][i].setCasillero(0);
-				casilla[aux][i].setCasillero(guardado1);
+				int guardado1 = celdas[posActual][i].getCasillero();
+				celdas[posActual][i].setCasillero(0);
+				celdas[aux][i].setCasillero(guardado1);
 
 			}
 		}
@@ -396,8 +397,8 @@ public class Tablero
 		{
 			for (int i=1;i<4;i++)
 			{
-				Casillero comparando=casilla[i][j];
-				Casillero comparador=casilla[i-1][j];
+				Casillero comparando=celdas[i][j];
+				Casillero comparador=celdas[i-1][j];
 				if (comparando.getCasillero()==0 || comparador.getCasillero()==0 || comparando.equals(comparador) )
 					return true;
 			}
@@ -407,8 +408,8 @@ public class Tablero
 		{
 			for (int i=0;i<4;i++)
 			{
-				Casillero comparando=casilla[i][j];
-				Casillero comparador=casilla[i][j-1];
+				Casillero comparando=celdas[i][j];
+				Casillero comparador=celdas[i][j-1];
 				if (comparando.getCasillero()==0 || comparador.getCasillero()==0 || comparando.equals(comparador) )
 					return true;
 			}

@@ -30,7 +30,6 @@ public class Interfaz {
 
 	private JFrame frame;
 	private JFrame inicio;
-	SavesManager saveManager=new SavesManager();
 	private static Tablero tablero=new Tablero();
 	private static Color [] paletaColores= {
 			new Color(252, 243, 207),
@@ -55,8 +54,7 @@ public class Interfaz {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					tablero.elegirCasillero().agregarPrimerCasillero();
-					tablero.elegirCasillero().agregarCasillero();
+				
 					Interfaz window = new Interfaz();
 					window.frame.setVisible(false);
 					window.frame.setEnabled(false);
