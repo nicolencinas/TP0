@@ -91,7 +91,6 @@ public class Interfaz {
 	 */
 	
 
-	//Genera un unico boton 
 	public static void colorear(JButton [] comp) 
 	{
 		 for (JButton j: comp) 
@@ -109,7 +108,6 @@ public class Interfaz {
 				 int pos=(int) (Math.log10(num)/Math.log10(2))-1;
 				
 				 j.setBackground(paletaColores[pos]); 
-				// j.setBorder(new RoundedBorder(10,paletaColores[pos]));
 				 }			
 		    }
 	}
@@ -596,7 +594,8 @@ public static JButton[] generarBotones()
 			frame.setVisible(true);
 			inicio.dispose();
 			}
-			else 
+
+            if (t==1) 
 			{
 				inicio.dispose();
 			}

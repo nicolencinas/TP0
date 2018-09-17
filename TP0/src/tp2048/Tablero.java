@@ -14,8 +14,8 @@ public class Tablero
 	private  int fila;
 	private  int columna;
 	private SavesManager saves=new SavesManager();
-	private final String scorepath="C:\\score.txt" ;
-	private final String hscorepath="C:\\high.txt" ;
+	private final String scorepath="score.txt" ;
+	private final String hscorepath="high.txt" ;
 	
 		
 	
