@@ -25,6 +25,39 @@ public class SavesManager
 		
 	}
 	
+	public void testAdminrigths() throws IOException 
+	{
+		File f=new File("C:/test.txt");
+		
+		 
+	
+		fw=new FileWriter (f);
+		
+		fw.write("test");	
+		
+
+ 	
+		
+        	if (fw!=null)
+        	{
+            	try 
+            	{
+                	fw.close(); //cerramos el archivo
+            	} catch (IOException e) {
+                	e.printStackTrace();
+            	}
+            	fw = null;//Cambiamos el valor del FileWriter a null para borrar los datos almacernados en tiempo de ejeccuion
+        	}
+		f.delete();
+		
+}
+		
+		
+			
+			
+		
+	
+	
 	public void guardar(JButton[] j) throws Exception
 	{
 		list.clear(); //Limpiamos la matriz que guardara la info de los botones para evitar quedarnos con los datos anteriores en tiempo de ejecucion
@@ -52,7 +85,8 @@ public class SavesManager
         	e.printStackTrace();
     	}
     	finally{
-        	if (fw!=null){
+        	if (fw!=null)
+        	{
             	try {
                 	fw.close(); //cerramos el archivo
             	} catch (IOException e) {

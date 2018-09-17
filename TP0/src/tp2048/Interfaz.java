@@ -160,8 +160,8 @@ public class Interfaz {
 			} catch (Exception e) 
 			{
 				
-				JOptionPane.showConfirmDialog(frame,"Acceso denegado  \n Administrator rights required ",
-						"Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showConfirmDialog(frame,"Acceso denegado: No se puede grabar el nuevo Highscore. Inicie como administrador",
+						"Error: Administrator rights required",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}
@@ -359,6 +359,8 @@ public static JButton[] generarBotones()
 	return ret;
 }
 	private void initialize()
+	
+	
 	{
 		//Declaracion del frame de inicio
 		inicio = new JFrame("Juego 2048: Menu de seleccion");
@@ -572,6 +574,20 @@ public static JButton[] generarBotones()
 	start.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
+			int t=-1;
+			try
+			{
+				tablero.getSaves().testAdminrigths();
+			} catch (IOException e1)
+			{
+				 t=JOptionPane.showConfirmDialog(inicio,"No se tiene permisos de administrador: Esto puede conllevar errores durante la ejecucion \n ¿Desea continuar de todos modos?",
+						"Error: Admin Rights required.",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
+				
+			}
+			
+			
+			if (t==0) 
+			{
 			tablero.nuevoJuego();
 			setScore(tablero.getScore(),scoreinfo);
 			dibujar(tablero.getmatriz(),botones);
@@ -579,6 +595,12 @@ public static JButton[] generarBotones()
 			frame.setEnabled(true);
 			frame.setVisible(true);
 			inicio.dispose();
+			}
+			else 
+			{
+				inicio.dispose();
+			}
+			
 			
 		}
 	});
@@ -597,7 +619,7 @@ public static JButton[] generarBotones()
 			{
 			
 				int seleccion=-1;
-				if (!tablero.saves.rutinacarga()) 
+				if (!tablero.getSaves().rutinacarga()) 
 				{
 					seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ",
 							"Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);

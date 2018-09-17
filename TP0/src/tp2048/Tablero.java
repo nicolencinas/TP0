@@ -13,9 +13,13 @@ public class Tablero
 	private  Casillero[][] casilla;
 	private  int fila;
 	private  int columna;
-	SavesManager saves=new SavesManager();
+	private SavesManager saves=new SavesManager();
 	private final String scorepath="C:\\score.txt" ;
 	private final String hscorepath="C:\\high.txt" ;
+	
+		
+	
+	
 
 	// constructor
 	public Tablero()
@@ -49,12 +53,12 @@ public class Tablero
 	
 	public void grabar_score(JLabel label) throws Exception
 	{
-		saves.grabar_hscore(label,scorepath);
+		getSaves().grabar_hscore(label,scorepath);
 	}
 	
 	public void grabar_hscore(JLabel label) throws Exception
 	{
-		saves.grabar_hscore(label,hscorepath);
+		getSaves().grabar_hscore(label,hscorepath);
 	}
 	
 
@@ -62,8 +66,8 @@ public class Tablero
 
 	public void cargarJuego() 
 	{
-		int [][] matriz=saves.cargar();
-		String sc=saves.cargar_score(scorepath);
+		int [][] matriz=getSaves().cargar();
+		String sc=getSaves().cargar_score(scorepath);
 		score=Integer.parseInt(sc);
 		System.out.println(sc);
 		for (int i=0;i<matriz.length;i++) 
@@ -77,19 +81,19 @@ public class Tablero
 	}
 	public String hscore()
 	{
-		return saves.cargar_score(hscorepath);
+		return getSaves().cargar_score(hscorepath);
 	}
 	
 	public void guardarJuego(JButton [] j, JLabel label) throws Exception 
 	{
-		saves.grabar_hscore(label, scorepath);
-		saves.guardar(j);
+		getSaves().grabar_hscore(label, scorepath);
+		getSaves().guardar(j);
 		
 	}
 	
 	public String score() 
 	{
-		return saves.cargar_score(scorepath);
+		return getSaves().cargar_score(scorepath);
 	}
 	public int [][] getmatriz() 
 	{
@@ -413,5 +417,18 @@ public class Tablero
 		return false;
 		
 	}
+
+
+	public SavesManager getSaves() {
+		return saves;
+	}
+
+
+	public void setSaves(SavesManager saves) {
+		this.saves = saves;
+	}
+
+
+	
 
 }
