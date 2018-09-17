@@ -574,7 +574,7 @@ public static JButton[] generarBotones()
 	start.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) 
 		{
-			int t=-1;
+			int t=0;
 			try
 			{
 				tablero.getSaves().testAdminrigths();
