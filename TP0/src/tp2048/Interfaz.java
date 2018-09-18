@@ -13,8 +13,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-
-import javax.imageio.IIOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -641,6 +639,7 @@ public static JButton[] generarBotones()
 					
 				 if (seleccion==0)
 				{
+					 tablero.nuevoJuego();
 					dibujar(tablero.getmatriz(),botones);
 					frame.setBounds(inicio.getBounds());
 					frame.setEnabled(true);
