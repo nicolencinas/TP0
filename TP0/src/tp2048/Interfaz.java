@@ -237,13 +237,15 @@ public class Interfaz {
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_up(JLabel icono)
 	{
-icono.setIcon(new ImageIcon("subir.png"));
+		Image imo=new ImageIcon("subir.png").getImage();
+icono.setIcon(new ImageIcon(imo.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
 	}
 	
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_down(JLabel icono)
 	{
-icono.setIcon(new ImageIcon("bajar.png"));
+		Image imo=new ImageIcon("bajar.png").getImage();
+		icono.setIcon(new ImageIcon(imo.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
 	}
 
 	//Metodo que vacia la matriz en los botones
@@ -456,9 +458,10 @@ public static JLabel[] generarBotones()
 		
 		//Icono que consiste en una flecha que contendra la accion para desplegar el drop menu
 		JLabel icono = new JLabel("");
-		icono.setBounds(280, 1, 30, 15);
+		icono.setBounds(280, 1, 35, 20);
 		icono.setBackground(Color.WHITE);
-		icono.setIcon(new ImageIcon("bajar.png"));
+		Image imo=new ImageIcon("bajar.png").getImage();
+		icono.setIcon(new ImageIcon(imo.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
 		icono.setToolTipText("Desplegar drop menu");
 		frame.getContentPane().add(icono);
 		
@@ -762,7 +765,7 @@ public static JLabel[] generarBotones()
 	if (posicion>=0)
 	{
 		
-		Animacion.subir(80, 0, 2,1, icono);
+		Animacion.subir(77, 0, 2,1, icono);
 		Animacion.subir(0, -100, 2,1, panel);
 		activar(botones);
 		icono.setToolTipText("Desplegar drop menu");
@@ -772,7 +775,7 @@ public static JLabel[] generarBotones()
 	{
 		
 		Animacion.bajar(-100, 0, 2,1, panel);
-		Animacion.bajar(0,80,  2,1, icono);
+		Animacion.bajar(0,77,  2,1, icono);
 		im_up(icono);
 		icono.setToolTipText("Retraer drop menu");
 		desactivar(botones);
