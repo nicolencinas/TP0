@@ -84,7 +84,7 @@ public class Tablero
 		return getSaves().cargar_score(hscorepath);
 	}
 	
-	public void guardarJuego(JButton [] j, JLabel label) throws Exception 
+	public void guardarJuego(JLabel [] j, JLabel label) throws Exception 
 	{
 		getSaves().grabar_hscore(label, scorepath);
 		getSaves().guardar(j);

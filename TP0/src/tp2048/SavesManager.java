@@ -58,13 +58,13 @@ public class SavesManager
 		
 	
 	
-	public void guardar(JButton[] j) throws Exception
+	public void guardar(JLabel[] j) throws Exception
 	{
 		list.clear(); //Limpiamos la matriz que guardara la info de los botones para evitar quedarnos con los datos anteriores en tiempo de ejecucion
 		
 		File f=new File("save.txt");//creamos un nuevo File 
 	
-		for (JButton boton : j) //Recorremos la lista de botones y los agregamos a una lista 
+		for (JLabel boton : j) //Recorremos la lista de botones y los agregamos a una lista 
 		{
 			String s =(String)boton.getText();
 			list.add(s);

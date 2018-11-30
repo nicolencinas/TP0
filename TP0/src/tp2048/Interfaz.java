@@ -6,6 +6,7 @@ import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +31,30 @@ public class Interfaz {
 	private JFrame frame;
 	private JFrame inicio;
 	private static Tablero tablero=new Tablero();
+
+	private static Image cero=new ImageIcon("0.png").getImage();
+	private static Image[] imagenes= 
+			{
+			new ImageIcon("2.png").getImage(),
+			new ImageIcon("4.png").getImage(),
+			new ImageIcon("8.png").getImage(),
+			new ImageIcon("16.png").getImage(),
+			new ImageIcon("32.png").getImage(),
+			new ImageIcon("64.png").getImage(),
+			new ImageIcon("128.png").getImage(),
+			new ImageIcon("256.png").getImage(),
+			new ImageIcon("512.png").getImage(),
+			new ImageIcon("1024.png").getImage(),
+			new ImageIcon("2048.png").getImage(),
+			
+			
+			};
+			//new ImageIcon("64.png").getImage(),
+			
+			
+			
+	
+	
 	private static Color [] paletaColores= {
 			new Color(252, 243, 207),
 			new Color(247, 220, 111), 
@@ -87,28 +113,29 @@ public class Interfaz {
 	 */
 	
 
-	public static void colorear(JButton [] comp) 
+	public static void colorear(JLabel [] comp) 
 	{
-		 for (JButton j: comp) 
+		 for (JLabel j: comp) 
 		    {
-				JButton boton=(JButton)j;
+				JLabel boton=(JLabel)j;
 				 String nombre=boton.getText();
 				 Integer num=Integer.parseInt(nombre);
 				 
 				 
 				 if (num==0) 
-					 j.setBackground(Color.LIGHT_GRAY);
+					 j.setIcon((new ImageIcon( cero.getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 				 
 				 else 
 				 {
 				 int pos=(int) (Math.log10(num)/Math.log10(2))-1;
 				
+				 boton.setIcon((new ImageIcon( imagenes[pos].getScaledInstance(120, 120, Image.SCALE_SMOOTH))));
 				 j.setBackground(paletaColores[pos]); 
 				 }			
 		    }
 	}
 
-	public void jugar(JButton[] botones,JLabel scoreinfo,JLabel hscoreinfo,JLabel mensajefinal)
+	public void jugar(JLabel[] botones,JLabel scoreinfo,JLabel hscoreinfo,JLabel mensajefinal)
 	{
 		if (!tablero.estaLleno()) tablero.elegirCasillero().agregarCasillero();
 		
@@ -118,26 +145,25 @@ public class Interfaz {
 			corregirLabel(scoreinfo);
 			if (tablero.gano() ) mensajefinal.setText("Ganaste");
 	}
-	public static JButton generarBoton(int x,int y) 
+	public static JLabel generarBoton(int x,int y) 
 	{
-		JButton b01 = new JButton("");
+		JLabel b01 = new JLabel("");
 		b01.setFont(new Font("Tahoma", Font.PLAIN, 65));
 		b01.setFocusable(false);
 		b01.setBounds(x, y, 120, 120);
-		b01.setBorder(new RoundedBorder(10,border));
 		b01.setBackground(Color.LIGHT_GRAY);
 		return b01;
 		
 	}
 	
-	public void blackfont(JButton [] botones)
+	public void blackfont(JLabel [] botones)
 	{
-		for (JButton b :botones) 
+		for (JLabel b :botones) 
 			{
 				b.setForeground(Color.DARK_GRAY);
 			}
 	}
-	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JButton [] botones,JLabel icono,JLabel mensajefinal) 
+	public void gameOver(JLabel hscore,JLabel hscoreinfo, JLabel score, JLabel scoreinfo, JPanel gameover,JLabel [] botones,JLabel icono,JLabel mensajefinal) 
 	{
 		String scoreText=scoreinfo.getText();
 		String hscoreText=hscoreinfo.getText();
@@ -221,7 +247,7 @@ icono.setIcon(new ImageIcon("bajar.png"));
 	}
 
 	//Metodo que vacia la matriz en los botones
-public static void  dibujar(int[][] matriz , JButton [] botones)
+public static void  dibujar(int[][] matriz , JLabel [] botones)
 	
 	{
 		
@@ -240,7 +266,7 @@ public static void  dibujar(int[][] matriz , JButton [] botones)
 		}
 	
 	}
-		corregir(botones);
+		//corregir(botones);
 		colorear(botones);
 	}
 	
@@ -263,10 +289,10 @@ public static void activar(Component [] comp)
 }
 //Utilizada para mejorar la interfaz grafica evitando dibujado sobre dibujado
 
-public static void desactivar(JButton [] comp) 
+public static void desactivar(JLabel [] comp) 
 {
     
-		for (JButton j: comp) 
+		for (JLabel j: comp) 
         {
         	try 
         	{
@@ -326,9 +352,9 @@ public static void corregir(JButton [] comp)
 	}
 	
 //Genera la matriz de botones que se dibujara
-public static JButton[] generarBotones() 
+public static JLabel[] generarBotones() 
 {
-	JButton[] ret = new JButton[16];;
+	JLabel[] ret = new JLabel[16];;
 	int i[]= {10,159,304,454};
 	int e[]= {11,156,300,441};
 	int indi=0;
@@ -362,6 +388,7 @@ public static JButton[] generarBotones()
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		inicio.getContentPane().setLayout(null);	
 		
+	
 		
 		//Esta es la definicion de Un Jlabel que se usara como contenedor de un hipervinculo que envia al usuario a un instructivo del juego
 		// en la pagina de wikipedia
@@ -411,6 +438,12 @@ public static JButton[] generarBotones()
 		frame.setFocusable(true);
 		frame.setEnabled(false);
 		frame.setVisible(false);
+		
+		JDialog dialog=new JDialog(frame);
+		Rectangle bou=frame.getBounds();
+		dialog.setBounds((int) (bou.x+bou.getWidth()),bou.y+bou.height/2,200,300);
+		dialog.setVisible(false);
+		dialog.setModal(true);
 		
 		//Label que se mostrara al finalizarse el juego
 		JLabel j=new JLabel("Clickee sobre el panel para salir");
@@ -518,7 +551,7 @@ public static JButton[] generarBotones()
 	
 	
 	// Por ultimo genero los botones y los agrego al frame
-	JButton[] botones=generarBotones();
+	JLabel[] botones=generarBotones();
 	
 	for (int i=0;i<16;i++) 
 	{
@@ -836,6 +869,7 @@ public static JButton[] generarBotones()
       				if ((!tablero.exiteMovPosible() && tablero.estaLleno()) || tablero.gano())
   					{
   						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+  						dialog.setVisible(true);
   						
   					}
       			}
