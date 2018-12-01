@@ -30,7 +30,7 @@ public class Estadistica
 	
 	public String toString() 
 	{
-		return "Estadistica: "+nombre+" "+puntaje;
+		return "\n"+nombre+"           "+puntaje+"           "+date.getDay()+"-"+date.getMonth()+"-"+date.getYear()+" " +date.getHours()+":"+date.getMinutes();
 	}
 	
 	 

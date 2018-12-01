@@ -453,8 +453,9 @@ public static JLabel[] generarBotones()
 		est.setModal(true);
 		//est.setUndecorated(true);
 		
-		JTextArea area=new JTextArea();
+		JTextArea area=new JTextArea("Nombre           Puntaje                 Fecha");
 		area.setBounds(bou);
+		area.setFont(new Font("Tahoma",Font.BOLD,26));
 		est.add(area);
 		
 		dialog.setLayout(null);
@@ -788,7 +789,7 @@ public static JLabel[] generarBotones()
 				
 				String ef=tablero.getSaves().get_Estadisticas();
 				Estadistica st=gson.fromJson(ef, Estadistica.class);
-				area.setText(st.toString());
+				area.setText(area.getText()+""+st.toString());
 				
 				est.setVisible(true);
 				
