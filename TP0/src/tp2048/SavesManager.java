@@ -15,6 +15,7 @@ public class SavesManager
 	FileWriter fw=null;
 	ArrayList<String> list;
 	int matriz[][] =new int [4][4];
+	String estadisticas;
 	String elem;
 	
 	public SavesManager()
@@ -22,6 +23,7 @@ public class SavesManager
 
 		list=new ArrayList<String>();
 		elem="";
+		estadisticas="";
 		
 	}
 	
@@ -172,11 +174,11 @@ public class SavesManager
 		
 		}
 		
-	public boolean rutinacarga()
+	public boolean rutinacarga(String path)
 	{
 		
 	
-	File f = new File( "save.txt" ); 
+	File f = new File(path); 
 	
 	if (f.exists())  
 	{
@@ -211,6 +213,60 @@ public class SavesManager
 			j++;
 			i=0; 
 		}
+		
+	}catch (Exception e)
+	{
+		e.printStackTrace();
+	}
+	
+	
+	} 
+	}catch (IOException e) { 
+	e.printStackTrace(); 
+	} 
+	finally 
+	{ 
+	try{ 
+	entrada.close();
+	return true;
+	}catch(IOException e1){} 
+	} 
+	}
+	else 
+	{ 
+		return false; 
+	}
+	return false;
+	
+	
+	}
+	
+	public String get_Estadisticas() 
+	{
+		return estadisticas;
+	}
+	public boolean cargarEstadistica(String path)
+	{
+		
+	
+	File f = new File(path); 
+	
+	if (f.exists())  
+	{
+		
+	
+	BufferedReader entrada = null; 
+	try 
+	{ 
+	entrada = new BufferedReader( new FileReader( f ) ); 
+	String linea;
+	
+	while(entrada.ready())
+	{ 
+	linea = entrada.readLine();
+	try 
+	{
+		estadisticas+=linea;
 		
 	}catch (Exception e)
 	{

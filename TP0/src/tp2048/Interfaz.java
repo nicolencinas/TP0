@@ -14,10 +14,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import com.google.gson.Gson;
 
 import Animacion.Animacion;
 
@@ -102,13 +104,6 @@ public class Interfaz {
 	public Interfaz()
 	{
 		initialize();
-//		try
-//		{
-//			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-//		}catch (Exception e)
-//		{
-//			
-//		}
 	}
 
 	/**
@@ -395,6 +390,7 @@ public static JLabel[] generarBotones()
 		
 	
 		
+		
 		//Esta es la definicion de Un Jlabel que se usara como contenedor de un hipervinculo que envia al usuario a un instructivo del juego
 		// en la pagina de wikipedia
 		
@@ -451,6 +447,16 @@ public static JLabel[] generarBotones()
 		dialog.setModal(true);
 		dialog.setUndecorated(true);
 		
+		JDialog est=new JDialog(frame);
+		est.setBounds(bou);
+		est.setVisible(false);
+		est.setModal(true);
+		//est.setUndecorated(true);
+		
+		JTextArea area=new JTextArea();
+		area.setBounds(bou);
+		est.add(area);
+		
 		dialog.setLayout(null);
 		
 		JLabel clos=new JLabel("Cerrar");
@@ -472,8 +478,11 @@ public static JLabel[] generarBotones()
 		
 		JButton guardarPuntaje=new JButton("Guardar puntaje");
 		guardarPuntaje.setBounds(180,160,150,20);
+		
 		dialog.add(guardarPuntaje);
 		text.setBorder(new TitledBorder("Ingrese su nombre: "));
+		
+		Gson gson=new Gson();
 		
 		text.addKeyListener(new KeyListener() 
 		{
@@ -730,7 +739,7 @@ public static JLabel[] generarBotones()
 			{
 			
 				int seleccion=-1;
-				if (!tablero.getSaves().rutinacarga()) 
+				if (!tablero.getSaves().rutinacarga( "s1.save" )) 
 				{
 					seleccion=JOptionPane.showConfirmDialog(inicio,"No existe una partida guardada. \n ¿Desea iniciar una nueva partida? ",
 							"Error",JOptionPane.OK_OPTION,JOptionPane.ERROR_MESSAGE);
@@ -774,7 +783,15 @@ public static JLabel[] generarBotones()
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				JOptionPane.showConfirmDialog(inicio, "Lo siento, la funcion requerida aun no fue desarrollada. ","Function: not implemented yet",JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE);
+				//JOptionPane.showConfirmDialog(inicio, "Lo siento, la funcion requerida aun no fue desarrollada. ","Function: not implemented yet",JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (tablero.getSaves().cargarEstadistica("stats.save"));
+				
+				String ef=tablero.getSaves().get_Estadisticas();
+				Estadistica st=gson.fromJson(ef, Estadistica.class);
+				area.setText(st.toString());
+				
+				est.setVisible(true);
+				
 			}
 		});
 	//Defino las acciones del boton de nuevo juego del drop menu
@@ -979,6 +996,23 @@ public static JLabel[] generarBotones()
   					}
       			}
       	});	
+        
+        guardarPuntaje.addActionListener(new ActionListener() 
+        {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				Estadistica stat=new Estadistica(text.getText(),Integer.parseInt(scoreinfo.getText()));
+				String jsonStat=gson.toJson(stat);
+				
+				System.out.println(stat);
+				System.out.println(jsonStat);
+				
+				
+			}
+        	
+        });
         
         
         

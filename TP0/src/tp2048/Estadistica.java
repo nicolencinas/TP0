@@ -28,6 +28,11 @@ public class Estadistica
 
 	}
 	
+	public String toString() 
+	{
+		return "Estadistica: "+nombre+" "+puntaje;
+	}
+	
 	 
 	
 
