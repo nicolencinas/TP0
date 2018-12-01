@@ -11,19 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 import Animacion.Animacion;
 
@@ -452,21 +446,65 @@ public static JLabel[] generarBotones()
 		
 		JDialog dialog=new JDialog(frame);
 		Rectangle bou=frame.getBounds();
-		dialog.setBounds((int) (bou.x+bou.getWidth()),bou.y+bou.height/2,500,250);
+		dialog.setBounds((int) (bou.getX()+620),(int)(bou.getX()+200),500,200);
 		dialog.setVisible(false);
 		dialog.setModal(true);
 		dialog.setUndecorated(true);
 		
 		dialog.setLayout(null);
+		
 		JLabel clos=new JLabel("Cerrar");
-		
-		
 		clos.setBounds(475, 0, 25, 25);
 		clos.setIcon(new ImageIcon(close.getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
 		clos.setToolTipText("Cerrar");
 		
-		dialog.add(clos);
+		JTextField text=new JTextField("");
+		text.setBounds(150,100,200,50);
+		text.setFont(new Font("Tahoma",Font.BOLD,32));
+		dialog.add(text);
 		
+		dialog.add(clos);
+		JLabel fi=new JLabel("Su Puntaje final es: ");
+		fi.setFont(new Font("Tahoma",Font.BOLD,26));
+		fi.setBounds(100,50,500,50);
+		dialog.add(fi);
+		
+		
+		JButton guardarPuntaje=new JButton("Guardar puntaje");
+		guardarPuntaje.setBounds(180,160,150,20);
+		dialog.add(guardarPuntaje);
+		text.setBorder(new TitledBorder("Ingrese su nombre: "));
+		
+		text.addKeyListener(new KeyListener() 
+		{
+
+			@Override
+			public void keyPressed(KeyEvent arg0) 
+			{
+				
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) 
+			{
+				
+				String te=text.getText().toUpperCase();
+				text.setText(te);
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) 
+			{
+				if (text.getText().length()==8) 
+				{
+					arg0.consume();
+				}
+				
+			}
+			
+		});
 		clos.addMouseListener(new MouseAdapter()
 		{
 
@@ -935,6 +973,7 @@ public static JLabel[] generarBotones()
       				if ((!tablero.exiteMovPosible() && tablero.estaLleno()) || tablero.gano())
   					{
   						gameOver(hscore,hscoreinfo,score,scoreinfo,gameover, botones, icono,mensajefinal) ;
+  						fi.setText("Su puntaje final es: " +scoreinfo.getText());
   						dialog.setVisible(true);
   						
   					}
