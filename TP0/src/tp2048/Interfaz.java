@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -33,6 +34,14 @@ public class Interfaz {
 	private static Tablero tablero=new Tablero();
 
 	private static Image cero=new ImageIcon("0.png").getImage();
+	private static Image up_in=new ImageIcon("subir_in.png").getImage();
+	private static Image down_in=new ImageIcon("bajar_in.png").getImage();
+	private static Image up=new ImageIcon("subir.png").getImage();
+	private Image down=new ImageIcon("bajar.png").getImage();
+	private Image close=new ImageIcon("close-icon.png").getImage();
+	private Image close_in=new ImageIcon("close-icon-in.png").getImage();
+	boolean abajo=false;
+	
 	private static Image[] imagenes= 
 			{
 			new ImageIcon("2.png").getImage(),
@@ -237,15 +246,15 @@ public class Interfaz {
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_up(JLabel icono)
 	{
-		Image imo=new ImageIcon("subir.png").getImage();
-icono.setIcon(new ImageIcon(imo.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
+	
+icono.setIcon(new ImageIcon(up.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
 	}
 	
 	//Utilizada como recurso grafico para cambiar imagen de un drop menu
 	public void im_down(JLabel icono)
 	{
-		Image imo=new ImageIcon("bajar.png").getImage();
-		icono.setIcon(new ImageIcon(imo.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
+		
+		icono.setIcon(new ImageIcon(down.getScaledInstance(35, 20,Image.SCALE_SMOOTH)));
 	}
 
 	//Metodo que vacia la matriz en los botones
@@ -443,9 +452,42 @@ public static JLabel[] generarBotones()
 		
 		JDialog dialog=new JDialog(frame);
 		Rectangle bou=frame.getBounds();
-		dialog.setBounds((int) (bou.x+bou.getWidth()),bou.y+bou.height/2,200,300);
+		dialog.setBounds((int) (bou.x+bou.getWidth()),bou.y+bou.height/2,500,250);
 		dialog.setVisible(false);
 		dialog.setModal(true);
+		dialog.setUndecorated(true);
+		
+		dialog.setLayout(null);
+		JLabel clos=new JLabel("Cerrar");
+		
+		
+		clos.setBounds(475, 0, 25, 25);
+		clos.setIcon(new ImageIcon(close.getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
+		clos.setToolTipText("Cerrar");
+		
+		dialog.add(clos);
+		
+		clos.addMouseListener(new MouseAdapter()
+		{
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) 
+			{
+			dialog.dispose();
+				
+			}
+			
+			public void mouseEntered(MouseEvent e)
+			{
+				clos.setIcon(new ImageIcon(close_in.getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
+			}
+			
+			public void mouseExited(MouseEvent e ) 
+			{
+				clos.setIcon(new ImageIcon(close.getScaledInstance(25, 25, Image.SCALE_SMOOTH)));
+			}
+			
+		});
 		
 		//Label que se mostrara al finalizarse el juego
 		JLabel j=new JLabel("Clickee sobre el panel para salir");
@@ -769,6 +811,7 @@ public static JLabel[] generarBotones()
 		Animacion.subir(0, -100, 2,1, panel);
 		activar(botones);
 		icono.setToolTipText("Desplegar drop menu");
+		abajo=false;
 
 		im_down(icono);
 	}else
@@ -779,9 +822,29 @@ public static JLabel[] generarBotones()
 		im_up(icono);
 		icono.setToolTipText("Retraer drop menu");
 		desactivar(botones);
+		abajo=true;
 	}
 
 }
+		
+		public void mouseEntered(MouseEvent e) 
+		{
+			if (abajo)
+			icono.setIcon(new ImageIcon(up_in.getScaledInstance(35, 20, Image.SCALE_SMOOTH)));
+			else 
+				icono.setIcon(new ImageIcon(down_in.getScaledInstance(35, 20, Image.SCALE_SMOOTH)));
+				
+		}
+		
+		public void mouseExited(MouseEvent e) 
+		{
+			if (abajo)
+			icono.setIcon(new ImageIcon(up.getScaledInstance(35, 20, Image.SCALE_SMOOTH)));
+			else 
+				icono.setIcon(new ImageIcon(down.getScaledInstance(35, 20, Image.SCALE_SMOOTH)));
+				
+		}
+		
 	});
 	
 	//Defino un mouse listener para mostrar un  mensaje al posicionar el puntero sobre el label
@@ -863,7 +926,7 @@ public static JLabel[] generarBotones()
       					
       					for (Component j: botones) 
       			        {
-      			        	JButton boton=(JButton)j;
+      			        	JLabel boton=(JLabel)j;
       			        	(boton).setText("");
       			        }
       				}	
